@@ -1,27 +1,31 @@
-header.header{
-    width : 100%;
-    height: 668px;
-    img.head-shape{
-        height:568px;
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
+@media screen and ( min-width: $break-medium){
+    header.header{
+        width : 100%;
+        height: 668px;
+        background-image: url('./img/svg/header.svg');
+        background-repeat: no-repeat;
+        background-size: auto 580px;
+        background-position: center top;
+        div.roban{
+            background-color: white;
+            margin-right: 60px;
+            border-radius: 0 0 16px 16px;
+            float: right;
+            width: 80px;
+            height:180px;
+            text-align: center;
+            padding-top: 105px;
+
+        }
     }
 }
 
-
 @media screen and ( min-width: $break-large){
-    header.header{
-        background-color:red;
-    }
 }
 
 @media screen and ( min-width: $break-medium) and (max-width: $break-large){
     header.header{
-        background-color:green;
-        img.head-shape{
-            height:380px;
-        }
+        background-size: auto 380px;
     }
 }
 
@@ -44,12 +48,13 @@ header.header{
             height: 130px;
             width: 75px;
             border-radius: 0 0 12px 12px;
+            padding-top: 60px;
+
             >img.logo{
                 width: 60px;
                 height:60px;
                 display: block;
                 margin:0 auto ;
-
             }
 
         }

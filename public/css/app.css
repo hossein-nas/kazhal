@@ -379,37 +379,54 @@ template {
   display: none;
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 html {
   direction: rtl;
   box-sizing: border-box;
 }
 
-header.header {
-  width: 100%;
-  height: 668px;
+div.container {
+  width: 1260px;
+  margin: 0 auto;
+  display: block;
 }
 
-header.header img.head-shape {
-  height: 568px;
-  position: absolute;
-  left: 50%;
-  -webkit-transform: translateX(-50%);
-          transform: translateX(-50%);
+@media screen and (max-width: 1260px) {
+  div.container {
+    width: 100%;
+  }
 }
 
-@media screen and (min-width: 1260px) {
+@media screen and (min-width: 768px) {
   header.header {
-    background-color: red;
+    width: 100%;
+    height: 668px;
+    background-image: url(/images/header.svg?87684c872036521f743f017459226d44);
+    background-repeat: no-repeat;
+    background-size: auto 580px;
+    background-position: center top;
+  }
+
+  header.header div.roban {
+    background-color: white;
+    margin-right: 60px;
+    border-radius: 0 0 16px 16px;
+    float: right;
+    width: 80px;
+    height: 180px;
+    text-align: center;
+    padding-top: 105px;
   }
 }
 
 @media screen and (min-width: 768px) and (max-width: 1260px) {
   header.header {
-    background-color: green;
-  }
-
-  header.header img.head-shape {
-    height: 380px;
+    background-size: auto 380px;
   }
 }
 
@@ -436,6 +453,7 @@ header.header img.head-shape {
     height: 130px;
     width: 75px;
     border-radius: 0 0 12px 12px;
+    padding-top: 60px;
   }
 
   header.header div.roban > img.logo {

@@ -1,4 +1,19 @@
+*, *::before, *::after{
+    box-sizing:border-box;
+}
 html{
     direction: rtl;
     box-sizing:border-box;
+}
+div.container{
+    width: 1260px;
+    margin: 0 auto;
+    display: block;
+
+}
+
+@media screen and (max-width: 1260px){
+    div.container{
+        width:100%;
+    }
 }
