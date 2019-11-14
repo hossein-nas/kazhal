@@ -27,6 +27,16 @@
 
     </head>
     <body>
+        <header class="header">
+            <img src="./img/svg/header.svg" alt="header" class="head-shape">
+            <div class="roban">
+                <img src="./img/svg/logo.social.svg" alt="" class="logo">
+            </div>
+
+        </header>
+        <section>
+            salam
+        </section>
 
     <script src="./js/app.js"></script>
     </body>
