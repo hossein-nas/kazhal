@@ -20,6 +20,20 @@
                 <div class="roban">
                     <img src="./img/svg/logo.social.svg" alt="" class="logo">
                 </div>
+                <div class="slog">
+                    <div class="main-picture">
+
+                    </div>
+                    <p class="first">به دنیای فناوری سلام کنید.</p>
+                    <p class="second">
+                        دیجیتــــــالی شــــــــدن کســـــــــب‌و‌کـــــــــار
+                        <br/>
+                        خود را به ما بسپارید
+                    </p>
+                    <p class="bold">
+                        تــا مـــوفقیت همـــراهتان هستیــم
+                    </p>
+                </div>
             </div>
 
         </header>
