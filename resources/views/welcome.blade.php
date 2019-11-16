@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" type="text/css" href="./css/app.css" />
+        <link rel="stylesheet" type="text/css" href="{{ mix('/css/app.css') }}" />
 
         <title>رایان پردازش کژال</title>
         <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
@@ -41,6 +41,6 @@
             salam
         </section>
 
-    <script src="./js/app.js"></script>
+    <script src="{{ mix('/js/app.js') }}"></script>
     </body>
 </html>
