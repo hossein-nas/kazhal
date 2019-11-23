@@ -834,13 +834,18 @@ div.container {
     background: linear-gradient(90deg, #11AC69 0%, #4AE9AC 100%);
   }
 }
+@media screen and (resolution: 96dpi) {
+  section#services::after {
+    color: red;
+  }
+}
 @media screen and (min-width: 768px) {
   section#services::before {
     background-image: url(../img/svg/root-desktop.svg);
     width: 100%;
     background-size: 98px 486px;
     background-position: center 57px;
-    opacity: 0.5;
+    opacity: 0.7;
   }
   section#services div.service {
     right: 50%;

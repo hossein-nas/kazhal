@@ -238,7 +238,15 @@
         } // services robot end
 
     }
+} // media small end
 
+@media screen and ( resolution: 96dpi ){
+    section#services{
+        &::after{
+            color: red;
+        }
+
+    }
 }
 
 @media screen and ( min-width: $break-medium ){
@@ -248,7 +256,7 @@
             width: 100%;
             background-size: 98px 486px;
             background-position: center 57px;
-            opacity: .5;
+            opacity: .7;
         }
         div.service{
             right:50%;
