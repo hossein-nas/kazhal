@@ -1,0 +1,100 @@
+@media screen and ( min-width: $break-small) {
+    #pricing{
+        display: block;
+        width: 100%;
+        min-height: 400px;
+
+        .panel{
+            width: 300px;
+            position: relative;
+            margin: 0 auto;
+            background-image : url('../img/svg/elem_svg/pricing1.svg');
+            background-repeat: no-repeat;
+            background-position: top center;
+            background-size : 100% auto;
+            border-radius: 1rem;
+            box-shadow: 0 5px 10px rgba(128, 128, 128, 0.2);
+            height: 360px;
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+            &.panel-2{
+                background-image : url('../img/svg/elem_svg/pricing2.svg');
+                &::before{
+                    width: 170px;
+                    background: url('../img/svg/elem_svg/telegram-icon.svg') no-repeat top left;
+                    background-size: 100% auto;
+                }
+            }
+            &.panel-3{
+                background-image : url('../img/svg/elem_svg/pricing3.svg');
+                &::before{
+                    width: 170px;
+                    background: url('../img/svg/elem_svg/rocket-icon.svg') no-repeat top left;
+                    background-size: 100% auto;
+                }
+            }
+            &::before{
+                content: '';
+                position: absolute;
+                width: 105px;
+                height: 100px;
+                left: 10px;
+                top: 10px;
+                background: url('../img/svg/elem_svg/webdesign-icon.svg') no-repeat top left;
+                background-size: 100% auto;
+            }
+
+            .header{
+                font-weight: 900;
+                font-size: 1.6rem;
+                color: white;
+                padding: 20px 15px 55px 160px;
+                line-height: 2rem;
+                text-shadow: 0 2px 2px rgba(grey, .1);
+
+            }
+
+            .price{
+                font-weight: 900;
+                font-size:1.9rem;
+                color: #4acfa9;
+                padding: 5px 90px 30px 22px;
+                text-align: left;
+                &::after{
+                    content: ' تومان ';
+                    color: #4acfa9;
+                    display: inline-block;
+                    font-size: 1rem;
+                    font-weight: normal;
+                }
+
+            }
+
+            .desc{
+                line-height:22px; 
+                font-size: .8rem;
+                font-weight: 300;
+                text-align: justify;
+                color: #7d7d7d;
+                padding: 0px 40px 10px ;
+
+            }
+            .order{
+                background-color: #43bd9b;
+                color: white;
+                font-size: .9rem;
+                font-weight: 600;
+                width: 225px;
+                border-radius: .75rem;
+                margin: 20px auto 15px;
+                text-align: center;
+                padding: 12px 0 ;
+                
+            }
+
+
+        }
+
+    }
+
+}

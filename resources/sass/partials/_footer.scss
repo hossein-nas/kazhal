@@ -1,0 +1,221 @@
+@media screen and ( min-width: $break-small ){
+    footer{
+        width: 100%;
+        background-color : $footer-bg;
+        &::after{
+            content:'';
+            display: block;
+            clear: both;
+        }
+        .social-links{
+            padding: 20px 0;
+            ul.social-icons{
+                display: block;
+                margin: 20px 25px;
+                text-align: center;
+                li.icon{
+                    display: inline-block;
+                    width: 45px;
+                    height: 45px;
+                    opacity: .4;
+                    padding: 5px;
+                    &:active{
+                        opacity: .7;
+                        transition-duration: .5s;
+                    }
+                    a{
+                        display: block;
+                        text-decoration: none;
+                        width: 100%;
+                        height: 100%;
+                        img{
+                            width: 100%;
+                            height: 100%;
+                        }
+                    }
+                }
+            }
+
+        }
+
+        .footer-links{
+            display: block;
+            position: relative;
+            &::before{
+                content:'';
+                position: absolute;
+                height: 8px;
+                width: 100%;
+                background-color: rgba(white, .15);
+                top: 5px;
+
+            }
+            &::after{
+                content: 'دسترسی سریع';
+                background-color: $footer-bg;
+                color: #b9c2c1;
+                position: absolute;
+                top: -1px;
+                padding: 4px 12px;
+                font-size: .75rem;
+                right: 50%;
+                transform: translateX(50%);
+                font-weight: 900;
+            }
+            ul.links{
+                display: block;
+                padding: 35px 15px 20px;
+                &::after{
+                    content:'';
+                    display: block;
+                    clear: both;
+                }
+
+                >li{
+                    display: block;
+                    float: right;
+                    width: 50%;
+                    position: relative;
+                    color: white;
+                    a{
+                        padding: 8px 45px 8px 10px;
+                        display: block;
+                        width: 100%;
+                        height: 100%;
+                        color: inherit;
+                        text-decoration: none;
+                        font-weight: 300;
+                        font-size: .9rem;
+                    }
+                }
+            }
+        }
+
+        .contact{
+            display: block;
+            position: relative;
+            width: 100%;
+            padding-top: 50px;
+            padding-bottom: 20px;
+            &::before{
+                content:'';
+                position: absolute;
+                height: 8px;
+                width: 100%;
+                background-color: rgba(white, .15);
+                top: 5px;
+
+            }
+            &::after{
+                content: 'راه‌های ارتباطی';
+                background-color: $footer-bg;
+                color: #b9c2c1;
+                position: absolute;
+                top: -1px;
+                padding: 4px 12px;
+                font-size: .75rem;
+                right: 50%;
+                transform: translateX(50%);
+                font-weight: 900;
+            }
+            .address{
+                width: 290px;
+                height: 50px;
+                margin: 0 auto;
+                .icon{
+                    margin-top: 5px;
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 100%;
+                    background-color:rgba(white, .2);
+                    float: right;
+                }
+                .address-text{
+                    float: right;
+                    width: 250px;
+                    padding-right: 10px;
+                    font-size: .85rem;
+                    font-weight: 300;
+                    color: #c5cdcc;
+                    line-height: 26px;
+                    >span{
+                        margin: 0 5px;
+                    }
+                }
+            }
+            .phone-numbers{
+                width: 290px;
+                height: 50px;
+                margin: 30px auto;
+                &::after{
+                    content:'';
+                    display: block;
+
+                }
+                .icon{
+                    width: 40px;
+                    height: 40px;
+                    float: right;
+                    border-radius: 100%;
+                    background-color: rgba(white, .2);
+                    transform: translateY(5px);
+                }
+                .numbers{
+                    float: right;
+                    width: 240px;
+                    padding-right: 25px;
+                    padding-left: 10px;
+                    &::after{
+                        content:'';
+                        display: block;
+                        clear: both;
+                    }
+                    div{
+                        letter-spacing: 2px;
+                        margin-bottom: 3px;
+                        text-align: center;
+                        color: #dbe0df;
+                        width: 33%;
+                        float: right;
+                        font-weight: 900;
+                        font-size: 1.3rem;
+                    }
+                }
+
+            }
+        }
+
+        section.map{
+            width: 100%;
+            height: 300px;
+            background-color: #bbb;
+
+        }
+
+
+        section.copyright{
+            margin-top: 30px;
+            margin-bottom: 15px;
+            padding: 0 20px;
+            color:#c5cdcc;
+            font-size: .77rem;
+            span{
+                font-weight: 300;
+                text-align: center;
+                line-height: 28px;
+                display: block;
+                img{
+                    width: auto;
+                    height: 21px;
+                    display: inline;
+                    margin-top: -50%;
+                    transform: translateY(6px);
+                    padding: 0 4px;
+                    opacity: .85;
+                }
+
+            }
+
+        }
+    }
+}
