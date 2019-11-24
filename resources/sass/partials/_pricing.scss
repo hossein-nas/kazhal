@@ -3,6 +3,12 @@
         display: block;
         width: 100%;
         min-height: 400px;
+        position: relative;
+        padding-top: 60px;
+        &::before{
+            @include header-before();
+            content: 'تعرفه‌ی خدمات';
+        }
 
         .panel{
             width: 300px;
@@ -93,6 +99,20 @@
             }
 
 
+        }
+
+    }
+}
+
+@media screen and ( min-width: $break-medium ){
+    section#pricing{
+        display: flex;
+        padding: 70px 30px 20px;
+        justify-content: center;
+        flex-flow: wrap;
+        .panel{
+
+            margin: 0 25px 35px;
         }
 
     }

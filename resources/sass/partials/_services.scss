@@ -251,6 +251,7 @@
 
 @media screen and ( min-width: $break-medium ){
     section#services{
+        height: 600px;
         &::before{
             background-image: url(../img/svg/root-desktop.svg);
             width: 100%;
@@ -262,6 +263,7 @@
             right:50%;
             margin-right: 14px;
             top: 121px;
+
             .icon{
                 width: 105px;
                 height:105px;
