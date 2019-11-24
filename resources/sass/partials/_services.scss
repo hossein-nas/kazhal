@@ -242,8 +242,8 @@
 
 @media screen and ( resolution: 96dpi ){
     section#services{
-        &::after{
-            color: red;
+        &::before{
+            opacity: .75;
         }
 
     }
@@ -256,7 +256,7 @@
             width: 100%;
             background-size: 98px 486px;
             background-position: center 57px;
-            opacity: .7;
+            opacity: .6;
         }
         div.service{
             right:50%;
