@@ -13,6 +13,3 @@ yarn-error.log
 .DS_Store
 composer.lock
 package*
-public/css/*
-public/js/*
-public/mix-manifest.json
