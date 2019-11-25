@@ -1,185 +1,188 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" type="text/css" href="{{ mix('/css/app.css') }}" />
 
-        <title>رایان پردازش کژال</title>
-        <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
-        <link rel="manifest" href="./favicon/site.webmanifest">
-    
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{{ mix('/css/app.css') }}" />
 
-    </head>
-    <body>
-        <header class="header">
-            <div class="hamberger"></div>
-            <div class="search"></div>
-            <div class="container">
-                <div class="roban">
-                    <img src="./img/svg/logo.social.svg" alt="" class="logo">
-                </div>
-                <div class="slog">
-                    <div class="main-picture">
+    <title>رایان پردازش کژال</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+    <link rel="manifest" href="./favicon/site.webmanifest">
 
-                    </div>
-                    <p class="first">به دنیای فناوری سلام کنید.</p>
-                    <p class="second">
-                        دیجیتــــــالی شــــــــدن کســـــــــب‌و‌کـــــــــار
-                        <br/>
-                        خود را به ما بسپارید
-                    </p>
-                    <p class="bold">
-                        تــا مـــوفقیت همـــراهتان هستیــم
-                    </p>
-                </div>
+
+</head>
+
+<body>
+    <header class="header">
+        <div class="hamberger"></div>
+        <div class="search"></div>
+        <div class="container">
+            <div class="roban">
+                <img src="./img/svg/logo.social.svg" alt="" class="logo">
             </div>
-
-        </header>
-        <section class="services" id="services">
-
-            <div class="service website">
-                <div class="icon">
+            <div class="slog">
+                <div class="main-picture">
 
                 </div>
-                <div class="header">طراحی وب‌سایت</div>
-                <div class="desc">
+                <p class="first">به دنیای فناوری سلام کنید.</p>
+                <p class="second">
+                    دیجیتــــــالی شــــــــدن کســـــــــب‌و‌کـــــــــار
+                    <br />
+                    خود را به ما بسپارید
+                </p>
+                <p class="bold">
+                    تــا مـــوفقیت همـــراهتان هستیــم
+                </p>
+            </div>
+        </div>
+
+    </header>
+    <section class="services" id="services">
+
+        <div class="service website">
+            <div class="icon">
+
+            </div>
+            <div class="header">طراحی وب‌سایت</div>
+            <div class="desc">
                 تیمی متشکل از بهترین‌های این حوزه آماده هستند بهترین راه‌کارها را برای دیجیتالی‌شدن کسب‌وکارتان در جهت …
-                </div>
             </div>
+        </div>
 
-            <div class="service desktop-app">
-                <div class="icon">
-
-                </div>
-                <div class="header">اپلیکیشن دسکتاپ</div>
-                <div class="desc">
-                    انتخابی عالی برای کسانی که می‌خواهند یک قدم از رقبای خود پیش بیفتند و خدمات بهتری به مشتریان خود ارائه دهند ...
-                </div>
-            </div>
-
-            <div class="service android-app">
-                <div class="icon">
-
-                </div>
-                <div class="header">اپلیکیشن اندروید</div>
-                <div class="desc">
-                    انتخابی عالی برای کسانی که می‌خواهند یک قدم از رقبای خود پیش بیفتند و خدمات بهتری به مشتریان خود ارائه دهند ...
-                </div>
-            </div>
-
-            <div class="service telegram-robot">
-                <div class="icon">
-
-                </div>
-                <div class="header">ربات تلگرام</div>
-                <div class="desc">
-                    انتخابی عالی برای کسانی که می‌خواهند یک قدم از رقبای خود پیش بیفتند و خدمات بهتری به مشتریان خود ارائه دهند ...
-                </div>
-            </div>
-
-
-            <div class="service seo">
-                <div class="icon">
-
-                </div>
-                <div class="header">بهینه‌سازی سئو</div>
-                <div class="desc">
-                    انتخابی عالی برای کسانی که می‌خواهند یک قدم از رقبای خود پیش بیفتند و خدمات بهتری به مشتریان خود ارائه دهند ...
-                </div>
-            </div>
-
-        </section>
-
-        <section id="pricing">
-            <div class="panel panel-1">
-                <div class="header">
-                    طراحی وب‌سایت
-                </div>
-                <div class="price">
-                    ۸۰۰٫۰۰۰
-                </div>
-                <div class="desc">
-                    تیمی متشکل از بهترین‌های این حوزه آماده هستند بهترین راه‌کارها را برای دیجیتالی‌شدن کسب‌وکارتان در جهت …
-                </div>
-                <div class="order">
-                    جزئیات بیشتر و مشاوره
-                </div>
+        <div class="service desktop-app">
+            <div class="icon">
 
             </div>
+            <div class="header">اپلیکیشن دسکتاپ</div>
+            <div class="desc">
+                انتخابی عالی برای کسانی که می‌خواهند یک قدم از رقبای خود پیش بیفتند و خدمات بهتری به مشتریان خود ارائه دهند ...
+            </div>
+        </div>
 
-            <div class="panel panel-2">
-                <div class="header">
-                   ربات تلگرام 
-                </div>
-                <div class="price">
-                    ۸۰۰٫۰۰۰
-                </div>
-                <div class="desc">
-                    تیمی متشکل از بهترین‌های این حوزه آماده هستند بهترین راه‌کارها را برای دیجیتالی‌شدن کسب‌وکارتان در جهت …
-                </div>
-                <div class="order">
-                    جزئیات بیشتر و مشاوره
-                </div>
+        <div class="service android-app">
+            <div class="icon">
 
             </div>
+            <div class="header">اپلیکیشن اندروید</div>
+            <div class="desc">
+                انتخابی عالی برای کسانی که می‌خواهند یک قدم از رقبای خود پیش بیفتند و خدمات بهتری به مشتریان خود ارائه دهند ...
+            </div>
+        </div>
 
-            <div class="panel panel-3">
-                <div class="header">
-                    سئــــو
-                    SEO
-                </div>
-                <div class="price">
-                    ۸۰۰٫۰۰۰
-                </div>
-                <div class="desc">
-                    تیمی متشکل از بهترین‌های این حوزه آماده هستند بهترین راه‌کارها را برای دیجیتالی‌شدن کسب‌وکارتان در جهت …
-                </div>
-                <div class="order">
-                    جزئیات بیشتر و مشاوره
-                </div>
+        <div class="service telegram-robot">
+            <div class="icon">
 
             </div>
-        </section>
+            <div class="header">ربات تلگرام</div>
+            <div class="desc">
+                انتخابی عالی برای کسانی که می‌خواهند یک قدم از رقبای خود پیش بیفتند و خدمات بهتری به مشتریان خود ارائه دهند ...
+            </div>
+        </div>
 
-        <section id="news">
-            <div class="item">
-                <a href="#">
-                    <img src="../img/1.jpg" alt="news">
-                    <p>
-                        تخفیف به مناسبت نیمه شعبان
-                    </p>
-                </a>
+
+        <div class="service seo">
+            <div class="icon">
+
+            </div>
+            <div class="header">بهینه‌سازی سئو</div>
+            <div class="desc">
+                انتخابی عالی برای کسانی که می‌خواهند یک قدم از رقبای خود پیش بیفتند و خدمات بهتری به مشتریان خود ارائه دهند ...
+            </div>
+        </div>
+
+    </section>
+
+    <section id="pricing">
+        <div class="panel panel-1">
+            <div class="header">
+                طراحی وب‌سایت
+            </div>
+            <div class="price">
+                ۸۰۰٫۰۰۰
+            </div>
+            <div class="desc">
+                تیمی متشکل از بهترین‌های این حوزه آماده هستند بهترین راه‌کارها را برای دیجیتالی‌شدن کسب‌وکارتان در جهت …
+            </div>
+            <div class="order">
+                جزئیات بیشتر و مشاوره
             </div>
 
-            <div class="item">
-                <a href="#">
-                    <img src="../img/1.jpg" alt="news">
-                    <p>
-                        تخفیف به مناسبت نیمه شعبان
-                    </p>
-                </a>
+        </div>
+
+        <div class="panel panel-2">
+            <div class="header">
+                ربات تلگرام
+            </div>
+            <div class="price">
+                ۸۰۰٫۰۰۰
+            </div>
+            <div class="desc">
+                تیمی متشکل از بهترین‌های این حوزه آماده هستند بهترین راه‌کارها را برای دیجیتالی‌شدن کسب‌وکارتان در جهت …
+            </div>
+            <div class="order">
+                جزئیات بیشتر و مشاوره
             </div>
 
-            <div class="item">
-                <a href="#">
-                    <img src="../img/1.jpg" alt="news">
-                    <p>
-                        تخفیف به مناسبت نیمه شعبان
-                    </p>
-                </a>
+        </div>
+
+        <div class="panel panel-3">
+            <div class="header">
+                سئــــو
+                SEO
+            </div>
+            <div class="price">
+                ۸۰۰٫۰۰۰
+            </div>
+            <div class="desc">
+                تیمی متشکل از بهترین‌های این حوزه آماده هستند بهترین راه‌کارها را برای دیجیتالی‌شدن کسب‌وکارتان در جهت …
+            </div>
+            <div class="order">
+                جزئیات بیشتر و مشاوره
             </div>
 
-            <div class="more-news">
-                <a href="#">
-                    مشاهده بیشتر
-                </a>
-            </div>
-        </section>
+        </div>
+    </section>
 
-        <footer>
+    <section id="news">
+        <div class="item">
+            <a href="#">
+                <img src="../img/1.jpg" alt="news">
+                <p>
+                    تخفیف به مناسبت نیمه شعبان
+                </p>
+            </a>
+        </div>
+
+        <div class="item">
+            <a href="#">
+                <img src="../img/1.jpg" alt="news">
+                <p>
+                    تخفیف به مناسبت نیمه شعبان
+                </p>
+            </a>
+        </div>
+
+        <div class="item">
+            <a href="#">
+                <img src="../img/1.jpg" alt="news">
+                <p>
+                    تخفیف به مناسبت نیمه شعبان
+                </p>
+            </a>
+        </div>
+
+        <div class="more-news">
+            <a href="#">
+                مشاهده بیشتر
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
             <section class="social-links">
                 <ul class="social-icons">
                     <li class="icon">
@@ -216,17 +219,17 @@
                 <div class="address">
                     <div class="icon"></div>
                     <div class="address-text">
-                        تهران 
+                        تهران
                         <span>/</span>
-                        شهر قدس 
+                        شهر قدس
                         <span>/</span>
-                        خیابان جمهوری 
-                        <br/>
-                        مجتمع ابریشم 
+                        خیابان جمهوری
+                        <br />
+                        مجتمع ابریشم
                         <span>/</span>
                         طبقه‌ی اول
                         <span>/</span>
-                        واحد ۱۰۱ 
+                        واحد ۱۰۱
                     </div>
                 </div>
 
@@ -254,14 +257,16 @@
             <section class="copyright">
                 <span>تمامی حقوق مادی و معنوی این سایت متعلق به</span>
                 <span>
-                    شرکت 
+                    شرکت
                     <img src="../img/svg/rpkazhal.svg" alt="رایان پردازش کژال">
                     می‌باشد.
                 </span>
             </section>
+        </div>
 
-        </footer>
+    </footer>
 
     <script src="{{ mix('/js/app.js') }}"></script>
-    </body>
+</body>
+
 </html>

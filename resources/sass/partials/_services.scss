@@ -240,14 +240,6 @@
     }
 } // media small end
 
-@media screen and ( resolution: 96dpi ){
-    section#services{
-        &::before{
-            opacity: .75;
-        }
-
-    }
-}
 
 @media screen and ( min-width: $break-medium ){
     section#services{
@@ -342,4 +334,12 @@
 
     }
 
+}
+
+@media screen and ( resolution: 96dpi ){
+    section#services{
+        &::before{
+            opacity: .8;
+        }
+    }
 }

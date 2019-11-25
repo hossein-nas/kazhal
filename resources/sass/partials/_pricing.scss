@@ -118,3 +118,15 @@
     }
 
 }
+
+
+@media screen and ( min-width: $break-medium ) and ( resolution: 96dpi ){
+    section#pricing{
+        .panel{
+            margin: 0 25px 35px;
+            box-shadow: 0 6px 19px rgba(128, 128, 128, 0.35);
+        }
+
+    }
+
+}

@@ -94,3 +94,27 @@
     }
 
 }
+
+@media screen and ( resolution: 96dpi ){
+    section#news{
+        .item{
+            a{
+                p{
+                    text-shadow: 0 2px 1px rgba(black , .2);
+
+                }
+            }
+
+        }
+        .more-news{
+            a{
+                border-color: #ccc;
+                color: #8c8c8c;
+                font-size: .8rem;
+            }
+
+        }
+
+    }
+
+}
