@@ -63,3 +63,12 @@ div.container{
         filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff",endColorstr="#ffffff",GradientType=1);
     }
 }
+
+@keyframes popup{
+    0%{
+        transform: scale(1.1);
+    }
+    100%{
+        transform: scale(0);
+    }
+}

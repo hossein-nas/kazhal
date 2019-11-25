@@ -428,6 +428,26 @@ div.container {
     -webkit-touch-callout: none;
   }
 }
+@-webkit-keyframes popup {
+  0% {
+    -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+  }
+  100% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  }
+}
+@keyframes popup {
+  0% {
+    -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+  }
+  100% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  }
+}
 @media screen and (min-width: 768px) {
   header.header {
     position: relative;
@@ -518,7 +538,12 @@ div.container {
 @media screen and (min-width: 768px) and (max-width: 1260px) {
   header.header {
     background-size: auto 395px;
-    height: 100vh;
+    height: 570px;
+  }
+}
+@media screen and (min-width: 768px) and (max-width: 1260px) and (orientation: landscape) {
+  header.header {
+    height: 550px;
   }
 }
 @media screen and (min-width: 320px) and (max-width: 768px) {
