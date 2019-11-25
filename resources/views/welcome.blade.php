@@ -245,11 +245,11 @@
                     </div>
                 </div>
 
+                <div class="map">
+                </div>
+
             </section>
 
-            <section class="map">
-
-            </section>
 
             <section class="copyright">
                 <span>تمامی حقوق مادی و معنوی این سایت متعلق به</span>

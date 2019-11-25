@@ -102,6 +102,12 @@
 @media screen and ( min-width: $break-medium) and (max-width: $break-large){
     header.header{
         background-size: auto 395px;
+        height: 570px;
+    }
+}
+@media screen and ( min-width: $break-medium) and (max-width:$break-large) and ( orientation: landscape){
+    header.header{
+        height: 550px;
     }
 }
 
