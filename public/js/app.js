@@ -36920,6 +36920,8 @@ module.exports = function(module) {
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
+__webpack_require__(/*! ./components/front/header */ "./resources/js/components/front/header.js");
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
@@ -36964,6 +36966,46 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     encrypted: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/components/front/header.js":
+/*!*************************************************!*\
+  !*** ./resources/js/components/front/header.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$(document).ready(function () {
+  $(document).scroll(function () {
+    var _header = $('.header');
+
+    var top_of_element = $(".header").offset().top;
+    var bottom_of_element = $(".header").offset().top + $(".header").outerHeight();
+    var bottom_of_screen = $(window).scrollTop() + $(window).innerHeight();
+    var top_of_screen = $(window).scrollTop();
+
+    if (top_of_screen + 50 > bottom_of_element) {
+      _header.addClass('topfixed');
+
+      var fixed_elem = $('.fixed-header').length;
+
+      var _fixed_header = $(fixedmenuHTML());
+
+      if (!fixed_elem) {
+        $('body').append(_fixed_header);
+      }
+    } else {
+      _header.removeClass('topfixed');
+
+      $('body .fixed-header').remove();
+    }
+  });
+});
+
+function fixedmenuHTML() {
+  return "\n    <div class=\"fixed-header\">\n        <div class=\"hamburger\"></div>\n        <div class=\"search\"></div>\n        <div class=\"logo\"></div>\n    </div>\n    ".trim();
+}
 
 /***/ }),
 
