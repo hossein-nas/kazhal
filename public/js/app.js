@@ -36985,7 +36985,7 @@ $(document).ready(function () {
     var bottom_of_screen = $(window).scrollTop() + $(window).innerHeight();
     var top_of_screen = $(window).scrollTop();
 
-    if (top_of_screen + 50 > bottom_of_element) {
+    if (top_of_screen > bottom_of_element + 100) {
       _header.addClass('topfixed');
 
       var fixed_elem = $('.fixed-header').length;
@@ -36994,17 +36994,25 @@ $(document).ready(function () {
 
       if (!fixed_elem) {
         $('body').append(_fixed_header);
+
+        _fixed_header.animate({
+          'top': '0'
+        }, 200);
       }
     } else {
       _header.removeClass('topfixed');
 
-      $('body .fixed-header').remove();
+      $('.fixed-header').animate({
+        'top': '-100%'
+      }, 100, function () {
+        $('body .fixed-header').remove();
+      });
     }
   });
 });
 
 function fixedmenuHTML() {
-  return "\n    <div class=\"fixed-header\">\n        <div class=\"hamburger\"></div>\n        <div class=\"search\"></div>\n        <div class=\"logo\"></div>\n    </div>\n    ".trim();
+  return "\n    <div class=\"fixed-header\">\n        <div class=\"hamburger\"></div>\n        <div class=\"search-btn\"></div>\n        <div class=\"logo\"></div>\n    </div>\n    ".trim();
 }
 
 /***/ }),

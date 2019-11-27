@@ -266,16 +266,17 @@
 @media screen and (max-width: $break-medium ){
     .fixed-header{
         position: fixed;
-        top: 0;
+        top: -100%;
         width: 100%;
-        height: 40px;
+        height: 50px;
         z-index: 99;
         box-shadow: 0 3px 4px rgba(black , .15);
         background-color: $bg;
+        transition-duration: .3s;
         @include clearfix();
         .hamburger{
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             float: right;
             margin-right: 5px;
             position: relative;
@@ -284,6 +285,65 @@
                 background: url('../img/svg/hamberger.svg') no-repeat center;
                 top: 0;
                 right: 0;
+                opacity:.7;
+                position: absolute;
+                width: 100%;
+                height: 100%;
+            }
+            &:hover, &:active{
+                background-color: rgba(white, .1);
+                &::after{
+                    opacity: 1;
+                }
+            }
+        }
+        .logo{
+            position: absolute;
+            display: block;
+            right: 50%;
+            transform: translateX(50%);
+            width: auto;
+            min-width: 130px;;
+            height: 30px;
+            background-color: rgba(white, .85);
+            // @include clearfix();
+            margin-top: 10px;
+            border-radius: 7px;
+            opacity: .95;
+            &::before{
+                content:'';
+                background: url('../img/svg/Logo.svg') center no-repeat ;
+                background-size: 20px auto;
+                display: block;
+                float: right;
+                width: auto;
+                height: 100%;
+                width: 30%;
+            }
+            &::after{
+                content:'';
+                background: url('../img/svg/rpkazhal-dark.svg') center no-repeat ;
+                background-size: 80% auto;
+                background-position: center right;
+                display: block;
+                float: right;
+                height: 100%;
+                width: 70%;
+                opacity:.7;
+            }
+
+        }
+        .search-btn{
+            width: 50px;
+            height: 50px;
+            float: left;
+            margin-left: 5px;
+            position: relative;
+            &::after{
+                content: '';
+                background: url('../img/svg/search-icon.svg') center/20px no-repeat ;
+                top: 0;
+                left: 0;
                 opacity:.7;
                 position: absolute;
                 width: 100%;
