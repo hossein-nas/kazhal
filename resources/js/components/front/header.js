@@ -13,6 +13,10 @@ $(document).ready(function(){
 
             if( !fixed_elem ){
                 $('body').append(_fixed_header)
+
+                // adding hamburger eventlistener
+                hamburgerClickEvent();
+
                 _fixed_header.animate({'top': '0'},200);
             }
         }
@@ -25,7 +29,14 @@ $(document).ready(function(){
 
     })
 
+
 })
+
+function hamburgerClickEvent(){
+    $('.hamburger').click(function(){
+        $('nav').addClass('active');
+    });
+}
 
 function fixedmenuHTML(){
     return `

@@ -36993,7 +36993,9 @@ $(document).ready(function () {
       var _fixed_header = $(fixedmenuHTML());
 
       if (!fixed_elem) {
-        $('body').append(_fixed_header);
+        $('body').append(_fixed_header); // adding hamburger eventlistener
+
+        hamburgerClickEvent();
 
         _fixed_header.animate({
           'top': '0'
@@ -37010,6 +37012,12 @@ $(document).ready(function () {
     }
   });
 });
+
+function hamburgerClickEvent() {
+  $('.hamburger').click(function () {
+    $('nav').addClass('active');
+  });
+}
 
 function fixedmenuHTML() {
   return "\n    <div class=\"fixed-header\">\n        <div class=\"hamburger\"></div>\n        <div class=\"search-btn\"></div>\n        <div class=\"logo\"></div>\n    </div>\n    ".trim();
