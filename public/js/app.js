@@ -36976,7 +36976,11 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports) {
 
+var sidebar_status = 0;
+var stickynavbar_status = 0;
+var search_status = 0;
 $(document).ready(function () {
+  handlingNavBarLinks();
   $(document).scroll(function () {
     var _header = $('.header');
 
@@ -36986,29 +36990,9 @@ $(document).ready(function () {
     var top_of_screen = $(window).scrollTop();
 
     if (top_of_screen > bottom_of_element + 100) {
-      _header.addClass('topfixed');
-
-      var fixed_elem = $('.fixed-header').length;
-
-      var _fixed_header = $(fixedmenuHTML());
-
-      if (!fixed_elem) {
-        $('body').append(_fixed_header); // adding hamburger eventlistener
-
-        hamburgerClickEvent();
-
-        _fixed_header.animate({
-          'top': '0'
-        }, 200);
-      }
+      fadeInNavbar();
     } else {
-      _header.removeClass('topfixed');
-
-      $('.fixed-header').animate({
-        'top': '-100%'
-      }, 100, function () {
-        $('body .fixed-header').remove();
-      });
+      fadeOutNavbar();
     }
   });
 });
@@ -37016,11 +37000,52 @@ $(document).ready(function () {
 function hamburgerClickEvent() {
   $('.hamburger').click(function () {
     $('nav').addClass('active');
+    sidebar_status = 1;
+    setTimeout(function () {
+      $('nav ul').addClass('show');
+    }, 100);
+  });
+}
+
+function handlingNavBarLinks() {
+  $('nav a').click(function (e) {
+    e.preventDefault();
   });
 }
 
 function fixedmenuHTML() {
   return "\n    <div class=\"fixed-header\">\n        <div class=\"hamburger\"></div>\n        <div class=\"search-btn\"></div>\n        <div class=\"logo\"></div>\n    </div>\n    ".trim();
+}
+
+function fadeInNavbar() {
+  $('.header').addClass('topfixed');
+  var fixed_elem = $('.fixed-header').length;
+
+  var _fixed_header = $(fixedmenuHTML());
+
+  if (!fixed_elem) {
+    $('body').append(_fixed_header); // adding hamburger eventlistener
+
+    hamburgerClickEvent();
+
+    _fixed_header.animate({
+      'top': '0'
+    }, 200);
+
+    stickynavbar_status = 1;
+  }
+}
+
+function fadeOutNavbar() {
+  if (sidebar_status != 1) {
+    $('.header').removeClass('topfixed');
+    $('.fixed-header').animate({
+      'top': '-100%'
+    }, 100, function () {
+      $('body .fixed-header').remove();
+      stickynavbar_status = 0;
+    });
+  }
 }
 
 /***/ }),

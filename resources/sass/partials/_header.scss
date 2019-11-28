@@ -97,7 +97,9 @@
             p.second{
                 margin-top: 20px;
                 font-size: 16px;
-                color: #8A8A8A;
+                color: #868686;
+                line-height: 26px;
+                font-weight: 600;
 
             }
             p.bold{
@@ -195,6 +197,7 @@
                 z-index: 100;
                 top:50px;
                 transition-duration: .3s;
+                overflow: hidden;
                 ul{
                     width: 70%;
                     height: 100%;
@@ -202,6 +205,12 @@
                     background-color: #e9e9e9;
                     color: white;
                     padding-top: 15px;
+                    transform: translateX(100%);
+                    transition-duration: .3s;
+                    box-shadow: -2px 0 4px rgba(black, .15);
+                    &.show{
+                        transform: translateX(0);
+                    }
                     li{
                         display: block;
                         list-style: none;
@@ -246,16 +255,53 @@
             }
         }
         div.hamberger{
-            position: absolute;
-            width:30px;
-            height:25px;
+            width:50px;
+            height:50px;
             // background-color: rgba( #fff, .2);
-            top:20px;
-            right:20px;
-            background-image: url('../img/svg/hamberger.svg');
-            background-repeat: no-repeat;
-            background-position: center center;
-            opacity:.7;
+            float: right;
+            margin-right: 5px;
+            position: relative;
+            &::before{
+                content: '';
+                position: absolute;
+                top: 0;
+                right: 0;
+                background: url('../img/svg/hamberger.svg') center no-repeat;
+                display: block;
+                width: 100%;
+                height: 100%;
+                opacity: .7;
+            }
+            &:hover, &:active{
+                background-color: rgba(white, .15);
+                &::before{
+                    opacity: .9;
+                }
+            }
+        }
+        .search{
+            position: relative;
+            float: left;
+            width: 50px;
+            height: 50px;
+            margin-left: 5px;
+            &::before{
+                content: '';
+                background: url('../img/svg/search-icon.svg') center/20px no-repeat;
+                position: absolute;
+                opacity: .7;
+                width: 100%;
+                height: 100%;
+                display: block;
+                top: 0;
+                left: 0;
+            }
+            &:hover, &:active{
+                background-color: rgba(white, .15);
+                &::before{
+                    opacity: .9;
+                }
+            }
         }
 
         div.slog{
@@ -364,14 +410,14 @@
             width: auto;
             min-width: 50px;;
             height: 35px;
-            background-color: rgba(white, .8);
+            background-color: rgba(white, .9);
             // @include clearfix();
             margin-top: 7px;
             border-radius: .5rem;
             &::before{
                 content:'';
                 background: url('../img/svg/Logo.svg') center no-repeat ;
-                background-size: 20px auto;
+                background-size: 24px auto;
                 display: block;
                 float: right;
                 width: auto;
