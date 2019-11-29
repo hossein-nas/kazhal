@@ -3,7 +3,7 @@
     <div class="search"></div>
     <div class="container">
         <div class="roban">
-            <img src="./img/svg/logo.social.svg" alt="" class="logo">
+            <img src="./img/svg/Logo.svg" alt="" class="logo">
         </div>
         <nav>
             <ul class="menubar">

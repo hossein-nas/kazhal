@@ -36922,6 +36922,8 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 __webpack_require__(/*! ./components/front/header */ "./resources/js/components/front/header.js");
 
+__webpack_require__(/*! ./components/front/logoclick */ "./resources/js/components/front/logoclick.js");
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
@@ -36994,6 +36996,12 @@ $(document).ready(function () {
     } else {
       fadeOutNavbar();
     }
+
+    if (top_of_screen > 1000) {
+      scrollTopFadeIn();
+    } else {
+      scrollTopFadeOut();
+    }
   });
 });
 
@@ -37004,6 +37012,7 @@ function hamburgerClickEvent() {
     setTimeout(function () {
       $('nav ul').addClass('show');
     }, 100);
+    disableScroll();
   });
 }
 
@@ -37047,6 +37056,54 @@ function fadeOutNavbar() {
     });
   }
 }
+
+function disableScroll() {
+  // Get the current page scroll position 
+  scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+  scrollLeft = window.pageXOffset || document.documentElement.scrollLeft, // if any scroll is attempted, set this to the previous value 
+  window.onscroll = function () {
+    window.scrollTo(scrollLeft, scrollTop);
+  };
+}
+
+function enableScroll() {
+  window.onscroll = function () {};
+}
+
+function scrollTopButton() {
+  $('.scrollTop').click(function () {
+    $('html, body').animate({
+      scrollTop: 0
+    }, 250);
+  });
+}
+
+function scrollTopFadeIn() {
+  if (!$('.scrollTop').length) {
+    var scrollTop = $('<div class="scrollTop"></div>');
+    $('body').append(scrollTop);
+    scrollTopButton();
+  }
+}
+
+function scrollTopFadeOut() {
+  $('.scrollTop').remove();
+}
+
+/***/ }),
+
+/***/ "./resources/js/components/front/logoclick.js":
+/*!****************************************************!*\
+  !*** ./resources/js/components/front/logoclick.js ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$(document).ready(function () {
+  $('.roban img').click(function () {
+    window.location = '/#home';
+  });
+});
 
 /***/ }),
 

@@ -19,6 +19,13 @@ $(document).ready(function(){
             fadeOutNavbar();
         }
 
+        if( top_of_screen > 1000 ){
+            scrollTopFadeIn();
+        }
+        else{
+            scrollTopFadeOut();
+        }
+
     })
 
 })
@@ -30,6 +37,7 @@ function hamburgerClickEvent(){
         setTimeout(function(){
             $('nav ul').addClass('show');
         },100)
+        disableScroll();
     });
 }
 
@@ -73,4 +81,38 @@ function fadeOutNavbar(){
             stickynavbar_status = 0;
         });
     }
+}
+function disableScroll() { 
+	// Get the current page scroll position 
+	scrollTop = window.pageYOffset || document.documentElement.scrollTop; 
+	scrollLeft = window.pageXOffset || document.documentElement.scrollLeft, 
+
+		// if any scroll is attempted, set this to the previous value 
+		window.onscroll = function() { 
+			window.scrollTo(scrollLeft, scrollTop); 
+		}; 
+} 
+
+function enableScroll() { 
+	window.onscroll = function() {}; 
+} 
+
+function scrollTopButton(){
+    $('.scrollTop').click(function(){
+        $('html, body').animate({
+            scrollTop: 0
+        }, 250 );
+    });
+}
+
+function scrollTopFadeIn(){
+    if ( ! $('.scrollTop').length ){
+        var scrollTop = $('<div class="scrollTop"></div>');
+        $('body').append(scrollTop);
+        scrollTopButton();
+    }
+}
+
+function scrollTopFadeOut(){
+    $('.scrollTop').remove();
 }
