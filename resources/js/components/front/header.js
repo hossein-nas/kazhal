@@ -37,7 +37,6 @@ function hamburgerClickEvent(){
         setTimeout(function(){
             $('nav ul').addClass('show');
         },100)
-        disableScroll();
     });
 }
 
@@ -50,9 +49,11 @@ function handlingNavBarLinks(){
 function fixedmenuHTML(){
     return `
     <div class="fixed-header">
-        <div class="hamburger"></div>
-        <div class="search-btn"></div>
-        <div class="logo"></div>
+        <div class="container">
+            <div class="hamburger"></div>
+            <div class="search-btn"></div>
+            <div class="logo"></div>
+        </div>
     </div>
     `.trim();
 }
@@ -82,20 +83,6 @@ function fadeOutNavbar(){
         });
     }
 }
-function disableScroll() { 
-	// Get the current page scroll position 
-	scrollTop = window.pageYOffset || document.documentElement.scrollTop; 
-	scrollLeft = window.pageXOffset || document.documentElement.scrollLeft, 
-
-		// if any scroll is attempted, set this to the previous value 
-		window.onscroll = function() { 
-			window.scrollTo(scrollLeft, scrollTop); 
-		}; 
-} 
-
-function enableScroll() { 
-	window.onscroll = function() {}; 
-} 
 
 function scrollTopButton(){
     $('.scrollTop').click(function(){

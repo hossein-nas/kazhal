@@ -37012,7 +37012,6 @@ function hamburgerClickEvent() {
     setTimeout(function () {
       $('nav ul').addClass('show');
     }, 100);
-    disableScroll();
   });
 }
 
@@ -37023,7 +37022,7 @@ function handlingNavBarLinks() {
 }
 
 function fixedmenuHTML() {
-  return "\n    <div class=\"fixed-header\">\n        <div class=\"hamburger\"></div>\n        <div class=\"search-btn\"></div>\n        <div class=\"logo\"></div>\n    </div>\n    ".trim();
+  return "\n    <div class=\"fixed-header\">\n        <div class=\"container\">\n            <div class=\"hamburger\"></div>\n            <div class=\"search-btn\"></div>\n            <div class=\"logo\"></div>\n        </div>\n    </div>\n    ".trim();
 }
 
 function fadeInNavbar() {
@@ -37055,19 +37054,6 @@ function fadeOutNavbar() {
       stickynavbar_status = 0;
     });
   }
-}
-
-function disableScroll() {
-  // Get the current page scroll position 
-  scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-  scrollLeft = window.pageXOffset || document.documentElement.scrollLeft, // if any scroll is attempted, set this to the previous value 
-  window.onscroll = function () {
-    window.scrollTo(scrollLeft, scrollTop);
-  };
-}
-
-function enableScroll() {
-  window.onscroll = function () {};
 }
 
 function scrollTopButton() {
@@ -37125,8 +37111,8 @@ $(document).ready(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Programing\Projects\Laravel\kazhal\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Programing\Projects\Laravel\kazhal\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/hosseinnasiri/code/kazhal/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/hosseinnasiri/code/kazhal/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
