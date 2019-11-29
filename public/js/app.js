@@ -36924,6 +36924,8 @@ __webpack_require__(/*! ./components/front/header */ "./resources/js/components/
 
 __webpack_require__(/*! ./components/front/logoclick */ "./resources/js/components/front/logoclick.js");
 
+__webpack_require__(/*! ./components/front/hashchange */ "./resources/js/components/front/hashchange.js");
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
@@ -36971,6 +36973,42 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
+/***/ "./resources/js/components/front/hashchange.js":
+/*!*****************************************************!*\
+  !*** ./resources/js/components/front/hashchange.js ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$(document).ready(function () {
+  $(window).bind('hashchange', function (e) {
+    e.preventDefault();
+    var hash = window.location.hash;
+
+    if (hash == "#home") {
+      $('body, html').animate({
+        'scrollTop': 0
+      }, 300);
+    }
+
+    if (hash == "#services-section") {
+      var services_top = $('#services').offset().top;
+      $('body, html').animate({
+        'scrollTop': services_top - 30
+      }, 300);
+    }
+
+    if (hash == "#pricing-section") {
+      var pricing_top = $('#pricing').offset().top;
+      $('body, html').animate({
+        'scrollTop': pricing_top - 70
+      }, 300);
+    }
+  });
+});
+
+/***/ }),
+
 /***/ "./resources/js/components/front/header.js":
 /*!*************************************************!*\
   !*** ./resources/js/components/front/header.js ***!
@@ -36982,7 +37020,6 @@ var sidebar_status = 0;
 var stickynavbar_status = 0;
 var search_status = 0;
 $(document).ready(function () {
-  handlingNavBarLinks();
   $(document).scroll(function () {
     var _header = $('.header');
 
@@ -37012,12 +37049,6 @@ function hamburgerClickEvent() {
     setTimeout(function () {
       $('nav ul').addClass('show');
     }, 100);
-  });
-}
-
-function handlingNavBarLinks() {
-  $('nav a').click(function (e) {
-    e.preventDefault();
   });
 }
 

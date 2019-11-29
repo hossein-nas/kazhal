@@ -7,9 +7,9 @@
         </div>
         <nav>
             <ul class="menubar">
-                <li class="item"><a href="#">خانه</a></li>
-                <li class="item"><a href="#">خدمات</a></li>
-                <li class="item"><a href="#">تعرفه‌ها</a></li>
+                <li class="item"><a href="#home">خانه</a></li>
+                <li class="item"><a href="#services-section">خدمات</a></li>
+                <li class="item"><a href="#pricing-section">تعرفه‌ها</a></li>
                 <li class="item"><a href="#">دربـاره‌ی مـا</a></li>
                 <li class="item"><a href="#">تماس با مـا</a></li>
             </ul>

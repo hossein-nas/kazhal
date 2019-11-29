@@ -2,9 +2,6 @@ var sidebar_status = 0;
 var stickynavbar_status = 0;
 var search_status = 0;
 $(document).ready(function(){
-
-    handlingNavBarLinks();
-
     $(document).scroll(function(){
         var _header = $('.header');
         var top_of_element = $(".header").offset().top;
@@ -40,11 +37,6 @@ function hamburgerClickEvent(){
     });
 }
 
-function handlingNavBarLinks(){
-    $('nav a').click(function(e){
-        e.preventDefault();
-    });
-}
 
 function fixedmenuHTML(){
     return `
