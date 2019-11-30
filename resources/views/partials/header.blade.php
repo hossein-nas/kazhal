@@ -1,4 +1,4 @@
-<header class="header">
+<header class="header @yield('header-class')">
     <div class="hamberger"></div>
     <div class="search"></div>
     <div class="container">

@@ -36981,6 +36981,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /***/ (function(module, exports) {
 
 $(document).ready(function () {
+  manageNavbarAnchorLinks();
   $(window).bind('hashchange', function (e) {
     e.preventDefault();
     var hash = window.location.hash;
@@ -37006,6 +37007,12 @@ $(document).ready(function () {
     }
   });
 });
+
+function manageNavbarAnchorLinks() {
+  $('nav a').click(function () {
+    window.location.hash = "#";
+  });
+}
 
 /***/ }),
 
@@ -37142,8 +37149,8 @@ $(document).ready(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/hosseinnasiri/code/kazhal/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/hosseinnasiri/code/kazhal/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\Programing\Projects\Laravel\kazhal\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\Programing\Projects\Laravel\kazhal\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

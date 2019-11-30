@@ -401,11 +401,11 @@
         }
         .logo{
             position: absolute;
-            right: 0;
-            top: 5px;
+            right: 60px;
+            top: 0;
             width: 50px;
-            height: 50px;
-            border-radius: .5rem;
+            height: 55px;
+            border-radius: 0 0 .5rem .5rem;
             background: url('../img/svg/Logo.svg') center/35px auto no-repeat;
             background-color: rgba(white, .95);
             opacity: .85;
@@ -414,7 +414,7 @@
                 display: block;
                 position: absolute;
                 right: 65px;
-                top: 7px;
+                top: 12px;
                 width: 180px;
                 height: 32px;
                 background: url('../img/svg/rpkazhal.svg')center right/auto 100% no-repeat;
@@ -438,7 +438,7 @@
             }
             &:hover{
                 cursor: pointer;
-                background-color: rgba(white, .2);
+                background-color: rgba(white, .1);
                 &::before{
                     opacity: .9;
                 }

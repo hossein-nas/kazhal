@@ -1,4 +1,5 @@
 $(document).ready(function(){
+    manageNavbarAnchorLinks();
     $(window).bind('hashchange', function(e){
         e.preventDefault();
         var hash = window.location.hash
@@ -22,3 +23,9 @@ $(document).ready(function(){
     })
 
 });
+
+function manageNavbarAnchorLinks(){
+    $('nav a').click(function(){
+        window.location.hash="#";
+    })
+}

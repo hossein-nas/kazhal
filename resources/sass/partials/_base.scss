@@ -16,6 +16,9 @@ div.container{
     display: block;
 
 }
+section#content{
+    min-height: 200px;
+}
 
 @media screen and (max-width: 1260px){
     div.container{
