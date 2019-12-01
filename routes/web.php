@@ -15,6 +15,6 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('/single', function () {
+Route::get('/services/web-design', function () {
     return view('single');
 });
