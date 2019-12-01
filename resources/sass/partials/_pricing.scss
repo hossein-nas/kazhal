@@ -100,8 +100,8 @@
                 border-radius: .75rem;
                 margin: 20px auto 15px;
                 text-align: center;
-                padding: 12px 0 ;
                 a{
+                    padding: 12px 0 ;
                     color: white;
                     display: block;
                     width: 100%;
@@ -142,6 +142,9 @@
         .panel{
             margin: 0 25px 35px;
             box-shadow: 0 6px 19px rgba(128, 128, 128, 0.35);
+            .desc{
+                font-weight: 400;
+            }
         }
 
     }

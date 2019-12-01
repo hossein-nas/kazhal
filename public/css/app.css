@@ -733,6 +733,7 @@ section#content {
     float: right;
     margin-right: 5px;
     position: relative;
+    z-index: 99;
   }
   header.header div.hamberger::before {
     content: "";
@@ -757,6 +758,7 @@ section#content {
     width: 50px;
     height: 50px;
     margin-left: 5px;
+    z-index: 99;
   }
   header.header .search::before {
     content: "";
@@ -1445,9 +1447,9 @@ section#content {
     border-radius: 0.75rem;
     margin: 20px auto 15px;
     text-align: center;
-    padding: 12px 0;
   }
   #pricing .panel .order a {
+    padding: 12px 0;
     color: white;
     display: block;
     width: 100%;
@@ -1476,6 +1478,9 @@ section#content {
   section#pricing .panel {
     margin: 0 25px 35px;
     box-shadow: 0 6px 19px rgba(128, 128, 128, 0.35);
+  }
+  section#pricing .panel .desc {
+    font-weight: 400;
   }
 }
 @media screen and (min-width: 320px) {
