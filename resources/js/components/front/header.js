@@ -2,6 +2,7 @@ var sidebar_status = 0;
 var stickynavbar_status = 0;
 var search_status = 0;
 $(document).ready(function(){
+    headerButtonEvents();
     $(document).scroll(function(){
         var _header = $('.header');
         var top_of_element = $(".header").offset().top;
@@ -27,14 +28,48 @@ $(document).ready(function(){
 
 })
 
+function headerButtonEvents(){
+    $('.hamberger').click(function(){
+        alert('hi');
+        var _nav = $('nav');
+        if( _nav.hasClass('active') ){
+            navbarFadOut();
+        }
+        else{
+            navbarFadeIn();
+        }
+    })
+    
+}
+
 function hamburgerClickEvent(){
     $('.hamburger').click(function(){
-        $('nav').addClass('active');
-        sidebar_status = 1;
-        setTimeout(function(){
-            $('nav ul').addClass('show');
-        },100)
+        var _nav = $('nav');
+        if( _nav.hasClass('active') ){
+            navbarFadOut();
+        }
+        else{
+            navbarFadeIn();
+        }
     });
+    $('nav').click(function(){
+        navbarFadOut();
+    });
+}
+
+function navbarFadOut(){
+    $('nav ul').removeClass('show');
+    sidebar_status = 0;
+    setTimeout(function(){
+        $('nav').removeClass('active');
+    },200)
+}
+function navbarFadeIn(){
+    $('nav').addClass('active');
+    sidebar_status = 1;
+    setTimeout(function(){
+        $('nav ul').addClass('show');
+    },100)
 }
 
 

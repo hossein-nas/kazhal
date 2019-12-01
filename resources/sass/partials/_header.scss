@@ -278,6 +278,7 @@
             float: right;
             margin-right: 5px;
             position: relative;
+            z-index: 99;
             &::before{
                 content: '';
                 position: absolute;
@@ -302,6 +303,7 @@
             width: 50px;
             height: 50px;
             margin-left: 5px;
+            z-index: 99;
             &::before{
                 content: '';
                 background: url('../img/svg/search-icon.svg') center/20px no-repeat;

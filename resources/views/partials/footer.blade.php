@@ -3,19 +3,19 @@
         <section class="social-links">
             <ul class="social-icons">
                 <li class="icon">
-                    <a href="#"> <img src="../img/svg/social/insta.svg" alt=""></a>
+                    <a href="#"> <img src="/img/svg/social/insta.svg" alt=""></a>
                 </li>
                 <li class="icon">
-                    <a href="#"> <img src="../img/svg/social/telegram.svg" alt=""></a>
+                    <a href="#"> <img src="/img/svg/social/telegram.svg" alt=""></a>
                 </li>
                 <li class="icon">
-                    <a href="#"> <img src="../img/svg/social/skype.svg" alt=""></a>
+                    <a href="#"> <img src="/img/svg/social/skype.svg" alt=""></a>
                 </li>
                 <li class="icon">
-                    <a href="#"> <img src="../img/svg/social/youtube.svg" alt=""></a>
+                    <a href="#"> <img src="/img/svg/social/youtube.svg" alt=""></a>
                 </li>
                 <li class="icon">
-                    <a href="#"> <img src="../img/svg/social/aparat.svg" alt=""></a>
+                    <a href="#"> <img src="/img/svg/social/aparat.svg" alt=""></a>
                 </li>
             </ul>
         </section>
@@ -75,7 +75,7 @@
             <span>تمامی حقوق مادی و معنوی این سایت متعلق به</span>
             <span>
                 شرکت
-                <img src="../img/svg/rpkazhal.svg" alt="رایان پردازش کژال">
+                <img src="/img/svg/rpkazhal.svg" alt="رایان پردازش کژال">
                 می‌باشد.
             </span>
         </section>

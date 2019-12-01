@@ -733,6 +733,7 @@ section#content {
     float: right;
     margin-right: 5px;
     position: relative;
+    z-index: 99;
   }
   header.header div.hamberger::before {
     content: "";
@@ -757,6 +758,7 @@ section#content {
     width: 50px;
     height: 50px;
     margin-left: 5px;
+    z-index: 99;
   }
   header.header .search::before {
     content: "";
@@ -1403,6 +1405,9 @@ section#content {
     background: url("../img/svg/elem_svg/webdesign-icon.svg") no-repeat top left;
     background-size: 100% auto;
   }
+  #pricing .panel:hover .order {
+    background-color: #3dae8f;
+  }
   #pricing .panel .header {
     font-weight: 900;
     font-size: 1.6rem;
@@ -1442,7 +1447,18 @@ section#content {
     border-radius: 0.75rem;
     margin: 20px auto 15px;
     text-align: center;
+  }
+  #pricing .panel .order a {
     padding: 12px 0;
+    color: white;
+    display: block;
+    width: 100%;
+    height: 100%;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  #pricing .panel .order a:hover, #pricing .panel .order a:active {
+    text-decoration: underline;
   }
 }
 @media screen and (min-width: 768px) {
@@ -1462,6 +1478,9 @@ section#content {
   section#pricing .panel {
     margin: 0 25px 35px;
     box-shadow: 0 6px 19px rgba(128, 128, 128, 0.35);
+  }
+  section#pricing .panel .desc {
+    font-weight: 400;
   }
 }
 @media screen and (min-width: 320px) {
