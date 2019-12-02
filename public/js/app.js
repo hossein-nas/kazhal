@@ -36985,7 +36985,7 @@ $(document).ready(function () {
   managingGettingStarted();
   managingHashChange(); // this is triggered when page first load along with hash
 
-  $(window).bind('hashchange', function (e) {
+  $(window).bind("hashchange", function (e) {
     e.preventDefault();
     managingHashChange();
   });
@@ -36995,36 +36995,36 @@ function managingHashChange() {
   var hash = window.location.hash;
 
   if (hash == "#home") {
-    $('body, html').animate({
-      'scrollTop': 0
+    $("body, html").animate({
+      scrollTop: 0
     }, 300);
   }
 
   if (hash == "#services-section") {
-    var services_top = $('#services').offset().top;
-    $('body, html').animate({
-      'scrollTop': services_top - 30
+    var services_top = $("#services").offset().top;
+    $("body, html").animate({
+      scrollTop: services_top - 30
     }, 300);
   }
 
   if (hash == "#pricing-section") {
-    var pricing_top = $('#pricing').offset().top;
-    $('body, html').animate({
-      'scrollTop': pricing_top - 70
+    var pricing_top = $("#pricing").offset().top;
+    $("body, html").animate({
+      scrollTop: pricing_top - 70
     }, 300);
   }
 }
 
 function manageNavbarAnchorLinks() {
-  $('nav a').click(function () {
+  $("nav a").click(function () {
     window.location.hash = "#";
   });
 }
 
 function managingGettingStarted() {
-  $('header p.bold').click(function () {
-    window.location.hash = '#';
-    window.location.hash = '#services-section';
+  $("header p.bold").click(function () {
+    window.location.hash = "#";
+    window.location.hash = "#services-section";
   });
 }
 
@@ -37043,7 +37043,7 @@ var search_status = 0;
 $(document).ready(function () {
   headerButtonEvents();
   $(document).scroll(function () {
-    var _header = $('.header');
+    var _header = $(".header");
 
     var top_of_element = $(".header").offset().top;
     var bottom_of_element = $(".header").offset().top + $(".header").outerHeight();
@@ -37065,12 +37065,12 @@ $(document).ready(function () {
 });
 
 function headerButtonEvents() {
-  $('.hamberger').click(function () {
-    alert('hi');
+  $(".hamberger").click(function () {
+    alert("hi");
 
-    var _nav = $('nav');
+    var _nav = $("nav");
 
-    if (_nav.hasClass('active')) {
+    if (_nav.hasClass("active")) {
       navbarFadOut();
     } else {
       navbarFadeIn();
@@ -37079,33 +37079,33 @@ function headerButtonEvents() {
 }
 
 function hamburgerClickEvent() {
-  $('.hamburger').click(function () {
-    var _nav = $('nav');
+  $(".hamburger").click(function () {
+    var _nav = $("nav");
 
-    if (_nav.hasClass('active')) {
+    if (_nav.hasClass("active")) {
       navbarFadOut();
     } else {
       navbarFadeIn();
     }
   });
-  $('nav').click(function () {
+  $("nav").click(function () {
     navbarFadOut();
   });
 }
 
 function navbarFadOut() {
-  $('nav ul').removeClass('show');
+  $("nav ul").removeClass("show");
   sidebar_status = 0;
   setTimeout(function () {
-    $('nav').removeClass('active');
+    $("nav").removeClass("active");
   }, 200);
 }
 
 function navbarFadeIn() {
-  $('nav').addClass('active');
+  $("nav").addClass("active");
   sidebar_status = 1;
   setTimeout(function () {
-    $('nav ul').addClass('show');
+    $("nav ul").addClass("show");
   }, 100);
 }
 
@@ -37114,18 +37114,18 @@ function fixedmenuHTML() {
 }
 
 function fadeInNavbar() {
-  $('.header').addClass('topfixed');
-  var fixed_elem = $('.fixed-header').length;
+  $(".header").addClass("topfixed");
+  var fixed_elem = $(".fixed-header").length;
 
   var _fixed_header = $(fixedmenuHTML());
 
   if (!fixed_elem) {
-    $('body').append(_fixed_header); // adding hamburger eventlistener
+    $("body").append(_fixed_header); // adding hamburger eventlistener
 
     hamburgerClickEvent();
 
     _fixed_header.animate({
-      'top': '0'
+      top: "0"
     }, 200);
 
     stickynavbar_status = 1;
@@ -37134,34 +37134,34 @@ function fadeInNavbar() {
 
 function fadeOutNavbar() {
   if (sidebar_status != 1) {
-    $('.header').removeClass('topfixed');
-    $('.fixed-header').animate({
-      'top': '-100%'
+    $(".header").removeClass("topfixed");
+    $(".fixed-header").animate({
+      top: "-100%"
     }, 100, function () {
-      $('body .fixed-header').remove();
+      $("body .fixed-header").remove();
       stickynavbar_status = 0;
     });
   }
 }
 
 function scrollTopButton() {
-  $('.scrollTop').click(function () {
-    $('html, body').animate({
+  $(".scrollTop").click(function () {
+    $("html, body").animate({
       scrollTop: 0
     }, 250);
   });
 }
 
 function scrollTopFadeIn() {
-  if (!$('.scrollTop').length) {
+  if (!$(".scrollTop").length) {
     var scrollTop = $('<div class="scrollTop"></div>');
-    $('body').append(scrollTop);
+    $("body").append(scrollTop);
     scrollTopButton();
   }
 }
 
 function scrollTopFadeOut() {
-  $('.scrollTop').remove();
+  $(".scrollTop").remove();
 }
 
 /***/ }),
@@ -37199,8 +37199,8 @@ $(document).ready(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Programing\Projects\Laravel\kazhal\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Programing\Projects\Laravel\kazhal\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/hosseinnasiri/code/kazhal/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/hosseinnasiri/code/kazhal/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
