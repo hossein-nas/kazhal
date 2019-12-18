@@ -1657,10 +1657,16 @@ section#content {
   .main-body article.plans .plan.news .heading {
     background-color: #5db6af;
   }
+  .main-body article.plans .plan.commerce .heading {
+    background-color: #f3c154;
+  }
+  .main-body article.plans .plan.company .heading {
+    background-color: #42d19a;
+  }
   .main-body article.plans .plan .wrapper {
     padding: 1rem 0 1.5rem;
     background-color: white;
-    box-shadow: 0 13px 16px -4px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 9px 18px -3px rgba(0, 0, 0, 0.17);
     width: 100%;
     min-height: 280px;
   }
@@ -1671,7 +1677,7 @@ section#content {
     font-weight: 900;
     font-size: 1.2rem;
     text-align: center;
-    text-shadow: 0 2px 0 rgba(0, 0, 0, 0.08);
+    text-shadow: 0 2px 0 rgba(0, 0, 0, 0.1);
     line-height: 2.5rem;
     margin-bottom: 0.5rem;
   }
@@ -1690,7 +1696,7 @@ section#content {
     color: #adadad;
     font-size: 0.9rem;
     font-weight: 400;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.55rem;
   }
   .main-body article.plans .plan .wrapper .price::after {
     content: "\647\632\627\631   \62A\648\645\627\646";
@@ -1745,6 +1751,93 @@ section#content {
   .main-body article.plans .plan .more:hover, .main-body article.plans .plan .more:active {
     text-decoration: underline;
     color: #65a1d6;
+  }
+}
+@media screen and (min-width: 769px) {
+  .main-body {
+    width: 100%;
+    max-width: 1260px;
+    margin: 0 auto;
+  }
+  .main-body::after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+  .main-body article.paragraph {
+    width: 100%;
+    max-width: 1024px;
+    margin: 0 auto;
+    margin-bottom: 2rem;
+  }
+  .main-body article.paragraph .header {
+    font-size: 1.5rem;
+    color: #424242;
+  }
+  .main-body article.paragraph .text {
+    font-size: 1.2rem;
+    line-height: 2.4rem;
+    color: #4c4c4c;
+    font-weight: 400;
+  }
+  .main-body article.plans {
+    display: -webkit-box;
+    display: flex;
+    max-width: none;
+    flex-flow: wrap;
+    -webkit-box-pack: center;
+            justify-content: center;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-tap-highlight-color: transparent;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+    -webkit-touch-callout: none;
+  }
+  .main-body article.plans div.header {
+    -webkit-box-flex: 1;
+            flex: 1 100%;
+    font-size: 1.6rem;
+    margin-bottom: 2.5rem;
+    position: relative;
+  }
+  .main-body article.plans div.header::before {
+    content: "";
+    width: 100px;
+    border-right: 50px solid #c5c5c5;
+    height: 6px;
+    background-color: #eee;
+    top: 100%;
+    position: absolute;
+    margin-top: 0.5rem;
+    right: 50%;
+    -webkit-transform: translateX(50%);
+            transform: translateX(50%);
+  }
+  .main-body article.plans .plan {
+    max-width: 340px;
+    margin: 0 1rem 1.5rem;
+  }
+  .main-body article.plans .plan .wrapper {
+    border: 1px solid #ececec;
+  }
+  .main-body article.plans .plan .wrapper .heading {
+    height: 55px;
+    line-height: 3.3rem;
+    font-size: 1.3rem;
+  }
+  .main-body article.plans .plan .wrapper .price {
+    padding: 1.5rem 0;
+  }
+  .main-body article.plans .plan .wrapper .desc {
+    margin-bottom: 1.5rem;
+  }
+  .main-body article.plans .plan .wrapper .getstarted {
+    width: 80%;
+  }
+  .main-body article.plans .plan .wrapper .getstarted a {
+    padding: 0.85rem 0;
   }
 }
 @media screen and (min-width: 320px) {

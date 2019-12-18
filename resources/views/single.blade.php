@@ -80,6 +80,59 @@
                 بیشتر بدانید
             </a>
         </section>
+
+        <section class="plan commerce">
+            <div class="wrapper">
+                <div class="heading">
+                    وب‌سایت فروشگاهی
+                </div>
+                <div class="price">
+                    ۸۰۰
+                </div>
+                <div class="desc">
+                    مناسب برای کسب‌وکارهایی که
+                    <span class="bold">
+                        می‌خواهند از تولید محتوا درآمدزایی کنند
+                    </span>
+                </div>
+                <div class="getstarted">
+                    <a href="#">شروع کنید</a>
+                </div>
+            </div>
+            <a href="#" class="more">
+                در مورد وب‌سایت
+                <span>
+                    فروشگاهی
+                </span>
+                بیشتر بدانید
+            </a>
+        </section>
+        <section class="plan company">
+            <div class="wrapper">
+                <div class="heading">
+                    وب‌سایت شرکتی
+                </div>
+                <div class="price">
+                    ۸۰۰
+                </div>
+                <div class="desc">
+                    مناسب برای کسب‌وکارهایی که
+                    <span class="bold">
+                        می‌خواهند از تولید محتوا درآمدزایی کنند
+                    </span>
+                </div>
+                <div class="getstarted">
+                    <a href="#">شروع کنید</a>
+                </div>
+            </div>
+            <a href="#" class="more">
+                در مورد وب‌سایت
+                <span>
+                    شرکتی
+                </span>
+                بیشتر بدانید
+            </a>
+        </section>
     </article>
 </div>
 
