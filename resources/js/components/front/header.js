@@ -1,15 +1,16 @@
-var sidebar_status = 0;
-var stickynavbar_status = 0;
-var search_status = 0;
-$(document).ready(function() {
+let sidebar_status = 0;
+window.stickynavbar_status = 0;
+
+$(document).ready(() => {
     headerButtonEvents();
-    $(document).scroll(function() {
-        var _header = $(".header");
-        var top_of_element = $(".header").offset().top;
-        var bottom_of_element =
+    $(document).scroll(() => {
+        const _header = $(".header");
+        const top_of_element = $(".header").offset().top;
+        const bottom_of_element =
             $(".header").offset().top + $(".header").outerHeight();
-        var bottom_of_screen = $(window).scrollTop() + $(window).innerHeight();
-        var top_of_screen = $(window).scrollTop();
+        const bottom_of_screen =
+            $(window).scrollTop() + $(window).innerHeight();
+        const top_of_screen = $(window).scrollTop();
 
         if (top_of_screen > bottom_of_element + 100) {
             fadeInNavbar();
@@ -26,9 +27,8 @@ $(document).ready(function() {
 });
 
 function headerButtonEvents() {
-    $(".hamberger").click(function() {
-        alert("hi");
-        var _nav = $("nav");
+    $(".hamberger").click(() => {
+        const _nav = $("nav");
         if (_nav.hasClass("active")) {
             navbarFadOut();
         } else {
@@ -38,15 +38,15 @@ function headerButtonEvents() {
 }
 
 function hamburgerClickEvent() {
-    $(".hamburger").click(function() {
-        var _nav = $("nav");
+    $(".hamburger").click(() => {
+        const _nav = $("nav");
         if (_nav.hasClass("active")) {
             navbarFadOut();
         } else {
             navbarFadeIn();
         }
     });
-    $("nav").click(function() {
+    $("nav").click(() => {
         navbarFadOut();
     });
 }
@@ -54,14 +54,14 @@ function hamburgerClickEvent() {
 function navbarFadOut() {
     $("nav ul").removeClass("show");
     sidebar_status = 0;
-    setTimeout(function() {
+    setTimeout(() => {
         $("nav").removeClass("active");
     }, 200);
 }
 function navbarFadeIn() {
     $("nav").addClass("active");
     sidebar_status = 1;
-    setTimeout(function() {
+    setTimeout(() => {
         $("nav ul").addClass("show");
     }, 100);
 }
@@ -80,8 +80,8 @@ function fixedmenuHTML() {
 
 function fadeInNavbar() {
     $(".header").addClass("topfixed");
-    var fixed_elem = $(".fixed-header").length;
-    var _fixed_header = $(fixedmenuHTML());
+    const fixed_elem = $(".fixed-header").length;
+    const _fixed_header = $(fixedmenuHTML());
 
     if (!fixed_elem) {
         $("body").append(_fixed_header);
@@ -97,7 +97,7 @@ function fadeInNavbar() {
 function fadeOutNavbar() {
     if (sidebar_status != 1) {
         $(".header").removeClass("topfixed");
-        $(".fixed-header").animate({ top: "-100%" }, 100, function() {
+        $(".fixed-header").animate({ top: "-100%" }, 100, () => {
             $("body .fixed-header").remove();
             stickynavbar_status = 0;
         });
@@ -105,10 +105,10 @@ function fadeOutNavbar() {
 }
 
 function scrollTopButton() {
-    $(".scrollTop").click(function() {
+    $(".scrollTop").click(() => {
         $("html, body").animate(
             {
-                scrollTop: 0
+                scrollTop: 0,
             },
             250
         );
@@ -117,7 +117,7 @@ function scrollTopButton() {
 
 function scrollTopFadeIn() {
     if (!$(".scrollTop").length) {
-        var scrollTop = $('<div class="scrollTop"></div>');
+        const scrollTop = $('<div class="scrollTop"></div>');
         $("body").append(scrollTop);
         scrollTopButton();
     }

@@ -1,5 +1,5 @@
-$(document).ready(function(){
-    $('.roban img').click(function(){
-        window.location = '/#home';
-    })
-})
+$(document).ready(() => {
+    $(".roban img").click(() => {
+        window.location = "/#home";
+    });
+});

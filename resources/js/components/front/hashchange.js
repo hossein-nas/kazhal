@@ -1,37 +1,37 @@
-$(document).ready(function() {
+$(document).ready(() => {
     manageNavbarAnchorLinks();
     managingGettingStarted();
     managingHashChange(); // this is triggered when page first load along with hash
-    $(window).bind("hashchange", function(e) {
+    $(window).bind("hashchange", (e) => {
         e.preventDefault();
         managingHashChange();
     });
 });
 
 function managingHashChange() {
-    var hash = window.location.hash;
+    const { hash } = window.location;
     if (hash == "#home") {
         $("body, html").animate(
             {
-                scrollTop: 0
+                scrollTop: 0,
             },
             300
         );
     }
     if (hash == "#services-section") {
-        var services_top = $("#services").offset().top;
+        const servicesTop = $("#services").offset().top;
         $("body, html").animate(
             {
-                scrollTop: services_top - 30
+                scrollTop: servicesTop - 30,
             },
             300
         );
     }
     if (hash == "#pricing-section") {
-        var pricing_top = $("#pricing").offset().top;
+        const pricingTop = $("#pricing").offset().top;
         $("body, html").animate(
             {
-                scrollTop: pricing_top - 70
+                scrollTop: pricingTop - 70,
             },
             300
         );
@@ -39,13 +39,13 @@ function managingHashChange() {
 }
 
 function manageNavbarAnchorLinks() {
-    $("nav a").click(function() {
+    $("nav a").click(() => {
         window.location.hash = "#";
     });
 }
 
 function managingGettingStarted() {
-    $("header p.bold").click(function() {
+    $("header p.bold").click(() => {
         window.location.hash = "#";
         window.location.hash = "#services-section";
     });
