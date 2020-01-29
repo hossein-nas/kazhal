@@ -8,6 +8,7 @@ $(document).ready(() => {
     });
 });
 
+
 function managingHashChange() {
     const { hash } = window.location;
     if (hash == "#home") {

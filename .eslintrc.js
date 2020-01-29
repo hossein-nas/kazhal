@@ -21,14 +21,6 @@ module.exports = {
     rules: {
         indent: ["error", 4],
         quotes: [2, "double", { avoidEscape: true }],
-        "import/no-extraneous-dependencies" : "off",
-        "global-require" : "off",
-        "no-multi-assign" : "off",
-        "no-undef" : "off",
-        "no-underscore-dangle" : "off",
-        "no-use-before-define" : "off",
-        "eqeqeq": "off",
-        "no-console" : "off",
         "prettier/prettier" : "error",
     }
 };
