@@ -1,5 +1,5 @@
 <template>
-    <div class="wrapper full-width row wrap justify-center items-center content-center">
+    <div class="wrapper user-select full-width row wrap justify-center items-center content-center">
         <div class="login-panel ">
             <div class="header row justify-center q-pa-sm">
                 پنل مدیریت
@@ -30,7 +30,14 @@
                 </div><!-- /.row checkbox -->
 
                 <div class="row q-px-lg q-pb-lg justify-center">
-                        <q-btn outline class="q-pa-sm" style="color: #6a97c7; flex: 1 100%" label="ورود به پنل" />
+                        <q-btn @click="login" outline class="q-pa-sm" style="color: #6a97c7; flex: 1 100%" label="ورود به پنل" >
+                            <q-inner-loading :showing="loading" >
+                                <q-spinner-dots
+                                color="primary"
+                                size="1em"
+                                />
+                            </q-inner-loading>
+                        </q-btn>
                 </div><!-- /.row -->
 
             </div><!-- /.body -->
@@ -39,14 +46,17 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
     name: 'Login',
 
     data () {
         return {
+            loading: false,
             rememberMe: false,
-            username: '',
-            password: ''
+            username: 'hossein@example.com',
+            password: '123'
         }
     },
     directives: {
@@ -54,6 +64,28 @@ export default {
             inserted (el) {
                 el.focus()
             }
+        }
+    },
+    methods: {
+        ...mapActions({
+            initSignIn: 'auth/init'
+        }),
+        login () {
+            this.loading = true
+            this.initSignIn({
+                data: {
+                    username: this.username,
+                    password: this.password
+                }
+            }).then(res => {
+                this.$router.push({ path: '/test' })
+                    .catch(() => {
+                        this.loading = false
+                    })
+            })
+        },
+        validateInputs () {
+            //
         }
     }
 }
@@ -88,7 +120,12 @@ body{
     .body{
         .row{
             .col{
-                //
+                input{
+                    font-size: 1.2rem;
+                }
+                .q-field--focused{
+                    background-color: white;
+                }
             }
         }
     }

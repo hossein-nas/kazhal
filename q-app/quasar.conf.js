@@ -1,3 +1,4 @@
+var path = require('path')
 // Configuration for your app
 // https://quasar.dev/quasar-cli/quasar-conf-js
 
@@ -7,7 +8,9 @@ module.exports = function (ctx) {
     // --> boot files are part of "main.js"
     // https://quasar.dev/quasar-cli/cli-documentation/boot-files
         boot: [
-            'axios'
+            'axios',
+            'authUser',
+            'routerGuard'
         ],
 
         // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css
@@ -177,6 +180,12 @@ module.exports = function (ctx) {
             extendWebpack (cfg) {
                 // do something with Electron main process Webpack cfg
                 // chainWebpack also available besides this extendWebpack
+
+                // I added this
+                cfg.resolve.alias = {
+                    ...cfg.resolve.alias,
+                    '@': path.resolve(__dirname, './src')
+                }
             }
         }
     }

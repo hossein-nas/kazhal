@@ -6,3 +6,7 @@ let _axios = axios.create({
     baseURL: 'http://kazhal.test/'
 })
 Vue.prototype.$axios = _axios
+
+export {
+    _axios
+}

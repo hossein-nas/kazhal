@@ -2,15 +2,17 @@ const routes = [
     {
         path: '/',
         component: () => import('layouts/MyLayout.vue'),
-        children: [{ path: '', component: () => import('pages/Index.vue') }]
+        children: [{ path: '', component: () => import('pages/Index.vue') }],
+        meta: { requireAuth: true }
     },
     {
-        path: '/test',
+        path: '/',
         component: () => import('layouts/MyLayout'),
-        name: 'test',
         children: [
-            { path: '', component: () => import('pages/test') },
-            { path: 'hey', component: () => import('pages/hey') }
+            { path: '/dashboard', component: () => import('pages/Index'), meta: { requireAuth: true } },
+
+            { path: '/user/preferences', component: () => import('pages/userPreferences'), meta: { requireAuth: true } },
+            { path: '/user/logout', component: () => import('pages/Logout'), meta: { requireAuth: true } }
         ]
     },
     {
