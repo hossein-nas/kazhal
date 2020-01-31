@@ -17,10 +17,10 @@
 
                 <div class="flex toolbar-dropdown">
                     <div class="username">
-                        حسین نصیری
+                        {{ this.username}}
                     </div><!-- /.username -->
                     <div class="role">
-                        مدیر
+                        {{ this.user_role}}
                     </div><!-- /.role -->
                     <div class="logo">
                         <img src="~assets/unknown_male.svg" alt="">
@@ -123,13 +123,24 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
     name: 'MyLayout',
 
     data () {
         return {
-            leftDrawerOpen: false
+            leftDrawerOpen: false,
+            username: '',
+            user_role: ''
         }
+    },
+    computed: {
+        ...mapGetters({ user: 'auth/getUserInfo' })
+
+    },
+    mounted () {
+        this.username = this.user.firstname + ' ' + this.user.lastname
+        this.user_role = 'ادمین'
     }
 }
 </script>

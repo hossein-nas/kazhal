@@ -12,12 +12,15 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
  */
-Route::get('/hey', function () {
-    return 'Hey';
-});
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
+    DB::delete('delete from oauth_access_tokens where user_id = ? and revoked = ?', [1, 1]);
+
     return $request->user();
 });
 
 Route::post('/login', 'Auth\LoginController@login');
+
+Route::group(['middleware' => 'auth:api'], function(){
+    Route::post('/logout', 'Auth\LoginController@logout');
+});

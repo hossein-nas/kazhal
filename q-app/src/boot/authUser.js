@@ -1,16 +1,19 @@
+import { _axios } from './axios'
 
-export default async ({ router, store, Vue, redirect }) => {
-    router.beforeEach((to, from, next) => {
-        if (to.name === 'login') {
-            let payload = { access_token: localStorage.getItem('token') }
-            store.dispatch('auth/checkAuthorized', payload).then(data => {
-                if (data === true) { return next({ path: '/dashboard' }) }
-                return next()
-            }).catch(() => {
-                next()
-            })
-            return
+export default function (store) {
+    return new Promise((resolve, reject) => {
+        if (localStorage.getItem('token')) {
+            var token = localStorage.getItem('token')
+            _axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
         }
-        next()
+        _axios.get('api/user')
+            .then((res) => {
+                store.dispatch('auth/setToken', token)
+                store.dispatch('auth/setUserInfo', res.data)
+                resolve()
+            })
+            .catch((e) => {
+                reject()
+            })
     })
 }

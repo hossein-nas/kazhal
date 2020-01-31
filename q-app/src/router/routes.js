@@ -8,11 +8,22 @@ const routes = [
     {
         path: '/',
         component: () => import('layouts/MyLayout'),
+        meta: { requireAuth: true },
         children: [
-            { path: '/dashboard', component: () => import('pages/Index'), meta: { requireAuth: true } },
+            { path: '/dashboard', component: () => import('pages/Index') },
 
-            { path: '/user/preferences', component: () => import('pages/userPreferences'), meta: { requireAuth: true } },
-            { path: '/user/logout', component: () => import('pages/Logout'), meta: { requireAuth: true } }
+            { path: '/user/preferences',
+                component: () => import('pages/userPreferences/index'),
+                children: [
+                    { path: '', component: () => import('pages/userPreferences/userState') },
+                    { path: 'change-password', component: () => import('pages/userPreferences/changePassword') },
+                    { path: 'change-email', component: () => import('pages/userPreferences/changeEmail') },
+                    { path: 'change-userphoto', component: () => import('pages/userPreferences/changeThumbnail') }
+                ]
+            },
+
+            { path: '/user/logout', component: () => import('pages/Logout') },
+            { path: 'hey', component: () => import('pages/hey') }
         ]
     },
     {

@@ -66,6 +66,8 @@ export default {
             }
         }
     },
+    created () {
+    },
     methods: {
         ...mapActions({
             initSignIn: 'auth/init'
@@ -78,7 +80,7 @@ export default {
                     password: this.password
                 }
             }).then(res => {
-                this.$router.push({ path: '/test' })
+                this.$router.push({ path: '/dashboard' })
                     .catch(() => {
                         this.loading = false
                     })

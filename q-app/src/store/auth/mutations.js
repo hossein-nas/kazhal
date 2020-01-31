@@ -9,5 +9,5 @@ export function SET_TOKEN (state, payload) {
 }
 
 export function SET_USER (state, payload) {
-    state.user = payload.user
+    state.user = payload
 }

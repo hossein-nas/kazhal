@@ -60,4 +60,14 @@ class LoginController extends Controller
 
         return json_decode((string) $response->getBody(), true);
     }
+    
+    public function logout(Request $req)
+    {
+        $req->user()->token()->revoke();
+        
+        return response()->json([
+            'status'  => "ok",
+            'message' => 'Loged Out'
+        ]);
+    }
 }

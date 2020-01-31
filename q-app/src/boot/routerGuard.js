@@ -1,13 +1,15 @@
-// import something here
-let auth = {
-    loggedIn () {
-        return true
-    }
-}
+import auth from './authUser'
+
 export default async ({ app, router, Vue, store }) => {
-    router.beforeEach((to, from, next) => {
+    router.beforeEach(async (to, from, next) => {
         if (to.matched.some(record => record.meta.requireAuth)) {
-            if (!auth.loggedIn()) {
+            let LoggedIn = false
+            try {
+                await auth(store)
+                LoggedIn = true
+            } catch (e) {
+            }
+            if (!LoggedIn) {
                 return next({
                     path: '/login',
                     query: { redirect: to.fullPath }

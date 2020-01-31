@@ -39,9 +39,16 @@ export function pullUserInfo ({ commit }) {
         .then(response => {
             commit('SET_USER', { user: response.data })
             return true
-        })
+        }).catch(() => { console.log('pullUserInfo Error') })
 }
 
+export function setToken ({ commit }, token) {
+    commit('SET_TOKEN', token)
+}
+
+export function setUserInfo ({ commit }, user) {
+    commit('SET_USER', user)
+}
 export function checkAuthorized ({ commit, state, dispatch }, payload) {
     return new Promise((resolve, reject) => {
         dispatch('setAxiosHeader', payload.access_token)
