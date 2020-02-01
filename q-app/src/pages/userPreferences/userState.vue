@@ -13,7 +13,7 @@
                             </div><!-- /.frame -->
                         </div><!-- /.thumbnail -->
                         <div class="caption">
-                            {{ this.email}}
+                            {{ this.email }}
                             <span class="role">
                                 ادمین
                             </span><!-- /.role -->
@@ -26,25 +26,42 @@
                             <div class="label">
                                 نــــام :
                             </div><!-- /.label -->
-                            <q-input outlined v-model="firstname"  />
+                            <q-input outlined v-model="firstname" :rules="[nameRule]" ref="firstname" />
                         </div><!-- /.form-control -->
 
                         <div class="form-control">
                             <div class="label">
                                 نــــام خانوادگی :
                             </div><!-- /.label -->
-                            <q-input outlined v-model="lastname"  />
+                            <q-input outlined v-model="lastname"  :rules="[nameRule]" ref="lastname" />
                         </div><!-- /.form-control -->
 
                         <div class="form-control">
                             <div class="label">
                                 بیوگرافی :
                             </div><!-- /.label -->
-                            <q-input outlined v-model="bio" type="textarea"   />
+                            <q-input outlined v-model="bio" type="textarea" :rules="[bioRule]" ref="bio" />
                         </div><!-- /.form-control -->
+                        <div class="form-control error" v-if="anyError">
+                            <ul>
+                                <li  v-text="error" >
+                                </li>
+                            </ul>
+                        </div><!-- /.form-control error -->
+
+                        <div class="form-control message" v-if="message">
+                            <ul>
+                                <li  v-text="message" >
+                                </li>
+                            </ul>
+                        </div><!-- /.form-control error -->
 
                         <div class="form-control  submit ">
-                            <q-btn  flat style="color: #1c4440"  type="submit" label="ثبت تغییرات"  />
+
+                            <q-btn  @click.prevent="submitChanges" flat style="color: #1c4440"
+                            type="submit" label="ثبت تغییرات"
+                            :disable="anyError" @mouseenter="anyErrors()" />
+
                         </div><!-- /.form-control -->
 
                     </div><!-- /.col -->
@@ -65,6 +82,9 @@ export default {
             lastname: '',
             email: '',
             bio: '',
+            error: '',
+            message: '',
+            anyError: false,
             anyChange: false
         }
     },
@@ -74,6 +94,53 @@ export default {
             this.lastname = this.user.lastname
             this.email = this.user.email
             this.bio = this.user.bio
+        },
+        submitChanges () {
+            if (this.anyErrors()) {
+                return false
+            }
+            this.$axios.post('api/user/update', {
+                firstname: this.firstname,
+                lastname: this.lastname,
+                bio: this.bio
+            })
+                .then(res => {
+                    if (res.data.status === 'ok') {
+                        this.message = res.data.text
+                        setTimeout(() => { this.message = '' }, 3000)
+                    }
+                    if (res.data.status === 'error') {
+                        this.anyError = true
+                        this.error = res.data.text
+                    }
+                })
+                .catch(() => {
+                    console.log('user submit error')
+                })
+        },
+        nameRule (val) {
+            if (val.length < 3) {
+                return false || 'طول نام باید بیشتر از ۳ کاراکتر باشد.'
+            }
+        },
+        bioRule (val) {
+            if (val === null || val.length === 0) {
+                return true
+            }
+            if (val.length < 10) {
+                return false || 'طول کاراکترهای بیوگرافی باید بیشتر از ۱۰ کاراکتر باشد.'
+            }
+        },
+        anyErrors () {
+            let errors = this.$refs
+            for (let err in errors) {
+                if (!errors[err].validate()) {
+                    this.anyError = true
+                    return true
+                }
+            }
+            this.anyError = false
+            return false
         }
     },
     computed: {
@@ -83,12 +150,9 @@ export default {
         if (this.user) {
             this.setUser()
         }
-    },
-    watch: {
-        user () {
-            this.setUser()
-        }
     }
+    // watch: {
+    // }
 }
 </script>
 
@@ -106,8 +170,8 @@ export default {
             color: #797979;
             font-size: 1rem;
             // margin:0 .5rem;
-            background-color: #eee;
-            border: 1px solid darken( #eee, 2);
+            background-color: $rp-bg-gray;
+            border: 1px solid $rp-gray-2;
             border-radius: .25rem;
             line-height: 3;
             margin-bottom: 2.5rem;
@@ -172,7 +236,7 @@ export default {
     .form{
         padding: 0 2rem;
         .form-control{
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             .label{
                 font-size: .85rem;
                 font-weight: 600;
@@ -196,7 +260,36 @@ export default {
                 display: block;
                 clear: both;
             }
+            &.error, &.message{
+                ul{
+                    display: block;
+                    margin: 0;
+                    padding: 0;
+                    &::after{
+                        content:'';
+                        display: block;
+                        clear:both;
+                    }
+                    li{
+                        padding-right: .75rem #{"/* rtl:ignore */"};
+                        display: block;
+                        font-size: .85rem;
+                        color:$rp-error;
+                        font-weight: 600;
+                        margin-bottom: .25rem #{"/* rtl:ignore */"};
+                    }
+                }
+                &:not(.error){
+                    li{
+                        color : $rp-success;
+                    }
+                }
+            } // .error , .message
         } // .form-control
+
+        .form-control + .error, .form-control + .message{
+            margin-top: -1.5rem;
+        }
 
     } // .form
 </style>

@@ -138,9 +138,25 @@ export default {
         ...mapGetters({ user: 'auth/getUserInfo' })
 
     },
+    methods: {
+        updateUserinfo () {
+            this.username = this.user.firstname + ' ' + this.user.lastname
+            this.user_role = 'ادمین'
+        }
+
+    },
+    watch: {
+        user () {
+            this.updateUserinfo()
+        }
+
+    },
     mounted () {
-        this.username = this.user.firstname + ' ' + this.user.lastname
-        this.user_role = 'ادمین'
+        this.updateUserinfo()
+    },
+    beforeRouteUpdate (to, from, next) {
+        this.updateUserinfo()
+        next()
     }
 }
 </script>
