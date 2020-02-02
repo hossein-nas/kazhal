@@ -21,8 +21,9 @@ class CreateFilesTable extends Migration
             $table->string('hashname')->unique();
             $table->string('ext');
             $table->string('basedir');
-            $table->boolean('is_responsive');
-            $table->string('keywords');
+            $table->string('base_url');
+            $table->boolean('is_responsive')->default(1);
+            $table->string('keywords')->nullable();
             $table->text('specs');
             $table->timestamps();
         });

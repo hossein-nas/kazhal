@@ -2,8 +2,12 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 use App\User;
+use App\File;
+use App\Permission;
+use App\Role;
 use Illuminate\Support\Str;
 use Faker\Generator as Faker;
+use Faker\Factory as _Faker;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,5 +33,37 @@ $factory->define(User::class, function (Faker $faker) {
         'email_verified_at' => now(),
         'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
         'remember_token' => Str::random(10),
+    ];
+});
+
+
+$factory->define(File::class, function(Faker $faker){
+    return [
+        'Title'     => $faker->text,
+        'name'      => $faker->file('/','../', false),
+        'desc'      => $faker->text,
+        'hashname'  => $faker->text,
+        'ext'       => $faker->text,
+        'basedir'   => $faker->text,
+        'base_url'  => $faker->text,
+        'is_responsive' => 1,
+        'keywords'  => "system_pics,avatar",
+        'specs'      => "{}",
+    ];
+});
+
+$factory->define(Role::class, function(Faker $faker){
+    return [
+        'title' => $faker->word,
+        'desc'  => $faker->text,
+        'slug' => $faker->word,
+    ];
+});
+
+$factory->define(Permission::class, function(Faker $faker){
+    return [
+        'title' => $faker->word,
+        'desc'  => $faker->text,
+        'slug' => $faker->word,
     ];
 });
