@@ -23,7 +23,7 @@
                         {{ this.user_role}}
                     </div><!-- /.role -->
                     <div class="logo">
-                        <img src="~assets/unknown_male.svg" alt="">
+                        <img :src="this.photoPath" alt="">
                     </div><!-- /.logo -->
                     <q-menu fit>
                         <q-list >
@@ -129,19 +129,24 @@ export default {
 
     data () {
         return {
-            leftDrawerOpen: false,
+            leftDrawerOpen: true,
             username: '',
-            user_role: ''
+            user_role: '',
+            photo: ''
         }
     },
     computed: {
-        ...mapGetters({ user: 'auth/getUserInfo' })
+        ...mapGetters({ user: 'auth/getUserInfo' }),
+        photoPath () {
+            return 'http://kazhal.test' + this.photo
+        }
 
     },
     methods: {
         updateUserinfo () {
             this.username = this.user.firstname + ' ' + this.user.lastname
-            this.user_role = 'ادمین'
+            this.user_role = this.user.role.slug
+            this.photo = this.user.photo.specs[0].fullpath
         }
 
     },

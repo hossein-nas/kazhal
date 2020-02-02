@@ -9,13 +9,13 @@
                     <div class="col-12 col-md-4">
                         <div class="thumbnail">
                             <div class="frame">
-                                <img src="~assets/unknown_male.svg" alt="">
+                                <img :src="this.photoPath" alt="">
                             </div><!-- /.frame -->
                         </div><!-- /.thumbnail -->
                         <div class="caption">
                             {{ this.email }}
                             <span class="role">
-                                ادمین
+                                {{ this.role }}
                             </span><!-- /.role -->
                         </div><!-- /.caption -->
                     </div><!-- /.col-4 -->
@@ -57,11 +57,9 @@
                         </div><!-- /.form-control error -->
 
                         <div class="form-control  submit ">
-
                             <q-btn  @click.prevent="submitChanges" flat style="color: #1c4440"
                             type="submit" label="ثبت تغییرات"
-                            :disable="anyError" @mouseenter="anyErrors()" />
-
+                             />
                         </div><!-- /.form-control -->
 
                     </div><!-- /.col -->
@@ -83,6 +81,8 @@ export default {
             email: '',
             bio: '',
             error: '',
+            photo: '',
+            role: '',
             message: '',
             anyError: false,
             anyChange: false
@@ -94,6 +94,8 @@ export default {
             this.lastname = this.user.lastname
             this.email = this.user.email
             this.bio = this.user.bio
+            this.photo = this.user.photo.specs[0].fullpath
+            this.role = this.user.role.title
         },
         submitChanges () {
             if (this.anyErrors()) {
@@ -144,15 +146,16 @@ export default {
         }
     },
     computed: {
-        ...mapGetters({ user: 'auth/getUserInfo' })
+        ...mapGetters({ user: 'auth/getUserInfo' }),
+        photoPath () {
+            return 'http://kazhal.test' + this.photo
+        }
     },
     mounted () {
         if (this.user) {
             this.setUser()
         }
     }
-    // watch: {
-    // }
 }
 </script>
 
@@ -233,63 +236,4 @@ export default {
         }// .body
     } // .user-state
 
-    .form{
-        padding: 0 2rem;
-        .form-control{
-            margin-bottom: 1rem;
-            .label{
-                font-size: .85rem;
-                font-weight: 600;
-                color: #777;
-                margin-bottom: .5rem;
-            }
-            .q-input{
-                font-size: 1.2rem;
-                input{
-                }
-            }
-            &.submit{
-                button[type="submit"]{
-                    font-weight: 600;
-                    float: left #{"/* rtl:ignore */"};
-                }
-            }
-
-            &::after{
-                content:'';
-                display: block;
-                clear: both;
-            }
-            &.error, &.message{
-                ul{
-                    display: block;
-                    margin: 0;
-                    padding: 0;
-                    &::after{
-                        content:'';
-                        display: block;
-                        clear:both;
-                    }
-                    li{
-                        padding-right: .75rem #{"/* rtl:ignore */"};
-                        display: block;
-                        font-size: .85rem;
-                        color:$rp-error;
-                        font-weight: 600;
-                        margin-bottom: .25rem #{"/* rtl:ignore */"};
-                    }
-                }
-                &:not(.error){
-                    li{
-                        color : $rp-success;
-                    }
-                }
-            } // .error , .message
-        } // .form-control
-
-        .form-control + .error, .form-control + .message{
-            margin-top: -1.5rem;
-        }
-
-    } // .form
 </style>

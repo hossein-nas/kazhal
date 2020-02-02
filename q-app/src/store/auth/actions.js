@@ -15,7 +15,14 @@ export async function init ({ commit, dispatch }, payload) {
 
     dispatch('setAxiosHeader', data.access_token)
     dispatch('setTokenLocalStorage', data.access_token)
-    dispatch('pullUserInfo')
+}
+
+export function setToken ({ commit }, token) {
+    commit('SET_TOKEN', token)
+}
+
+export function setUserInfo ({ commit }, user) {
+    commit('SET_USER', user)
 }
 
 export function setAxiosHeader ({ commit }, payload) {
@@ -32,30 +39,4 @@ export function setTokenLocalStorage ({ commit }, payload) {
     } else {
         localStorage.removeItem('token')
     }
-}
-
-export function pullUserInfo ({ commit }) {
-    return _axios.get('api/user')
-        .then(response => {
-            commit('SET_USER', { user: response.data })
-            return true
-        }).catch(() => { console.log('pullUserInfo Error') })
-}
-
-export function setToken ({ commit }, token) {
-    commit('SET_TOKEN', token)
-}
-
-export function setUserInfo ({ commit }, user) {
-    commit('SET_USER', user)
-}
-export function checkAuthorized ({ commit, state, dispatch }, payload) {
-    return new Promise((resolve, reject) => {
-        dispatch('setAxiosHeader', payload.access_token)
-        dispatch('pullUserInfo').then(data => {
-            if (data === true) {
-                return resolve(true)
-            }
-        }).catch(() => reject())
-    })
 }
