@@ -13,14 +13,19 @@ use Illuminate\Http\Request;
 |
  */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    DB::delete('delete from oauth_access_tokens where user_id = ? and revoked = ?', [1, 1]);
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     DB::delete('delete from oauth_access_tokens where user_id = ? and revoked = ?', [1, 1]);
 
-    return $request->user();
-});
+//     return $request->user();
+// });
+
+Route::middleware('auth:api')->get('/user', 'User\UsersController@me'); 
 
 Route::post('/login', 'Auth\LoginController@login');
 
 Route::group(['middleware' => 'auth:api'], function(){
     Route::post('/logout', 'Auth\LoginController@logout');
+
+    Route::post('/user/update', 'User\UsersController@update');
 });
+

@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'firstname', 'lastname', 'email', 'password','gender', 'username','activated', 'bio',
+        'firstname', 'lastname', 'email' ,'gender', 'username','activated', 'bio',
     ];
 
     /**
@@ -37,8 +37,22 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    protected $appends = [
+        'photo',
+    ];
+
     // public function findForPassport($username)
     // {
     //     return $this->where('username', $username)->first();
     // }
+
+    public function photo()
+    {
+        return $this->hasOne('App\File', 'id', 'thumbnail_id');
+    }
+
+    public function role()
+    {
+        return $this->hasOne('App\Role', 'id', 'role_id');
+    }
 }

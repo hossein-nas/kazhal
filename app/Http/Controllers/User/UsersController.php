@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\User as ResourcesUser;
 use Illuminate\Support\Facades\Validator;
 
 class UsersController extends Controller
@@ -48,5 +49,12 @@ class UsersController extends Controller
             'text'          => 'اطلاعات کاربر به درستی آپدیت شد.',
             'data'          => null
         ];
+    }
+
+    public function me(){
+        $userId = auth()->user()->id;
+        $user = User::findOrFail($userId);
+        return new ResourcesUser($user);
+
     }
 }

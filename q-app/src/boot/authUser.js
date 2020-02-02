@@ -9,7 +9,7 @@ export default function (store) {
         _axios.get('api/user')
             .then((res) => {
                 store.dispatch('auth/setToken', token)
-                store.dispatch('auth/setUserInfo', res.data)
+                store.dispatch('auth/setUserInfo', res.data.data)
                 resolve()
             })
             .catch((e) => {
