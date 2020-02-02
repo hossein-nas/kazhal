@@ -59,11 +59,11 @@ module.exports = function (ctx) {
         build: {
             scopeHoisting: true,
             vueRouterMode: 'history', // available values: 'hash', 'history'
-            publicPath: 'http://kazhal.test/admin',
             showProgress: true,
             rtl: true,
             gzip: false,
             analyze: false,
+            publicPath: ctx.dev ? 'http://kazhal.test/admin' : 'https://rp-kazhal.ir/admin',
             // Options below are automatically set depending on the env, set them if you want to override
             // preloadChunks: false,
             // extractCSS: false,
@@ -79,6 +79,11 @@ module.exports = function (ctx) {
                         formatter: require('eslint').CLIEngine.getFormatter('stylish')
                     }
                 })
+                // I added this
+                cfg.resolve.alias = {
+                    ...cfg.resolve.alias,
+                    '@': path.resolve(__dirname, './src')
+                }
             }
         },
 
@@ -181,11 +186,6 @@ module.exports = function (ctx) {
                 // do something with Electron main process Webpack cfg
                 // chainWebpack also available besides this extendWebpack
 
-                // I added this
-                cfg.resolve.alias = {
-                    ...cfg.resolve.alias,
-                    '@': path.resolve(__dirname, './src')
-                }
             }
         }
     }
