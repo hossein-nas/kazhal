@@ -12,7 +12,9 @@
                 />
 
                 <q-toolbar-title>
-                Quasar App
+                    <div class="logo">
+                        <img :src="logoPath" alt="رایان پردازش کژال">
+                    </div><!-- /.logo -->
                 </q-toolbar-title>
 
                 <div class="flex toolbar-dropdown">
@@ -22,7 +24,7 @@
                     <div class="role">
                         {{ this.user_role}}
                     </div><!-- /.role -->
-                    <div class="logo">
+                    <div class="user-thumb">
                         <img :src="this.photoPath" alt="">
                     </div><!-- /.logo -->
                     <q-menu fit>
@@ -138,9 +140,11 @@ export default {
     computed: {
         ...mapGetters({ user: 'auth/getUserInfo' }),
         photoPath () {
-            return 'http://kazhal.test' + this.photo
+            return window.baseURL + this.photo
+        },
+        logoPath () {
+            return window.baseURL + 'img/svg/Logo.svg'
         }
-
     },
     methods: {
         updateUserinfo () {
@@ -167,6 +171,35 @@ export default {
 </script>
 
 <style lang="scss">
+.logo {
+    display: block;
+    width: 56px;
+    height: 40px;
+    text-align: center;
+    padding: .35rem .75rem;
+    background-color: #e0eae9;
+    border-radius: .25rem;
+    img{
+        width: auto;
+        height: 100%;
+    }
+}
+
+.q-drawer__content{
+    position: relative;
+    &::after{
+        content: '';
+        position: absolute;
+        bottom: .5rem;
+        left: .5rem;
+        width: 120px;
+        height: 120px;
+        background: url(http://kazhal.test/img/svg/Logo.svg) center no-repeat;
+        opacity: .15;
+        mix-blend-mode: luminosity;
+        transform:rotate(-25deg);
+    }
+}
 .q-list.sidebar{
     padding-top: 3rem;
     .q-item{
@@ -213,7 +246,7 @@ export default {
         font-size: .75rem;
 
     }
-    .logo{
+    .user-thumb{
         height: 100%;
         display: block;
         background-color: #fff;

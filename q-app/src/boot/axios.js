@@ -3,8 +3,10 @@ import axios from 'axios'
 var baseURL = 'http://kazhal.test/'
 
 if (process.env.PROD) {
-    baseURL = 'https://rp-kazhal.rp/'
+    baseURL = 'https://rp-kazhal.ir/'
 }
+
+window.baseURL = baseURL
 
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
 axios.defaults.headers.common['Accept'] = 'application/json'

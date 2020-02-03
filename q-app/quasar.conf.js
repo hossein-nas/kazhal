@@ -10,7 +10,8 @@ module.exports = function (ctx) {
         boot: [
             'axios',
             // 'authUser',
-            'routerGuard'
+            'routerGuard',
+            'ajaxBar'
         ],
 
         // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css
@@ -49,7 +50,19 @@ module.exports = function (ctx) {
             directives: [],
 
             // Quasar plugins
-            plugins: []
+            plugins: [
+                'LoadingBar'
+            ],
+            config: {
+                loadingBar: {
+                    skipHijack: true,
+                    reverse: true,
+                    color: 'cyan-7',
+                    size: '4px',
+                    position: 'top'
+                }
+            }
+
         },
 
         // https://quasar.dev/quasar-cli/cli-documentation/supporting-ie
