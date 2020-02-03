@@ -1,9 +1,14 @@
 import Vue from 'vue'
 import axios from 'axios'
-var baseURL = 'http://kazhal.test/'
+var baseURL = ''
 
 if (process.env.PROD) {
+    console.log('PROD')
     baseURL = 'https://rp-kazhal.ir/'
+}
+if (process.env.DEV) {
+    console.log('DEV')
+    baseURL = 'http://kazhal.test/'
 }
 
 window.baseURL = baseURL
