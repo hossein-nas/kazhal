@@ -148,7 +148,7 @@ export default {
     computed: {
         ...mapGetters({ user: 'auth/getUserInfo' }),
         photoPath () {
-            return 'http://kazhal.test' + this.photo
+            return window.baseURL + this.photo
         }
     },
     mounted () {

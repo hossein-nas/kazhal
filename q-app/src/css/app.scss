@@ -1,5 +1,8 @@
 @import "./quasar.variables.scss";
+
+@import '~cropperjs/src/css/cropper.css';
 // app global css in SCSS form
 @import './partials/font';
 @import './partials/base';
 @import './partials/form'; 
+@import './partials/panel'; 

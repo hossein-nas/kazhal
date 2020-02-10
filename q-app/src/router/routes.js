@@ -1,16 +1,16 @@
 const routes = [
     {
         path: '/',
-        component: () => import('layouts/MyLayout.vue'),
-        children: [{ path: '', component: () => import('pages/Index.vue') }],
-        meta: { requireAuth: true }
-    },
-    {
-        path: '/',
         component: () => import('layouts/MyLayout'),
         meta: { requireAuth: true },
         children: [
+            { path: '', redirect: '/dashboard' },
             { path: '/dashboard', component: () => import('pages/Index') },
+            // posts specifc routes ::
+
+            { path: '/posts', component: () => import('pages/posts/Index') },
+            { path: '/posts/new/post', component: () => import('pages/posts/newPost') },
+            { path: '/posts/edit/post/:id/', component: () => import('pages/posts/newPost'), props: true },
 
             { path: '/user/preferences',
                 component: () => import('pages/userPreferences/index'),
@@ -22,8 +22,7 @@ const routes = [
                 ]
             },
 
-            { path: '/user/logout', component: () => import('pages/Logout') },
-            { path: 'hey', component: () => import('pages/hey') }
+            { path: '/user/logout', component: () => import('pages/Logout') }
         ]
     },
     {

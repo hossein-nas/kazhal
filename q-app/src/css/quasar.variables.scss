@@ -27,20 +27,22 @@ $warning   : #F2C037;
 
 // Gray Colors 
 $rp-gray-1 : #eee;
-$rp-gray-2 : #e9e9e9;
+$rp-gray-2 : #d8d8d8;
 $rp-gray-3 : #bfbfbf;
 
 $rp-gray-text-1 : #777;
 $rp-gray-text-2 : #666;
-$rp-gray-text-3 : #777;
+$rp-gray-text-3 : #444;
 
 // Colorfull Colors
 $rp-red : #d66060;
 $rp-green: #51b784;
+$rp-blue: #4b86c3;
 
 $rp-danger: $rp-red;
 $rp-error: $rp-red;
 $rp-success: $rp-green;
+$rp-info: $rp-blue;
 
 // default vars
 $rp-bg-gray : $rp-gray-1;
