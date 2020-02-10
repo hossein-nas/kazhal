@@ -19,7 +19,7 @@ class User extends JsonResource
             'lastname'          => $this->lastname,
             'email'             => $this->email,
             'bio'               => $this->bio,
-            'photo'             => new File($this->photo),
+            'photo'             => new File($this->thumb),
             'role'              => $this->role,
             'activated'         => $this->activated,
             'created_at'        => $this->created_at,

@@ -38,7 +38,6 @@ class User extends Authenticatable
     ];
 
     protected $appends = [
-        'photo',
     ];
 
     // public function findForPassport($username)
@@ -46,7 +45,7 @@ class User extends Authenticatable
     //     return $this->where('username', $username)->first();
     // }
 
-    public function photo()
+    public function thumb()
     {
         return $this->hasOne('App\File', 'id', 'thumbnail_id');
     }
@@ -54,5 +53,10 @@ class User extends Authenticatable
     public function role()
     {
         return $this->hasOne('App\Role', 'id', 'role_id');
+    }
+
+    public function getPhotoAttribute()
+    {
+        return $this->photo()->get();
     }
 }

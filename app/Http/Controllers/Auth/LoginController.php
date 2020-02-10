@@ -51,7 +51,7 @@ class LoginController extends Controller
             'form_params' => [
                 'grant_type' => 'password',
                 'client_id' => '1',
-                'client_secret' => 'NWIJgjVP9htrsCWJoBcNCMQtwQwFd0TnorNxYLk6',
+                'client_secret' => 'gOAxqm4uQGdPTbSI67lSHMRjN5QHTI8Q2OupmlPV',
                 'username' => $req->get('username'),
                 'password' => $req->get('password'),
                 'scope' => '',

@@ -5,6 +5,8 @@ use App\User;
 use App\File;
 use App\Permission;
 use App\Role;
+use App\Post;
+use App\Category;
 use Illuminate\Support\Str;
 use Faker\Generator as Faker;
 use Faker\Factory as _Faker;
@@ -39,7 +41,7 @@ $factory->define(User::class, function (Faker $faker) {
 
 $factory->define(File::class, function(Faker $faker){
     return [
-        'Title'     => $faker->text,
+        'title'     => $faker->word,
         'name'      => $faker->file('/','../', false),
         'desc'      => $faker->text,
         'hashname'  => $faker->text,
@@ -52,6 +54,17 @@ $factory->define(File::class, function(Faker $faker){
     ];
 });
 
+$factory->define(Post::class, function(Faker $faker){
+    return [
+        'title'     => $faker->word,
+        'content' => $faker->text,
+        'slug' => 'some_slug',
+        'published' => 0,
+        'user_id' => 1,
+        'thumbnail_id' => 1,
+        'post_type' => 1,
+    ];
+});
 $factory->define(Role::class, function(Faker $faker){
     return [
         'title' => $faker->word,
@@ -65,5 +78,12 @@ $factory->define(Permission::class, function(Faker $faker){
         'title' => $faker->word,
         'desc'  => $faker->text,
         'slug' => $faker->word,
+    ];
+});
+
+$factory->define(Category::class, function(Faker $faker){
+    return [
+        'title' => $faker->word,
+        'parent_id' => null,
     ];
 });

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\File;
 
 use App\File;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Traits\FileTrait;
@@ -12,27 +13,48 @@ use Illuminate\Support\Facades\Storage;
 class FilesController extends Controller
 {
     use FileTrait;
-    protected $res = [];
+    protected $resp = [];
+    protected $hashname = null;
 
     public function index(Request $req){
 
-        if($req->ajax() && !$validate = $this->validateParmas($req->all())){
+        if(!$validate = $this->validateParams($req->all())){
             return response()->json($this->res);
         }
-        return 'uploaded';
+
+        $this->initAttributes();
+
+        return response()->json($this->resp);
     }
 
-    public function ajaxUpload(){
+    public function initAttributes()
+    {
+        $this->hashname = $hashname =   Str::uuid()->toString();
+        $ext = $this->resp['file']->extension();
+        $this->resp['hashname'] = $this->hashname;
+        $this->resp['ext'] = $ext;
+        $this->resp['basedir'] = storage_path('public/images'); 
+        $this->resp['is_responsive'] = (int) $this->isResizable($this->resp['ext']);
+        $this->resp['base_url'] = '/storage/images'; 
+        if( isset($this->resp['keywords']) ){
+            $this->resp['keywords'] = implode(',', $this->resp['keywords']);
+        }
 
+        if( request()->hasFile('file') ){
+            $this->resp['tmp_file_path'] = "/temp/images/${hashname}.${ext}";
+            request()->file('file')->storeAs('temp/images', "${hashname}.${ext}");
+        }
+        dd($this->resp);
+        return 'done';
     }
 
     public function validateParams($params)
     {
         $validate = Validator::make($params, [
-            'file'          => 'required|file|mimes:jpeg,png,svg,pdf,zip|max:4096',
-            'title'         => 'required|alpha_num|min:10',
-            'desc'          => 'required|alpha_num|min:10',
-            'name'          => 'required|alpha_num',
+            'file'          => 'required|file|max:4096',
+            'title'         => 'required|regex:/^[^\_\:\#\$]+$/i|min:10',
+            'desc'          => 'required|regex:/^[^\_\:\#\$]+$/i|min:10',
+            'name'          => 'required|regex:/^[\w\d\_\(\)]+\.[\w]*$/i',
             'keywords'      => 'nullable|array',
         ]);
         
@@ -41,10 +63,11 @@ class FilesController extends Controller
                 'status' => 'error',
                 'message' => 'there_is_an_error_in_file_upload',
                 'text' => 'خطایی در آپلود فایل رخ داد.',
-                'data' => null
+                'data' => $validate->errors() 
             ];
             return false;
         }
+        $this->resp = $validate->validated();
         return true;
     }
 

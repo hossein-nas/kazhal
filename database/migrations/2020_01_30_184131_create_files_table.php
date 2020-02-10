@@ -17,7 +17,7 @@ class CreateFilesTable extends Migration
             $table->bigIncrements('id');
             $table->string('title');
             $table->string('name');
-            $table->string('desc');
+            $table->text('desc');
             $table->string('hashname')->unique();
             $table->string('ext');
             $table->string('basedir');

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Traits;
 
 trait FileTrait {
-    protected $hey = "file";
 
     /*
     * @return string
@@ -22,11 +21,24 @@ trait FileTrait {
     {
         return collect([
             'zip',
+            'rar',
             'pdf',
         ]);
     }
 
-    private function getValidExt( $filePath ){
-
+    private function isResizable($ext)
+    {
+        if ( $this->getResizableImages()->contains($ext)){
+            return true;
+        }
+        return false;
     }
+
+    public function getResizableImages()
+    {
+        return collect([
+            'png', 'jpeg', 'jpg'
+        ]);
+    }
+
 }
