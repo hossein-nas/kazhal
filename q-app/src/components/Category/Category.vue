@@ -192,7 +192,7 @@ ul{
     border: 1px solid $rp-gray-2;
     margin-bottom: .5rem;
     max-height: 10rem;
-    overflow: scroll;
+    overflow-y: scroll;
 }
 
 </style>
