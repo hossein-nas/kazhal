@@ -98,6 +98,7 @@
                 <div class="col-12 col-md-3">
                     <div class="sidebar">
                         <category />
+                        <thumbnail v-model="thumb" />
                     </div><!-- /.sidebar -->
                 </div><!-- /.col -->
 
@@ -110,19 +111,21 @@
 
 <script>
 import Category from '@/components/Category/Category'
+import Thumbnail from '@/components/widgets/Thumbnail'
 export default {
     name: 'Posts',
     components: {
-        Category
+        Category,
+        Thumbnail
     },
     data () {
         return {
-            posts: []
-
+            posts: [],
+            thumb: {}
         }
     },
     beforeMount () {
-        this.$axios.get('api/all-posts')
+        this.$axios.get('api/posts/all-posts')
             .then((res) => {
                 this.posts = res.data
             })
@@ -168,9 +171,10 @@ export default {
                 float: left #{"/* rtl:ignore */"};
                 background-color: white;
                 border: 1px solid $rp-gray-2;
-                padding: .45rem 1.25rem;
+                padding: .4rem 1.25rem;
                 text-align: center;
                 border-radius: .5rem;
+                line-height: 1.25;
                 &:hover{
                     border-color: lighten($rp-blue, 15);
                     color: darken($rp-blue,8);
