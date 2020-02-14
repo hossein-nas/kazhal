@@ -16,7 +16,7 @@
                         </ul><!-- /.node-category -->
                     </div><!-- /.cat-groups -->
 
-                    <div class="actions flex justify-end" >
+                    <div class="actions flex justify-end" v-if="actionsEnable">
                         <q-btn flat size="sm" color="blue-8" v-if="this.selected.length && this.selected.length < 2">
                             ویرایش
                         </q-btn>
@@ -46,6 +46,7 @@ export default {
     },
     data () {
         return {
+            actionsEnable: true,
             cats: [],
             selected: [],
             addnewcat: false,
@@ -69,6 +70,7 @@ export default {
     },
     created () {
         this.initCats()
+        this.$emit('category_mounted')
     },
     computed: {
         allcat () {

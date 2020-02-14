@@ -36,6 +36,8 @@ module.exports = {
         "generator-star-spacing": "off",
         // allow paren-less arrow functions
         "arrow-parens": "off",
+        "no-unused-vars" : "off",
+        "eqeqeq" : "off",
         "one-var": "off",
 
         "import/first": "off",

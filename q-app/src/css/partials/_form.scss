@@ -16,6 +16,13 @@
             input{
             }
         }
+        textarea{
+            width: 100%;
+            border: 1px solid $rp-input-border;
+            border-radius: .3rem;
+            outline: none;
+            padding: .5rem;
+        }
         &.submit{
             button[type="submit"]{
                 font-weight: 600;
