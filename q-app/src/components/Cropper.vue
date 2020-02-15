@@ -107,7 +107,7 @@ export default {
             this.cropper = new Cropper(img, {
                 aspectRatio: 1.6,
                 dragMode: 'move',
-                autoCropArea: 0.9,
+                autoCropArea: 0.95,
                 highlight: false,
                 cropBoxMovable: true,
                 cropBoxResizable: false,
@@ -140,10 +140,7 @@ export default {
             data.append('name', this.selectedFile.name)
             data.append('keywords', [])
             this.uploading = true
-            this.$axios({
-                method: 'post',
-                url: 'api/files/upload',
-                data: data,
+            this.$axios.post('/api/files/upload', data, {
                 headers: { 'Content-Type': 'multipart/form-data' },
                 onUploadProgress: (progressEvent) => {
                     const totalLength = progressEvent.lengthComputable ? progressEvent.total : progressEvent.target.getResponseHeader('content-length') || progressEvent.target.getResponseHeader('x-decompressed-content-length')
@@ -157,6 +154,9 @@ export default {
                     this.uploading = false
                     this.uploadingDone = true
                     this.uploadingValue = 0
+                })
+                .catch(() => {
+                    console.log('error')
                 })
         },
         fileValidate (val) {
