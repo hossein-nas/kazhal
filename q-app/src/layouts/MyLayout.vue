@@ -3,17 +3,18 @@
         <q-header elevated>
             <q-toolbar style="background-color: #387e77">
                 <q-btn
-                flat
-                dense
-                round
-                @click="leftDrawerOpen = !leftDrawerOpen"
-                icon="menu"
-                aria-label="Menu"
+                    flat
+                    dense
+                    round
+                    @click="leftDrawerOpen = !leftDrawerOpen"
+                    icon="menu"
+                    aria-label="Menu"
                 />
 
                 <q-toolbar-title>
                     <div class="logo">
-                        <img :src="logoPath" alt="رایان پردازش کژال">
+                        <img :src="logoPath"
+                             alt="رایان پردازش کژال">
                     </div><!-- /.logo -->
                 </q-toolbar-title>
 
@@ -25,11 +26,13 @@
                         {{ this.user_role}}
                     </div><!-- /.role -->
                     <div class="user-thumb">
-                        <img :src="this.photoPath" alt="">
+                        <img :src="this.photoPath"
+                             alt="">
                     </div><!-- /.logo -->
                     <q-menu fit>
                         <q-list >
-                            <q-item clickable to="/user/preferences">
+                            <q-item clickable
+                                    to="/user/preferences">
                                 <q-item-section avatar>
                                     <q-icon name="settings"></q-icon>
                                 </q-item-section>
@@ -38,7 +41,8 @@
                                 </q-item-section>
                             </q-item>
 
-                            <q-item clickable to="/user/logout">
+                            <q-item clickable
+                                    to="/user/logout">
                                 <q-item-section avatar>
                                     <q-icon name="exit_to_app"></q-icon>
                                 </q-item-section>
@@ -53,15 +57,19 @@
         </q-header>
 
         <q-drawer
-        v-model="leftDrawerOpen"
-        show-if-above
-        bordered
-        :width="250"
-        content-class="bg-grey-2 ">
+            v-model="leftDrawerOpen"
+            show-if-above
+            bordered
+            :width="250"
+            content-class="bg-grey-2 ">
 
             <q-list class="sidebar">
 
-                <q-item clickable tag="a" to="/dashboard" exact class="posts">
+                <q-item clickable
+                        tag="a"
+                        to="/dashboard"
+                        exact
+                        class="posts">
                     <q-item-section avatar>
                         <q-icon name="home" />
                     </q-item-section>
@@ -70,7 +78,11 @@
                     </q-item-section>
                 </q-item> <!-- Dashboard Item -->
 
-                <q-item clickable tag="a" to="/posts" exact class="posts">
+                <q-item clickable
+                        tag="a"
+                        to="/posts"
+                        exact
+                        class="posts">
                     <q-item-section avatar>
                         <q-icon name="post_add" />
                     </q-item-section>
@@ -79,7 +91,11 @@
                     </q-item-section>
                 </q-item> <!-- Posts Item -->
 
-                <q-item clickable tag="a" to="/services" exact class="posts">
+                <q-item clickable
+                        tag="a"
+                        to="/services"
+                        exact
+                        class="posts">
                     <q-item-section avatar>
                         <q-icon name="work" />
                     </q-item-section>
@@ -88,7 +104,11 @@
                     </q-item-section>
                 </q-item> <!-- Services Item -->
 
-                <q-item clickable tag="a" to="/orders" exact class="posts">
+                <q-item clickable
+                        tag="a"
+                        to="/orders"
+                        exact
+                        class="posts">
                     <q-item-section avatar>
                         <q-icon name="add_shopping_cart" />
                     </q-item-section>
@@ -97,7 +117,11 @@
                     </q-item-section>
                 </q-item> <!-- Orders Item -->
 
-                <q-item clickable tag="a" to="/comments" exact class="posts">
+                <q-item clickable
+                        tag="a"
+                        to="/comments"
+                        exact
+                        class="posts">
                     <q-item-section avatar>
                         <q-icon name="message" />
                     </q-item-section>
@@ -106,7 +130,11 @@
                     </q-item-section>
                 </q-item> <!-- Comments Item -->
 
-                <q-item clickable tag="a" to="/users" exact class="posts">
+                <q-item clickable
+                        tag="a"
+                        to="/users"
+                        exact
+                        class="posts">
                     <q-item-section avatar>
                         <q-icon name="supervised_user_circle" />
                     </q-item-section>
@@ -116,7 +144,7 @@
                 </q-item> <!-- Users Item -->
 
             </q-list>
-    </q-drawer>
+        </q-drawer>
 
         <q-page-container>
             <router-view />

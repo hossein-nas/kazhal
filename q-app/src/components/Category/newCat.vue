@@ -1,5 +1,6 @@
 <template>
-    <div class="addnewcat" v-if="isVisible">
+    <div class="addnewcat"
+         v-if="isVisible">
         <span>
             افزودن دسته بندی جدید
         </span>
@@ -11,19 +12,43 @@
                         <div class="label">
                             نام دسته‌ :
                         </div><!-- /.label -->
-                        <q-input outlined dense v-model="title" :rules="[inputRule]" ref="title"/>
+                        <q-input outlined
+                                 dense
+                                 v-model="title"
+                                 :rules="[inputRule]"
+                                 ref="title"/>
                     </div><!-- /.form-control -->
 
                     <div class="form-control">
                         <div class="label">
                             زیر شاخه‌ی دسته‌ی :
                         </div><!-- /.label -->
-                        <q-select outlined dense options-dense v-model="parent" :rules="[selectRule]" ref="select" :options="this.cats"></q-select>
+                        <q-select outlined
+                                  dense
+                                  options-dense
+                                  v-model="parent"
+                                  :rules="[selectRule]"
+                                  ref="select"
+                                  :options="this.cats"></q-select>
                     </div><!-- /.form-control -->
 
                     <div class="form-control flex justify-end">
-                        <q-btn outline size=".8rem" dense label="انصراف" color="red-6" class="q-px-md q-mr-sm" @click="reset" />
-                        <q-btn :disabled="!anyError" outline size=".8rem" type="submit" dense label="ذخیره" color="green-6" class="q-px-md" @click.prevent="addedCat" />
+                        <q-btn outline
+                               size=".8rem"
+                               dense
+                               label="انصراف"
+                               color="red-6"
+                               class="q-px-md q-mr-sm"
+                               @click="reset" />
+                        <q-btn :disabled="!anyError"
+                               outline
+                               size=".8rem"
+                               type="submit"
+                               dense
+                               label="ذخیره"
+                               color="green-6"
+                               class="q-px-md"
+                               @click.prevent="addedCat" />
                     </div><!-- /.form-control -->
                 </form>
             </div><!-- /.form -->

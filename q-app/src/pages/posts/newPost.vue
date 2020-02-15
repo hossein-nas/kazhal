@@ -27,13 +27,19 @@
                         <form >
                             <div class="form-control post-title">
                                 <div class="label">عنوان پست :</div><!-- /.label -->
-                                <q-input outlined type="text" name="post-title" size="3rem" v-model="postModel.title" hint="برای پست مورد نظر یک عنوان مناسب وارد کنید." />
+                                <q-input outlined
+                                         type="text"
+                                         name="post-title"
+                                         size="3rem"
+                                         v-model="postModel.title"
+                                         hint="برای پست مورد نظر یک عنوان مناسب وارد کنید." />
                             </div><!-- /.form-control post-title -->
 
                             <div class="form-control post-content">
                                 <div class="label">محتوای پست :</div><!-- /.label -->
                                 <div class="textarea-wrapper">
-                                    <ckeditor v-model="ckData" :config="ckConfig" />
+                                    <ckeditor v-model="ckData"
+                                              :config="ckConfig" />
                                 </div><!-- /.textarea-wrapper -->
                             </div><!-- /.form-control post-title -->
                         </form>
@@ -44,6 +50,7 @@
             <div class="col-12 col-md-4 side-widgets">
                 <div class="sidebar">
                     <category />
+                    <thumbnail v-model="thumbnail" />
                 </div><!-- /.sidebar -->
             </div><!-- /.col-12 col-md-3 -->
 
@@ -55,12 +62,14 @@
 <script>
 import CKEditor from 'ckeditor4-vue'
 import Category from '@/components/Category/Category'
+import Thumbnail from '@/components/widgets/Thumbnail'
 
 export default {
     name: 'newPost',
     components: {
         ckeditor: CKEditor.component,
-        category: Category
+        category: Category,
+        thumbnail: Thumbnail
     },
     mounted () {
         this.$emit('newPostMounted')
@@ -71,6 +80,7 @@ export default {
             ckConfig: {
                 language: 'fa'
             },
+            thumbnail: {},
             newPost: true,
             postModel: {
                 posttype: 'news'

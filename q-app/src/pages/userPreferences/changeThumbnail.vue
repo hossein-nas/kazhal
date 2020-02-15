@@ -3,15 +3,19 @@
         <div class="row justify-center">
             <div class="col-md-7 col-12 ">
                 <div class="form" >
-                    <form action="" ref="form" @input="changed">
+                    <form action=""
+                          ref="form"
+                          @input="changed">
 
                         <div class="form-control">
                             <div class="label">
                                 انتخاب فایل
                             </div><!-- /.label -->
-                            <q-file outlined v-model="file" :rules="[fileRule]">
+                            <q-file outlined
+                                    v-model="file"
+                                    :rules="[fileRule]">
                                 <template v-slot:prepend>
-                                <q-icon name="attach_file" />
+                                    <q-icon name="attach_file" />
                                 </template>
                             </q-file>
                         </div><!-- /.form-control file-picker -->
@@ -20,7 +24,10 @@
                             <div class="label">
                                 عنوان عکس
                             </div><!-- /.label -->
-                            <q-input v-model="thumbnail.title" outlined ref="title" hint="یک عنوان برای عکس مورد نظر انتخاب کنید."/>
+                            <q-input v-model="thumbnail.title"
+                                     outlined
+                                     ref="title"
+                                     hint="یک عنوان برای عکس مورد نظر انتخاب کنید."/>
 
                         </div><!-- /.form-control -->
 
@@ -28,14 +35,23 @@
                             <div class="label">
                                 توضیح :
                             </div><!-- /.label -->
-                            <q-input v-model="thumbnail.desc" type="textarea" :row="3" outlined ref="title" hint="توضیح مختصری برای عکس بنویسید"/>
+                            <q-input v-model="thumbnail.desc"
+                                     type="textarea"
+                                     :row="3"
+                                     outlined
+                                     ref="title"
+                                     hint="توضیح مختصری برای عکس بنویسید"/>
 
                         </div><!-- /.form-control -->
 
                         <div class="form-control  submit ">
-                            <q-btn  flat style="color: #1c4440"
-                            type="submit" @click.prevent="submitFileUpload" label="ثبت تغییرات" :disable="!anyChange"
-                             />
+                            <q-btn  flat
+                                    style="color: #1c4440"
+                                    type="submit"
+                                    @click.prevent="submitFileUpload"
+                                    label="ثبت تغییرات"
+                                    :disable="!anyChange"
+                            />
                         </div><!-- /.form-control .submit -->
 
                     </form>

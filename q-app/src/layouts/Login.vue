@@ -10,34 +10,48 @@
             <div class="body">
                 <div class="row q-px-lg q-pt-lg">
                     <div class="col">
-                        <q-input dir="ltr" filled  stack-label v-model="username" label="ایمیل" v-autofocus />
+                        <q-input dir="ltr"
+                                 filled
+                                 stack-label
+                                 v-model="username"
+                                 label="ایمیل"
+                                 v-autofocus />
                     </div><!-- /.col -->
                 </div><!-- /.row -->
 
                 <div class="row q-px-lg q-pt-lg ">
                     <div class="col">
-                        <q-input filled  type="password" stack-label v-model="password" label="پسورد" dir="ltr" />
+                        <q-input filled
+                                 type="password"
+                                 stack-label
+                                 v-model="password"
+                                 label="پسورد"
+                                 dir="ltr" />
                     </div><!-- /.col -->
                 </div><!-- /.row  password -->
                 <div class="row q-py-sm q-px-lg">
                     <div class="col">
                         <q-toggle
-                        v-model="rememberMe"
-                        label="مرا به خاطر بسپار"
-                        left-label
+                            v-model="rememberMe"
+                            label="مرا به خاطر بسپار"
+                            left-label
                         />
                     </div><!-- /.col -->
                 </div><!-- /.row checkbox -->
 
                 <div class="row q-px-lg q-pb-lg justify-center">
-                        <q-btn @click="login" outline class="q-pa-sm" style="color: #6a97c7; flex: 1 100%" label="ورود به پنل" >
-                            <q-inner-loading :showing="loading" >
-                                <q-spinner-dots
+                    <q-btn @click="login"
+                           outline
+                           class="q-pa-sm"
+                           style="color: #6a97c7; flex: 1 100%"
+                           label="ورود به پنل" >
+                        <q-inner-loading :showing="loading" >
+                            <q-spinner-dots
                                 color="primary"
                                 size="1em"
-                                />
-                            </q-inner-loading>
-                        </q-btn>
+                            />
+                        </q-inner-loading>
+                    </q-btn>
                 </div><!-- /.row -->
 
             </div><!-- /.body -->

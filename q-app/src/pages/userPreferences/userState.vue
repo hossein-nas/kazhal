@@ -9,7 +9,8 @@
                     <div class="col-12 col-md-4">
                         <div class="thumbnail">
                             <div class="frame">
-                                <img :src="this.photoPath" alt="">
+                                <img :src="this.photoPath"
+                                     alt="">
                             </div><!-- /.frame -->
                         </div><!-- /.thumbnail -->
                         <div class="caption">
@@ -26,30 +27,42 @@
                             <div class="label">
                                 نــــام :
                             </div><!-- /.label -->
-                            <q-input outlined v-model="firstname" :rules="[nameRule]" ref="firstname" />
+                            <q-input outlined
+                                     v-model="firstname"
+                                     :rules="[nameRule]"
+                                     ref="firstname" />
                         </div><!-- /.form-control -->
 
                         <div class="form-control">
                             <div class="label">
                                 نــــام خانوادگی :
                             </div><!-- /.label -->
-                            <q-input outlined v-model="lastname"  :rules="[nameRule]" ref="lastname" />
+                            <q-input outlined
+                                     v-model="lastname"
+                                     :rules="[nameRule]"
+                                     ref="lastname" />
                         </div><!-- /.form-control -->
 
                         <div class="form-control">
                             <div class="label">
                                 بیوگرافی :
                             </div><!-- /.label -->
-                            <q-input outlined v-model="bio" type="textarea" :rules="[bioRule]" ref="bio" />
+                            <q-input outlined
+                                     v-model="bio"
+                                     type="textarea"
+                                     :rules="[bioRule]"
+                                     ref="bio" />
                         </div><!-- /.form-control -->
-                        <div class="form-control error" v-if="anyError">
+                        <div class="form-control error"
+                             v-if="anyError">
                             <ul>
                                 <li  v-text="error" >
                                 </li>
                             </ul>
                         </div><!-- /.form-control error -->
 
-                        <div class="form-control message" v-if="message">
+                        <div class="form-control message"
+                             v-if="message">
                             <ul>
                                 <li  v-text="message" >
                                 </li>
@@ -57,9 +70,12 @@
                         </div><!-- /.form-control error -->
 
                         <div class="form-control  submit ">
-                            <q-btn  @click.prevent="submitChanges" flat style="color: #1c4440"
-                            type="submit" label="ثبت تغییرات"
-                             />
+                            <q-btn  @click.prevent="submitChanges"
+                                    flat
+                                    style="color: #1c4440"
+                                    type="submit"
+                                    label="ثبت تغییرات"
+                            />
                         </div><!-- /.form-control -->
 
                     </div><!-- /.col -->

@@ -2,16 +2,23 @@
     <div>
         <li>
             <span @click.prevent="itemclicked">
-                <q-radio v-model="selectedCategory" size="1.4rem" :val="this.node.id" ref='radio' @input="checked"/>
+                <q-radio v-model="selectedCategory"
+                         size="1.4rem"
+                         :val="this.node.id"
+                         ref='radio'
+                         @input="checked"/>
                 <span > {{ this.node.title }}</span>
-                <span class="clear float-right" @click.stop="clearselected" :class="{ active : this.selectedCategory }">
+                <span class="clear float-right"
+                      @click.stop="clearselected"
+                      :class="{ active : this.selectedCategory }">
                     <q-icon name="clear"></q-icon>
                 </span><!-- /.clear -->
             </span>
             <template v-if="nodes">
                 <ul class="node-category">
                     <template v-for="cat in nodes" >
-                        <node-cat  :node="cat" :key="cat.id"> </node-cat>
+                        <node-cat  :node="cat"
+                                   :key="cat.id"> </node-cat>
                     </template>
                 </ul><!-- /.node-category -->
             </template>

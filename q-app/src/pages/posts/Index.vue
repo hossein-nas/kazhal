@@ -12,7 +12,8 @@
                             <router-link to="/posts/new/post">
                                 <div class="action button newpost">
                                     ایجاد پست جدید
-                                    <q-icon name="add_box" size="xs">
+                                    <q-icon name="add_box"
+                                            size="xs">
                                     </q-icon>
                                 </div><!-- /.action button newpost -->
                             </router-link>
@@ -26,7 +27,9 @@
                                         همه‌ی اخبار
                                     </span>
                                     <div class="searchbox">
-                                        <input type="text" id="searchbox-input" placeholder="">
+                                        <input type="text"
+                                               id="searchbox-input"
+                                               placeholder="">
                                         <q-icon name="search"></q-icon>
                                     </div><!-- /.searchbox -->
                                 </div><!-- /.head-section -->
@@ -41,7 +44,8 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr v-for="post in posts" :key="post.id" >
+                                            <tr v-for="post in posts"
+                                                :key="post.id" >
                                                 <td class="title">
                                                     <div class="thumb">
                                                         <q-img :src="getThumb(post.thumb.specs[0].fullpath)"></q-img>
@@ -76,12 +80,14 @@
                                                             </router-link>
                                                         </div><!-- /.edit -->
                                                         <div class="goto-post">
-                                                            <a :href="`http://kazhal.test/posts/${post.slug}/show`" target="blank">
+                                                            <a :href="`http://kazhal.test/posts/${post.slug}/show`"
+                                                               target="blank">
                                                                 <q-icon name="link"></q-icon>
                                                             </a>
                                                         </div><!-- /.edit -->
-                                                        <div class="delete" @click="deletePost(post.id)">
-                                                                <q-icon name="delete_outline"></q-icon>
+                                                        <div class="delete"
+                                                             @click="deletePost(post.id)">
+                                                            <q-icon name="delete_outline"></q-icon>
                                                         </div><!-- /.edit -->
                                                     </div><!-- /.buttons -->
                                                 </td>
@@ -98,7 +104,6 @@
                 <div class="col-12 col-md-3">
                     <div class="sidebar">
                         <category />
-                        <thumbnail v-model="thumb" />
                     </div><!-- /.sidebar -->
                 </div><!-- /.col -->
 
@@ -111,17 +116,14 @@
 
 <script>
 import Category from '@/components/Category/Category'
-import Thumbnail from '@/components/widgets/Thumbnail'
 export default {
     name: 'Posts',
     components: {
-        Category,
-        Thumbnail
+        Category
     },
     data () {
         return {
-            posts: [],
-            thumb: {}
+            posts: []
         }
     },
     beforeMount () {

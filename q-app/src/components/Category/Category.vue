@@ -6,29 +6,46 @@
             </div><!-- /.header -->
 
             <div class="body">
-                <div class="categories" v-if="!this.addnewcat">
+                <div class="categories"
+                     v-if="!this.addnewcat">
 
                     <div class="cat-groups">
                         <ul class="node-category root">
                             <template v-for="cat in this.cats" >
-                                <node-cat :node="cat" :key="cat.id"> </node-cat>
+                                <node-cat :node="cat"
+                                          :key="cat.id"> </node-cat>
                             </template>
                         </ul><!-- /.node-category -->
                     </div><!-- /.cat-groups -->
 
-                    <div class="actions flex justify-end" v-if="actionsEnable">
-                        <q-btn flat size="sm" color="blue-8" v-if="this.selected.length && this.selected.length < 2">
+                    <div class="actions flex justify-end"
+                         v-if="actionsEnable">
+                        <q-btn flat
+                               size="sm"
+                               color="blue-8"
+                               v-if="this.selected.length && this.selected.length < 2">
                             ویرایش
                         </q-btn>
-                        <q-btn flat size="sm" color="red-8" v-if="this.selected.length" @click="allcats()">
+                        <q-btn flat
+                               size="sm"
+                               color="red-8"
+                               v-if="this.selected.length"
+                               @click="allcats()">
                             حذف
                         </q-btn>
-                        <q-btn flat size="sm" v-if="!this.selected.length" @click="addnewcat = true">
+                        <q-btn flat
+                               size="sm"
+                               v-if="!this.selected.length"
+                               @click="addnewcat = true">
                             ایجاد دسته‌ی جدید
                         </q-btn>
                     </div><!-- /.actions -->
                 </div><!-- /.categories -->
-                <newCat v-model="newcat" :visible="addnewcat" :cats="this.allcat" @canceled="addnewcat = false" @done="addnewcat = false"/>
+                <newCat v-model="newcat"
+                        :visible="addnewcat"
+                        :cats="this.allcat"
+                        @canceled="addnewcat = false"
+                        @done="addnewcat = false"/>
 
             </div><!-- /.body -->
         </div><!-- /.panel -->

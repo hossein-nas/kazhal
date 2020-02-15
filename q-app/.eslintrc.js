@@ -50,6 +50,20 @@ module.exports = {
         "import/no-extraneous-dependencies": "off",
         "prefer-promise-reject-errors": "off",
         "camelcase" : "off",
+        "vue/html-indent": ["error", 4, {
+            "attribute": 1,
+            "baseIndent": 1,
+            "closeBracket": 0,
+            "alignAttributesVertically": true,
+            "ignores": []
+        }],
+        "vue/max-attributes-per-line": ["error", {
+            "singleline": 1,
+            "multiline": {
+              "max": 1,
+              "allowFirstLine": true
+            }
+        }],
 
         // allow debugger during development only
         "no-debugger": process.env.NODE_ENV === "production" ? "error" : "off"

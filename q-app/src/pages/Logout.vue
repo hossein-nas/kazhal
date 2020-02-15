@@ -1,5 +1,6 @@
 <template>
-    <q-page padding class="flex flex-center">
+    <q-page padding
+            class="flex flex-center">
         <h5 v-if="show">شما با موفقیت خارج شدید</h5>
     </q-page>
 </template>

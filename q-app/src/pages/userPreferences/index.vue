@@ -3,25 +3,37 @@
         <div class="row user-preferences">
             <div class="col-3 q-pa-sm sidebar-buttons active">
                 <q-list>
-                    <q-item clickable tag="a" to="/user/preferences" exact >
+                    <q-item clickable
+                            tag="a"
+                            to="/user/preferences"
+                            exact >
                         <q-item-section>
                             <q-item-label >مشخصات کاربری</q-item-label>
                         </q-item-section>
                     </q-item> <!-- /User States Item -->
 
-                    <q-item clickable tag="a" to="/user/preferences/change-password" exact >
+                    <q-item clickable
+                            tag="a"
+                            to="/user/preferences/change-password"
+                            exact >
                         <q-item-section>
                             <q-item-label >تغییر رمز عبور</q-item-label>
                         </q-item-section>
                     </q-item> <!-- /Change Password Item -->
 
-                    <q-item clickable tag="a" to="/user/preferences/change-email" exact >
+                    <q-item clickable
+                            tag="a"
+                            to="/user/preferences/change-email"
+                            exact >
                         <q-item-section>
                             <q-item-label >تغییر ایمیل</q-item-label>
                         </q-item-section>
                     </q-item> <!-- /Change Email Item -->
 
-                    <q-item clickable tag="a" to="/user/preferences/change-userphoto" exact >
+                    <q-item clickable
+                            tag="a"
+                            to="/user/preferences/change-userphoto"
+                            exact >
                         <q-item-section>
                             <q-item-label >تغییر عکس کاربری</q-item-label>
                         </q-item-section>
