@@ -23,6 +23,8 @@ class FilesController extends Controller
         }
 
         $this->initAttributes();
+        $this->persistInDisk();
+        $this->persistInDB();
 
         return response()->json($this->resp);
     }
@@ -33,37 +35,41 @@ class FilesController extends Controller
         $ext = $this->resp['file']->extension();
         $this->resp['hashname'] = $this->hashname;
         $this->resp['ext'] = $ext;
-        $this->resp['basedir'] = storage_path('public/images'); 
+        $this->resp['basedir'] = storage_path('app/public/images');
         $this->resp['is_responsive'] = (int) $this->isResizable($this->resp['ext']);
-        $this->resp['base_url'] = '/storage/images'; 
+        $this->resp['base_url'] = '/storage/images';
         if( isset($this->resp['keywords']) ){
             $this->resp['keywords'] = implode(',', $this->resp['keywords']);
         }
 
         if( request()->hasFile('file') ){
-            $this->resp['tmp_file_path'] = "/temp/images/${hashname}.${ext}";
+            $tmp_path = "/temp/images/${hashname}.${ext}";
+            $this->resp['tmp_file_path'] = [
+                'basedir' => storage_path('app'."/temp/images/"),
+                'filepath' => $tmp_path,
+                'fullpath' => storage_path('app'. $tmp_path)
+            ];
             request()->file('file')->storeAs('temp/images', "${hashname}.${ext}");
         }
-        dd($this->resp);
         return 'done';
     }
 
     public function validateParams($params)
     {
         $validate = Validator::make($params, [
-            'file'          => 'required|file|max:4096',
+            'file'          => 'required|file|mimes:png,jpg,jpeg,svg|max:4096',
             'title'         => 'required|regex:/^[^\_\:\#\$]+$/i|min:10',
             'desc'          => 'required|regex:/^[^\_\:\#\$]+$/i|min:10',
             'name'          => 'required|regex:/^[\w\d\_\(\)]+\.[\w]*$/i',
             'keywords'      => 'nullable|array',
         ]);
-        
+
         if( $validate->fails()){
             $this->res = [
                 'status' => 'error',
                 'message' => 'there_is_an_error_in_file_upload',
                 'text' => 'خطایی در آپلود فایل رخ داد.',
-                'data' => $validate->errors() 
+                'data' => $validate->errors()
             ];
             return false;
         }
