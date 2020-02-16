@@ -30,7 +30,9 @@
                                 <q-input outlined
                                          type="text"
                                          name="post-title"
+                                         ref="postTitle"
                                          size="3rem"
+                                         :rules="[postTitleValidate]"
                                          v-model="postModel.title"
                                          @input="postTitleUpdate"
                                          hint="برای پست مورد نظر یک عنوان مناسب وارد کنید." />
@@ -102,13 +104,15 @@ export default {
             ckConfig: {
                 language: 'fa'
             },
-            thumbnail: {},
-            categories: {},
+            thumbnail: null,
+            categories: {
+                init: [1]
+            },
             newPost: true,
-            erorrs: [],
+            errors: [],
             anyError: false,
             postModel: {
-                post_type: 'news',
+                post_type: 1,
                 title: '',
                 slug: '',
                 published: true
@@ -121,12 +125,46 @@ export default {
             let id = this.$route.params.id
             try {
                 let post = await this.$axios.get(`api/posts/${id}/`)
+                this.newPost = false
                 this.postModel = post.data.post
                 this.ckData = post.data.post.content
+                this.thumbnail = {
+                    thumbnailId: post.data.thumbnail.id,
+                    previewImage: post.data.thumbnail.specs[0].relativepath
+                }
             } catch (e) {}
         }
     },
     methods: {
+        postTitleValidate (val) {
+            if (!val) {
+                return false || 'این فیلد باید پرشود.'
+            }
+            if (val.length < 10) {
+                return false || 'تعداد کاراکتر حداقل باید ۱۰ تا باشد.'
+            }
+            return true
+        },
+        validateAllInputs () {
+            this.errors = []
+            this.anyError = false
+            if (this.postModel.title !== undefined && this.postModel.title.length < 10) {
+                this.anyError = true
+                this.errors.push('تعداد کاراکتر های عنوان پست ناکافی است.')
+            }
+            if (this.ckData !== undefined && this.ckData.length < 15) {
+                this.anyError = true
+                this.errors.push('متن پست حداقل باید ۱۵ کاراکتر باشد.')
+            }
+            if (this.categories && this.categories.selected.length == 0) {
+                this.anyError = true
+                this.errors.push('دسته‌ای برای پست انتخاب نشده است')
+            }
+            if (this.thumbnail === null) {
+                this.anyError = true
+                this.errors.push('تصویر شاخص انتخاب نشده است')
+            }
+        },
         submitPost () {
             let data = {
                 title: this.postModel.title,
@@ -134,12 +172,30 @@ export default {
                 published: this.postModel.published,
                 slug: this.postModel.slug,
                 post_type: this.postModel.post_type,
-                categories: this.allCategories
+                categories: this.allCategories,
+                thumbnail_id: this.thumbnail
             }
-            console.log(data)
+            this.validateAllInputs()
+            if (this.anyError) {
+                alert('در داده‌های ورودی خطایی مشاهده می‌شود.')
+                return
+            }
+
+            // this is because of check for new post or Post Update functionality
+            if (this.newPost === true) {
+                this.$axios.post('/api/posts/add-new/post', data)
+                    .then((res) => {
+                        console.log(res.data)
+                    })
+            } else {
+                this.$axios.post(`/api/posts/update/${this.postModel.id}/post`, data)
+                    .then((res) => {
+                        console.log(res.data)
+                    })
+            }
         },
         postTitleUpdate (value) {
-            let slug = value
+            let slug = value.trim()
             slug = slug.replace(/\s/gi, '-')
             slug = slug.replace(/[._?؟()[\]{}‌]/gi, '')
             this.postModel.slug = slug

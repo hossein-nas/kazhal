@@ -10,7 +10,7 @@
                                 بخش مدیریت پست‌ها
                             </span>
                             <router-link to="/posts/new/post">
-                                <div class="action button newpost">
+                                <div class="action button ">
                                     ایجاد پست جدید
                                     <q-icon name="add_box"
                                             size="xs">
@@ -48,7 +48,7 @@
                                                 :key="post.id" >
                                                 <td class="title">
                                                     <div class="thumb">
-                                                        <q-img :src="getThumb(post.thumb.specs[0].fullpath)"></q-img>
+                                                        <q-img :src="getThumb(post.thumb.specs[0].relativepath)"></q-img>
                                                     </div><!-- /.thumb -->
                                                     <router-link to="/">
                                                         <span>
@@ -103,7 +103,7 @@
                 </div><!-- /.col -->
                 <div class="col-12 col-md-3">
                     <div class="sidebar">
-                        <category />
+                        <category v-model="categories" />
                     </div><!-- /.sidebar -->
                 </div><!-- /.col -->
 
@@ -123,7 +123,8 @@ export default {
     },
     data () {
         return {
-            posts: []
+            posts: [],
+            categories: {}
         }
     },
     beforeMount () {

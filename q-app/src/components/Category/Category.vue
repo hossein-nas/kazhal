@@ -13,7 +13,8 @@
                         <ul class="node-category root">
                             <template v-for="cat in this.cats" >
                                 <node-cat :node="cat"
-                                          :key="cat.id"> </node-cat>
+                                          :key="cat.id"
+                                          :init="value.init"> </node-cat>
                             </template>
                         </ul><!-- /.node-category -->
                     </div><!-- /.cat-groups -->
@@ -63,7 +64,6 @@ export default {
     },
     props: {
         value: {
-            required: true,
             type: Object
         }
     },
@@ -91,8 +91,16 @@ export default {
             this.deselectCategory(value)
         })
         if (this.value) {
+            // init selected key
             this.value.selected = []
             this.$emit('input', this.value)
+
+            // init selected items
+            if (this.value && this.value.init && this.value.init.length) {
+
+            } else {
+                this.value.init = []
+            }
         }
     },
     created () {

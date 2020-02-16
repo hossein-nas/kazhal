@@ -18,7 +18,8 @@
                 <ul class="node-category">
                     <template v-for="cat in nodes" >
                         <node-cat  :node="cat"
-                                   :key="cat.id"> </node-cat>
+                                   :key="cat.id"
+                                   :init="init"> </node-cat>
                     </template>
                 </ul><!-- /.node-category -->
             </template>
@@ -30,7 +31,8 @@
 export default {
     name: 'NodeCat',
     props: [
-        'node'
+        'node',
+        'init'
     ],
     data () {
         return {
@@ -46,6 +48,14 @@ export default {
         }
     },
     mounted () {
+        // this is for initial checking for initial check items
+        if (this.init && this.init.length) {
+            let nodeId = this.node.id
+            let list = this.init
+            if (list.includes(nodeId)) {
+                this.itemclicked()
+            }
+        }
     },
     methods: {
         checked (value) {

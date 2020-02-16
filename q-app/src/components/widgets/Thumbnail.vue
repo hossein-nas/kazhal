@@ -71,13 +71,18 @@ export default {
     },
     props: {
         value: {
-            type: Object,
             required: true
         }
     },
     watch: {
         thumbnail (val) {
             this.thumbImg = val.previewImage
+            this.$emit('input', val.thumbnailId)
+        },
+        value (val) {
+            if (val) {
+                this.initDefaultImage()
+            }
         }
     },
     data () {
@@ -90,11 +95,15 @@ export default {
         }
     },
     mounted () {
-        if (this.value.thumbnail_path && this.valu.thumbnail_path.length) {
-            this.hasThumb = true
-        }
     },
     methods: {
+        initDefaultImage () {
+            if (this.value && this.value.previewImage && this.value.previewImage.length) {
+                this.hasThumb = true
+                this.thumbImg = this.value.previewImage
+                this.$emit('input', this.value.thumbnailId)
+            }
+        },
         openDialog () {
             this.ThumbnailDialog = true
         },
