@@ -31,9 +31,9 @@ trait FileTrait {
     private function getCropFrames()
     {
         return collect([
-            'large' => ['width' =>1080 , 'height' =>675],
+            'small' => ['width' =>240, 'height' =>150],
             'medium' => ['width' =>480, 'height' =>300],
-            'small' => ['width' =>240, 'height' =>150]
+            'large' => ['width' =>1080 , 'height' =>675]
         ]);
     }
 

@@ -36,7 +36,7 @@ class InitialFilesSeeder extends Seeder
                         'height' => 0,
                         'ration' => 0,
                         'filesize' => filesize(storage_path("app/$image")),
-                        'fullpath' => "/storage/images/${hashname}.${ext}"
+                        'relativepath' => "/storage/images/${hashname}.${ext}"
                     ]
                 ]
             ]);
