@@ -80,7 +80,9 @@ trait FileTrait {
             $width = $frame['width'];
             $height = $frame['height'];
             $ratio = ( (float) $width / $height );
-            $newName = $basedir . $this->hashname . "_h" . $height . "." . $this->resp['ext'];
+            $filename = $this->hashname . "_h" . $height . "." . $this->resp['ext'];
+            $newName = $basedir . $filename;
+            $uriName = $this->resp['base_url'] . '/' . $filename;
             $image->resize($width, $height)->save($newName);
             $this->resp['specs'][] = [
                 'size' => $frameName,
@@ -89,6 +91,7 @@ trait FileTrait {
                 'ratio' => $ratio,
                 'filesize' => filesize($newName),
                 'fullpath' => $newName,
+                'relativepath' => $uriName,
             ];
         }
     }
@@ -106,7 +109,8 @@ trait FileTrait {
                     'height' => 0,
                     'ratio' => 0,
                     'filesize' => filesize($this->resp['tmp_file_path']['fullpath']),
-                    'fullpath' => $this->resp['tmp_file_path']['fullpath']
+                    'fullpath' => $this->resp['tmp_file_path']['fullpath'],
+                    'relativepath' => $this->resp['base_url'] . '/' . $this->hashname . "." . $this->resp['ext']
                 ]
             ];
         }
@@ -120,14 +124,18 @@ trait FileTrait {
         foreach( $files as $in => $f ){
             $old_path = $f['fullpath'];
             $basedir = $this->resp['basedir'];
-            $new_path = $basedir . "/" . $this->hashname . "_H" . $f['height'] . "." . $this->resp['ext'];
+            $filename = $this->hashname . "_H" . $f['height'] . "." . $this->resp['ext'];
+            $new_path = $basedir . "/" . $filename;
+            $relativepath = $this->resp['base_url'] . '/' . $filename;
             rename($old_path, $new_path);
             $this->resp['specs'][$in]['fullpath'] = $new_path;
+            $this->resp['specs'][$in]['relativepath'] = $relativepath;
         }
 
         // this is for unlinking actual uploaded file
         $uploaded_file = $this->resp['tmp_file_path']['fullpath'];
-        unlink($uploaded_file);
+        if( file_exists($uploaded_file) )
+            unlink($uploaded_file);
         // unseting 'tmp_file_path' index
         unset($this->resp['tmp_file_path']);
     }
@@ -142,6 +150,7 @@ trait FileTrait {
     {
         $file = new \App\File();
         $file->fill($this->resp)->save();
+        return $file;
     }
 
 }

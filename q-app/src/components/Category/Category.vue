@@ -61,6 +61,12 @@ export default {
         NodeCat,
         newCat
     },
+    props: {
+        value: {
+            required: true,
+            type: Object
+        }
+    },
     data () {
         return {
             actionsEnable: true,
@@ -84,6 +90,10 @@ export default {
         this.$root.$on('category_deselected', (value) => {
             this.deselectCategory(value)
         })
+        if (this.value) {
+            this.value.selected = []
+            this.$emit('input', this.value)
+        }
     },
     created () {
         this.initCats()
@@ -141,9 +151,12 @@ export default {
                 }
             })
             if (notSame) {
-                console.log('added ' + node.title)
                 this.selected.push(node)
             }
+            let value = {
+                selected: this.selected
+            }
+            this.$emit('input', value)
         },
         deselectCategory (node) {
             this.selected.forEach((val, ind) => {

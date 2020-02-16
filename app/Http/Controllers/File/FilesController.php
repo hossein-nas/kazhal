@@ -19,14 +19,19 @@ class FilesController extends Controller
     public function index(Request $req){
 
         if(!$validate = $this->validateParams($req->all())){
-            return response()->json($this->res);
+            return response()->json('error');
         }
 
         $this->initAttributes();
         $this->persistInDisk();
-        $this->persistInDB();
+        $file_info = $this->persistInDB();
 
-        return response()->json($this->resp);
+        return response()->json([
+            'status' => 'ok',
+            'message' => 'file_uploaded_successfuly',
+            'message' => 'بهمث با موفقیت آپلود شد',
+            'data' => $file_info,
+        ]);
     }
 
     public function initAttributes()

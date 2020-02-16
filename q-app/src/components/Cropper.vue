@@ -34,7 +34,8 @@
                 <img :src="previewImg"
                      alt="">
             </div>
-            <div class="buttons" >
+            <div class="buttons"
+                 v-if="!uploadingDone" >
                 <div class="button upload-server"
                      v-if="previewImg"
                      @click.prevent.stop="uploadCropedImage">
@@ -48,6 +49,11 @@
                      @click="crop_image">
                     بریدن تصویر
                 </div>
+            </div>
+
+            <div class="success-message"
+                 v-if="uploadingDone" >
+                تصویر با موفقیت بارگذاری شد.
             </div>
         </div>
     </div>
@@ -94,6 +100,13 @@ export default {
     mounted () {
     },
     methods: {
+        emitEvent (imageData) {
+            let data = {
+                previewImage: imageData.data.specs[2].relativepath,
+                thumbnailId: imageData.data.id
+            }
+            this.$emit('input', data)
+        },
         initImg () {
             let file_reader = new FileReader()
             file_reader.onload = (loadedFile) => {
@@ -150,10 +163,13 @@ export default {
                     }
                 }
             })
-                .then(() => {
-                    this.uploading = false
-                    this.uploadingDone = true
-                    this.uploadingValue = 0
+                .then((res) => {
+                    if (res.data.status === 'ok') {
+                        this.uploading = false
+                        this.uploadingDone = true
+                        this.uploadingValue = 0
+                        this.emitEvent(res.data)
+                    }
                 })
                 .catch(() => {
                     console.log('error')
@@ -227,6 +243,13 @@ div.cropper{
         width: auto;
         height: 100%;
     }
+}
+
+.success-message{
+    text-align: center;
+    font-size: .9rem;
+    color: $rp-green;
+    padding: 1.5rem 0;
 }
 
 </style>

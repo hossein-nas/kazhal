@@ -32,7 +32,16 @@
                                          name="post-title"
                                          size="3rem"
                                          v-model="postModel.title"
+                                         @input="postTitleUpdate"
                                          hint="برای پست مورد نظر یک عنوان مناسب وارد کنید." />
+                                <div class="post-slug"
+                                     id="post-slug"
+                                     v-if="titleEntered"
+                                     dir="ltr"
+                                     @dblclick="selectURL">
+                                    <span>URL Adress : </span>
+                                    <span class="uri">{{ slugURL }}</span>
+                                </div>
                             </div><!-- /.form-control post-title -->
 
                             <div class="form-control post-content">
@@ -49,8 +58,21 @@
 
             <div class="col-12 col-md-4 side-widgets">
                 <div class="sidebar">
-                    <category />
+                    <category v-model="categories" />
                     <thumbnail v-model="thumbnail" />
+                    <div class="submit">
+                        <div class="publishedToggle">
+                            <span>قابلیت نمایش پست</span>
+                            <q-toggle v-model="postModel.published" />
+                        </div>
+                        <div class="submit-button">
+                            <q-btn label="ذخیره‌ی پست"
+                                   unelevated
+                                   @click="submitPost"
+                                   color="blue-9" />
+
+                        </div>
+                    </div>
                 </div><!-- /.sidebar -->
             </div><!-- /.col-12 col-md-3 -->
 
@@ -81,9 +103,15 @@ export default {
                 language: 'fa'
             },
             thumbnail: {},
+            categories: {},
             newPost: true,
+            erorrs: [],
+            anyError: false,
             postModel: {
-                posttype: 'news'
+                post_type: 'news',
+                title: '',
+                slug: '',
+                published: true
             }
         }
     },
@@ -96,6 +124,54 @@ export default {
                 this.postModel = post.data.post
                 this.ckData = post.data.post.content
             } catch (e) {}
+        }
+    },
+    methods: {
+        submitPost () {
+            let data = {
+                title: this.postModel.title,
+                content: this.ckData,
+                published: this.postModel.published,
+                slug: this.postModel.slug,
+                post_type: this.postModel.post_type,
+                categories: this.allCategories
+            }
+            console.log(data)
+        },
+        postTitleUpdate (value) {
+            let slug = value
+            slug = slug.replace(/\s/gi, '-')
+            slug = slug.replace(/[._?؟()[\]{}‌]/gi, '')
+            this.postModel.slug = slug
+        },
+        selectURL () {
+            event.preventDefault()
+            let el = document.getElementById('post-slug')
+            var sel = window.getSelection()
+            var range = document.createRange()
+            range.selectNodeContents(el.childNodes[1])
+            sel.removeAllRanges()
+            sel.addRange(range)
+        }
+    },
+    computed: {
+        slugURL () {
+            let slug = this.postModel.slug
+            return `http://rp-kazhal.ir/posts/${slug}/show`
+        },
+        titleEntered () {
+            if (this.postModel.title && this.postModel.title.length) {
+                return true
+            }
+            return false
+        },
+        allCategories () {
+            let result = []
+            for (let cat in this.categories.selected) {
+                let c = this.categories.selected[cat]
+                result.push(c.id)
+            }
+            return result
         }
     }
 }
@@ -174,11 +250,66 @@ export default {
     }
 } // .newpost
 
+.form{
+    .form-control{
+        &.post-title{
+            position: relative;
+            .post-slug{
+                position: absolute;
+                top: .25rem;
+                left: 0rem #{"/* rtl:ignore */"};
+                direction: ltr #{"/* rtl:ignore */"};
+                span{
+                    font-size: .75rem;
+                    color: $rp-gray-text-1;
+                    &.uri{
+                        font-size: .85rem;
+                        color: $rp-gray-text-2;
+                        font-weight: 600;
+                        transition: color .2s ease-out;
+                        &:hover{
+                            cursor: default;
+                            color: $rp-blue;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
 .side-widgets{
     .sidebar{
         min-width: 10rem;
         border-radius: .5rem;
         border: 1px solid $rp-gray-2;
+
+        .submit{
+            user-select : none;
+            padding-bottom: 1rem;
+            .publishedToggle{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0 1rem 0;
+                margin-bottom: 1rem;
+                margin-top: .5rem;
+                span{
+                   color: $rp-gray-text-2;
+                   font-size: .85rem;
+                }
+                >div{
+                    transform: translateX(-.5rem) #{"/* rtl:ignore */"};
+                }
+            } // /.publishedToggle
+
+            .submit-button{
+                display: flex;
+                justify-content: flex-end;
+                padding-left: 1rem #{"/* rtl:ignore */"};
+            } // /.submit-button
+
+        } // /.submit
     } // .sidebar
 } // .side-widgets
 </style>

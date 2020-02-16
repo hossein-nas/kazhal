@@ -4,13 +4,26 @@
             افزودن تصویر شاخص
         </div> <!-- /.header -->
         <div class="body">
-            <div class="no-thumb">
+            <div class="no-thumb"
+                 v-if="!hasThumb" >
                 <div class="text">
                     تصویر شاخص انتخاب نشده.
                 </div>
                 <div class="add-new-thumb"
                      @click="openDialog">
                     افزودن تصویر
+                </div>
+            </div>
+
+            <div class="thumb"
+                 v-if="hasThumb">
+                <div class="thumb-area">
+                    <img :src="thumbImgSrc"
+                         alt="">
+                </div>
+                <div class="change-thumb add-new-thumb"
+                     @click="resetThumbnail" >
+                    تغییر تصویر شاخص
                 </div>
             </div>
 
@@ -37,6 +50,11 @@
                            flat
                            color="red-4"
                            @click.stop="closeDialog" />
+                    <q-btn label="تایید"
+                           unelevated
+                           v-if="thumbImg"
+                           color="secondary"
+                           @click.stop="setThumbnail" />
                 </q-card-actions>
             </q-card>
         </q-dialog>
@@ -53,16 +71,22 @@ export default {
     },
     props: {
         value: {
-            type: Object
+            type: Object,
+            required: true
+        }
+    },
+    watch: {
+        thumbnail (val) {
+            this.thumbImg = val.previewImage
         }
     },
     data () {
         return {
             thumbnail: {
-                src: 'http://kazhal.test/img/1.jpg'
             },
-            ThumbnailDialog: true,
-            hasThumb: false
+            ThumbnailDialog: false,
+            hasThumb: false,
+            thumbImg: null
         }
     },
     mounted () {
@@ -76,6 +100,20 @@ export default {
         },
         closeDialog () {
             this.ThumbnailDialog = false
+        },
+        setThumbnail () {
+            this.closeDialog()
+            this.hasThumb = true
+        },
+        resetThumbnail () {
+            this.hasThumb = false
+            this.thumbImg = null
+            this.openDialog()
+        }
+    },
+    computed: {
+        thumbImgSrc () {
+            return 'http://kazhal.test' + this.thumbImg
         }
     }
 }
@@ -84,7 +122,7 @@ export default {
 <style lang="scss">
 .panel{
     .body{
-        .no-thumb{
+        .no-thumb, .thumb{
             text-align: center;
             .text{
                 min-height: 4rem;
@@ -92,6 +130,18 @@ export default {
                 font-size: 1rem;
                 color: $rp-danger-light;
                 text-align: center;
+            }
+            .thumb-area{
+                display: block;
+                padding: .5rem 1.5rem .25rem;
+                text-align: center;
+                img{
+                    width: auto;
+                    max-height:120px;
+                    border-radius: .5rem;
+                    border: 2px solid white;
+                    box-shadow: 0 4px 6px -2px $rp-gray-2;
+                }
             }
             .add-new-thumb{
                 padding: .25rem;
