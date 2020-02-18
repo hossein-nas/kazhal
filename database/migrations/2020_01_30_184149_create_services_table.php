@@ -23,8 +23,8 @@ class CreateServicesTable extends Migration
             $table->unsignedBigInteger('thumbnail_id');
             $table->unsignedBigInteger('color_id');
             $table->unsignedBigInteger('parent_id')->nullable();
-            $table->string('features')->nullable();
-            $table->string('hardware')->nullable();
+            $table->text('features')->nullable();
+            $table->text('hardware')->nullable();
             $table->json('extra')->nullable();
             $table->timestamps();
 
