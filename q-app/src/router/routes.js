@@ -6,11 +6,16 @@ const routes = [
         children: [
             { path: '', redirect: '/dashboard' },
             { path: '/dashboard', component: () => import('pages/Index') },
-            // posts specifc routes ::
 
+            // posts specifc routes ::
             { path: '/posts', component: () => import('pages/posts/Index') },
             { path: '/posts/new/post', component: () => import('pages/posts/newPost') },
             { path: '/posts/edit/post/:id/', component: () => import('pages/posts/newPost'), props: true },
+
+            // posts specifc routes ::
+            { path: '/services/', component: () => import('pages/services/Index') },
+            { path: '/services/new/service', component: () => import('pages/services/newService') },
+            { path: '/services/edit/:id/', component: () => import('pages/services/newService') },
 
             { path: '/user/preferences',
                 component: () => import('pages/userPreferences/index'),
