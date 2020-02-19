@@ -59,4 +59,7 @@ Route::group(['middleware' => 'auth:api'], function(){
 	Route::post('/services/get-all/category/services', 'Service\ServicesController@getAllCategoryServices');
 
 	Route::post('/services/get-service/{id}', 'Service\ServicesController@getSingleService');
+	Route::post('/services/delete/service', 'Service\ServicesController@deleteService');
 });
+
+	Route::get('/services/get-all/recursive/services', 'Service\ServicesController@getRecursiveServices');

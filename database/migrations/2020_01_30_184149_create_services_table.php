@@ -17,7 +17,8 @@ class CreateServicesTable extends Migration
             $table->bigIncrements('id');
             $table->string('title')->unique();
             $table->string('slug')->index();
-            $table->string('excerpt');
+            $table->text('excerpt');
+            $table->string('price')->nullable;
             $table->text('content');
             $table->enum('service_type', ['category', 'main']);
             $table->unsignedBigInteger('thumbnail_id');

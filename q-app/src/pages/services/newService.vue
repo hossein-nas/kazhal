@@ -40,6 +40,7 @@
                                             </div>
                                             <q-input outlined
                                                      @input="validateInputs"
+                                                     @blur="escapeWhitespace($event)"
                                                      ref="postSlug"
                                                      v-model="serviceModel.slug"
                                                      hint="اسم سرویسی که می‌خواهید بسازید را به انگلیسی بنویسید"
@@ -55,6 +56,8 @@
                                     <q-input type="textarea"
                                              ref="postExcerpt"
                                              @input="validateInputs"
+                                             counter
+                                             maxlength="250"
                                              outlined
                                              :rows="5"
                                              v-model="serviceModel.excerpt"
@@ -70,6 +73,14 @@
                                               @input="validateInputs"
                                               min-height="20rem"/>
                                 </div> <!-- ./form-control serviceModel Excerpt -->
+
+                                <div class="form-control price"
+                                     v-if="serviceModel.type === 'main'">
+                                    <div class="label">هزینه سرویس</div>
+                                    <q-input v-model="serviceModel.price"
+                                             hint="اگر هزینه قابل عنوان کردن برای سرویس هست اینجا وارد کنید."
+                                             outlined />
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -146,6 +157,7 @@ export default {
                 excerpt: '',
                 parent_id: null,
                 slug: '',
+                price: null,
                 content: '',
                 type: 'main',
                 features: [],
@@ -180,6 +192,7 @@ export default {
                     title: this.serviceModel.title,
                     excerpt: this.serviceModel.excerpt,
                     slug: this.serviceModel.slug,
+                    price: this.serviceModel.price,
                     content: this.serviceModel.content,
                     service_type: this.serviceModel.type,
                     parent_id: this.serviceModel.parent_id,
@@ -243,6 +256,7 @@ export default {
             this.serviceModel = {
                 title: data.title,
                 slug: data.slug,
+                price: data.price,
                 excerpt: data.excerpt,
                 content: data.content,
                 type: data.service_type,
@@ -255,6 +269,12 @@ export default {
             this.color = data.color_id
             this.thumbnail = data.thumbnail_id
             this.extras = data.extra
+        },
+        escapeWhitespace (event) {
+            let value = event.target.value
+            value = value.trim()
+            value = value.replace(/\s/gi, '-')
+            this.serviceModel.slug = value
         }
     },
     computed: {

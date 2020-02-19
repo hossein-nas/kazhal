@@ -89,6 +89,11 @@ export default {
             this.$emit('input', this.features)
         }
     },
+    mounted () {
+        if (this.value && this.value.length) {
+            this.features = this.value
+        }
+    },
     data () {
         return {
             features: [

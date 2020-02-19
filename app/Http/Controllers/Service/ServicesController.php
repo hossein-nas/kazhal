@@ -6,9 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Controllers\Traits\ServicesTrait;
 
 class ServicesController extends Controller
 {
+	use ServicesTrait;
+
 	protected $attrs;
 	protected $params;
 	protected $resp;
@@ -28,6 +31,35 @@ class ServicesController extends Controller
 	{
 		$service = Service::find($id);
 		return $service;
+	}
+
+	public function getRecursiveServices()
+	{
+		return $this->getChildren(null);
+	}
+
+	public function deleteService(Request $request)
+	{
+		$id = $request->get('service_id');
+		$service = Service::find($id);
+
+		// checking for having child
+		if( $this->hasChildren($service->id)){
+			return response()->json([
+				'status' 		=> 'error',
+				'text'			=> 'failed_to_delete_service',
+				'message'		=> 'سرویس مورد نظر دارای زیرسرویس است.',
+				'data'			=> null,
+			]);
+		}
+
+		$service->delete();
+		return response()->json([
+			'status' 		=> 'ok',
+			'text'			=> 'successfully_deleted',
+			'message'		=> 'سرویس مورد نظر با موفقیت حذف گردید.',
+			'data'			=> null,
+		]);
 	}
 
 	public function getAllCategoryServices()
@@ -56,6 +88,7 @@ class ServicesController extends Controller
 			'excerpt' 				=> 'required|min:25',
 			'service_type' 			=> 'required',
 			'parent_id' 			=> 'nullable|numeric',
+			'price'		 			=> 'nullable',
 			'features' 				=> 'array',
 			'hardware' 				=> 'array',
 			'extra' 				=> 'array',
