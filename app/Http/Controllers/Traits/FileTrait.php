@@ -30,11 +30,14 @@ trait FileTrait {
 
     private function getCropFrames()
     {
-        return collect([
-            'small' => ['width' =>240, 'height' =>150],
-            'medium' => ['width' =>480, 'height' =>300],
-            'large' => ['width' =>1080 , 'height' =>675]
+        $dimension = $this->generateImageDimension();
+        $base_ratio= $dimension['ratio'];
+        $frames = collect([
+            'large' => ['width' => 1080 , 'height' => 1080 / $base_ratio ],
+            'medium' => ['width' => 480 , 'height' => 480 / $base_ratio ],
+            'small' => ['width' => 240  , 'height' => 240 / $base_ratio ]
         ]);
+        return $frames;
     }
 
     private function isResizable($ext)
@@ -83,7 +86,7 @@ trait FileTrait {
             $filename = $this->hashname . "_h" . $height . "." . $this->resp['ext'];
             $newName = $basedir . $filename;
             $uriName = $this->resp['base_url'] . '/' . $filename;
-            $image->resize($width, $height)->save($newName);
+            $image->resize($width, $height)->save($newName,100);
             $this->resp['specs'][] = [
                 'size' => $frameName,
                 'width' => $width,
@@ -94,6 +97,11 @@ trait FileTrait {
                 'relativepath' => $uriName,
             ];
         }
+
+        // this is because reverse $this-resp['spec'] array
+        // to make small frame in first index
+
+        $this->resp['specs'] = array_reverse($this->resp['specs']);
     }
 
     public function generateImageSpecs()

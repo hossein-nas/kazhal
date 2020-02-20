@@ -21,28 +21,28 @@ class InitialColorsSeeder extends Seeder
     			"gradient" 				=> "linear-gradient(to right top, #037580, #007c81, #008280, #00897e, #008f7a)"
     		], // https://mycolor.space/gradient?ori=to+right+top&hex=%23037580&hex2=%23008F7A&sub=1
     		[
-    			"primary_color" 		=> "#642450",
-    			"color_one" 			=> "#642450",
-    			"color_two" 			=> "#AA5991",
+    			"primary_color" 		=> "#553055",
+    			"color_one" 			=> "#431840",
+    			"color_two" 			=> "#553055",
     			"text_color" 			=> "#FFFFFF",
-    			"contrast_color" 		=> "#642450",
-    			"gradient" 				=> "linear-gradient(to right top, #642450, #753160, #863e70, #984b80, #aa5991)"
-    		], // https://mycolor.space/gradient?ori=to+right+top&hex=%23642450&hex2=%23AA5991&sub=1
+    			"contrast_color" 		=> "#547d78",
+    			"gradient" 				=> "linear-gradient(to right top, #553055, #502a50, #4c244a, #471e45, #431840)"
+    		], // https://mycolor.space/gradient?ori=to+right+top&hex=%23553055&hex2=%23431840&sub=1
     		[
-    			"primary_color" 		=> "#3F5B00",
-    			"color_one" 			=> "#1A3710",
-    			"color_two" 			=> "#3F5B00",
+    			"primary_color" 		=> "#1F7658",
+    			"color_one" 			=> "#1D976C",
+    			"color_two" 			=> "#1F7658",
     			"text_color" 			=> "#FFFFFF",
-    			"contrast_color" 		=> "#577f7c",
-    			"gradient" 				=> "linear-gradient(to right top, #1a3710, #21400f, #2a490c, #345207, #3f5b00)"
-    		], // https://mycolor.space/gradient?ori=to+right+top&hex=%231A3710&hex2=%233F5B00&sub=1
+    			"contrast_color" 		=> "#9aa766",
+    			"gradient" 				=> "linear-gradient(to right top, #1d976c, #1e8f67, #1e8662, #1f7e5d, #1f7658)"
+    		], // https://mycolor.space/gradient?ori=to+right+top&hex=%231D976C&hex2=%231F7658&sub=1
     		[
-    			"primary_color" 		=> "#291A3D",
-    			"color_one" 			=> "#342D7A",
-    			"color_two" 			=> "#291A3D",
+    			"primary_color" 		=> "#4F2422",
+    			"color_one" 			=> "#6B2A2A",
+    			"color_two" 			=> "#4F2422",
     			"text_color" 			=> "#FFFFFF",
-    			"contrast_color" 		=> "#87cac4",
-    			"gradient" 				=> "linear-gradient(to right top, #342d7a, #34286a, #32235a, #2e1e4b, #291a3d)"
+    			"contrast_color" 		=> "#61a998",
+    			"gradient" 				=> "linear-gradient(to right top, #6b2a2a, #642928, #5d2726, #562624, #4f2422)"
     		], // https://mycolor.space/gradient?ori=to+right+top&hex=%23342D7A&hex2=%23291A3D&sub=1
     		[
     			"primary_color" 		=> "#4F2422",
@@ -69,21 +69,21 @@ class InitialColorsSeeder extends Seeder
     			"gradient" 				=> "linear-gradient(to right top, #494737, #484631, #48452b, #474325, #46421f)"
     		], // https://mycolor.space/gradient?ori=to+right+top&hex=%23494737&hex2=%2346421F&sub=1
     		[
-    			"primary_color" 		=> "#9B4028",
-    			"color_one" 			=> "#9B6354",
-    			"color_two" 			=> "#9B4028",
+    			"primary_color" 		=> "#2C3E50",
+    			"color_one" 			=> "#226DA6",
+    			"color_two" 			=> "#2C3E50",
     			"text_color" 			=> "#FFFFFF",
-    			"contrast_color" 		=> "#b97d70",
-    			"gradient" 				=> "linear-gradient(to right top, #9b6354, #9c5b49, #9c523e, #9c4933, #9b4028)"
-    		], // https://mycolor.space/gradient?ori=to+right+top&hex=%239B6354&hex2=%239B4028&sub=1
+    			"contrast_color" 		=> "#a2b184",
+    			"gradient" 				=> "linear-gradient(to right top, #226da6, #286190, #2b557a, #2d4964, #2c3e50)"
+    		], // https://mycolor.space/gradient?ori=to+right+top&hex=%23226DA6&hex2=%232C3E50&sub=1
     		[
-    			"primary_color" 		=> "#051937",
-    			"color_one" 			=> "#051937",
-    			"color_two" 			=> "#43551B",
+    			"primary_color" 		=> "#1F2427",
+    			"color_one" 			=> "#45494E",
+    			"color_two" 			=> "#1F2427",
     			"text_color" 			=> "#FFFFFF",
     			"contrast_color" 		=> "#43551B",
-    			"gradient" 				=> "linear-gradient(to right top, #051937, #002c46, #003d42, #004b2f, #43551b)"
-    		], // https://mycolor.space/gradient?ori=to+right+top&hex=%23051937&hex2=%2343551B&sub=1
+    			"gradient" 				=> "linear-gradient(to right top, #45494e, #3b3f44, #31363a, #282d30, #1f2427)"
+    		], // https://mycolor.space/gradient?ori=to+right+top&hex=%2345494E&hex2=%231F2427&sub=1
     		[
     			"primary_color" 		=> "#24777E",
     			"color_one" 			=> "#597F81",

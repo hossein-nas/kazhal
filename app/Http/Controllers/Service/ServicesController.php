@@ -17,9 +17,14 @@ class ServicesController extends Controller
 	protected $resp;
 	protected $model;
 
-	public function index()
+	public function index($slug)
 	{
-
+		$service = Service::where('slug', $slug)->with(['color', 'thumbnail'])->first();
+		if($service->service_type == 'category' && $this->hasChildren($service->id) ){
+			$service->hasChild = true;
+			$service->children = Service::where('parent_id', $service->id)->with(['color', 'thumbnail'])->get();
+		}
+		return view('Services.single', compact('service'));
 	}
 
 	public function getAllServices()
@@ -29,7 +34,7 @@ class ServicesController extends Controller
 
 	public function getSingleService(Request $request, $id)
 	{
-		$service = Service::find($id);
+		$service = Service::with(['thumbnail'])->find($id);
 		return $service;
 	}
 

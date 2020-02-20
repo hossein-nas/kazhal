@@ -11,10 +11,10 @@
 |
  */
 
-Route::get('/', function () {
-    return view('home');
+Route::get('/', 'HomeController@index');
+
+Route::group(['prefix' => 'services'], function(){
+	Route::get('{slug}/show/', 'Service\ServicesController@index');
 });
 
-Route::get('/services/web-design', function () {
-    return view('single');
-});
+Route::post('/upload', "File\FilesController@index");

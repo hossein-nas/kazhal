@@ -2,56 +2,34 @@
 
 @section('content')
     <section class="services" id="services">
-
-        <div class="service website">
-            <div class="icon">
-
-            </div>
-            <div class="header">طراحی وب‌سایت</div>
-            <div class="desc">
-                تیمی متشکل از بهترین‌های این حوزه آماده هستند بهترین راه‌کارها را برای دیجیتالی‌شدن کسب‌وکارتان در جهت …
-            </div>
+        <div class="head-section">
+            <span>
+                خدماتی که ارائه می‌دهیم
+            </span>
         </div>
+        <div class="body">
+            @foreach( $allRootCategoryServices as $service )
+                <div class="service">
+                    <div class="thumbnail">
+                        {{ $service->thumbanil }}
+                        <img src="{{ $service->thumbnail->specs[0]['relativepath']}} " alt="{{$service->title}}">
+                    </div>
+                    <div class="main">
+                        <div class="title" style='color:{{$service->color->primary_color}}'>
+                            {{ $service->title }}
+                        </div>
+                        <div class="excerpt">
+                            {{ $service->excerpt }}
+                        </div>
+                        <div class="more" style='background:{{$service->color->gradient}}'>
+                            <a href='{{ "/services/$service->slug/show/" }}'>
+                                بیشتر بدانید
+                            </a>
+                        </div>
+                    </div>
+                </div> <!-- .service -->
+                @endforeach
 
-        <div class="service desktop-app">
-            <div class="icon">
-
-            </div>
-            <div class="header">اپلیکیشن دسکتاپ</div>
-            <div class="desc">
-                انتخابی عالی برای کسانی که می‌خواهند یک قدم از رقبای خود پیش بیفتند و خدمات بهتری به مشتریان خود ارائه دهند ...
-            </div>
-        </div>
-
-        <div class="service android-app">
-            <div class="icon">
-
-            </div>
-            <div class="header">اپلیکیشن اندروید</div>
-            <div class="desc">
-                انتخابی عالی برای کسانی که می‌خواهند یک قدم از رقبای خود پیش بیفتند و خدمات بهتری به مشتریان خود ارائه دهند ...
-            </div>
-        </div>
-
-        <div class="service telegram-robot">
-            <div class="icon">
-
-            </div>
-            <div class="header">ربات تلگرام</div>
-            <div class="desc">
-                انتخابی عالی برای کسانی که می‌خواهند یک قدم از رقبای خود پیش بیفتند و خدمات بهتری به مشتریان خود ارائه دهند ...
-            </div>
-        </div>
-
-
-        <div class="service seo">
-            <div class="icon">
-
-            </div>
-            <div class="header">بهینه‌سازی سئو</div>
-            <div class="desc">
-                انتخابی عالی برای کسانی که می‌خواهند یک قدم از رقبای خود پیش بیفتند و خدمات بهتری به مشتریان خود ارائه دهند ...
-            </div>
         </div>
 
     </section>
