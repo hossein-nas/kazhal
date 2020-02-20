@@ -1,0 +1,48 @@
+#main-area{
+    border: 1px dashed $rp-gray-2;
+    min-height: 15rem;
+    padding: .5rem;
+    margin-left: .75rem #{"/* rtl:ignore */"};
+    .head-section{
+        background-color: $rp-gray-1;
+        border: 1px solid $rp-gray-2;
+        border-radius: .5rem;
+        min-height: 3rem;
+        padding: .25rem .75rem;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        margin-bottom: 2rem;
+       .label{
+            font-size: .95rem;
+            font-weight: 600;
+            color: $rp-gray-text-1;
+       }
+    }
+}
+
+.side-widgets{
+    border-radius: .5rem;
+    border: 1px solid $rp-gray-2;
+    min-height: 15rem;
+    .submit{
+        display:flex;
+        justify-content: flex-end;
+        padding: .5rem 1rem 1rem;
+    }
+    .errors{
+        ul{
+            display: block;
+            list-style: none;
+            li{
+                display: block;
+                font-size: .75rem;
+                color : $red-4;
+                padding: .1rem;
+                .q-icon{
+                    margin-top: -5px;
+                }
+            }
+        }
+    }
+}

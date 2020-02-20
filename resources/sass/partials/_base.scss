@@ -8,6 +8,11 @@ html{
     direction: rtl;
     box-sizing:border-box;
 }
+
+body{
+    background-color: #efefef;
+}
+
 div.container{
     @include clearfix();
     width: 1260px;

@@ -1,340 +1,129 @@
 // media query for small
 @media screen and (min-width: $break-small){
 
-    section#services{
-        position: relative;
-        // background-color:red;
-        width:100%;
-        height: 640px; 
-        margin-top: 25px;
-
-        &::before{
-            content:"";
-            display: block;
-            position: absolute;
-            background-image:url('../img/svg/root-mobile.svg');
-            background-size: 48px 548px;
-            background-repeat: no-repeat;
-            background-position: 8px  50px ;
-            width:58px;
-            height:578px;
-            opacity: .7;
-            right:0;
-        }
-
-        &::after{
-            content:'خدماتی که ارائه می‌دهیم';
-            display: block;
-            display: inline-block;
-            position: absolute;
-            right: 50%;
-            top:25px;
-            transform: translateX(50%);
-            border-bottom: 4px solid #dadada;
-            font-weight: 900;
-            font-size: 0.85rem;
-            padding: 0 2px 4px;
-            color: #8e8e8e;
-        }
-
-        div.service{
-            // background-color: rgba(red, .2);
-            width: 300px;
-            height:95px;
-            position: absolute;
-            right:16px;
-            top:81px;
- 
-            .icon{
-                float: right;
-                width: 90px;
-                height: 90px;
-                background: rgb(176,53,141);
-                background: linear-gradient(190deg, $services-pink-dark 0%, $services-pink-light 100%); 
-                border-radius: 100%;
-                border: 3px solid white;
-                position: relative;
-                z-index: 3;
-                &::before{
-                    content: '';
-                    display: block;
-                    width:70px;
-                    height:70px;
-                    margin: 7px;
-                    border-radius: 100%;
-                    border: 2px solid rgba(white, .6);
-                    background: $services-pink-light;
-                    background: linear-gradient(0deg, $services-pink-dark 0%, $services-pink-light 100%); 
-                }
-                &::after{
-                    content:'';
-                    top: 0;
-                    position: absolute;
-                    width: 100%;
-                    height: 100%;
-                    background-image: url('../img/svg/services-icon/webdesign.svg');
-                    background-repeat: no-repeat;
-                    background-size: 35px auto;
-                    background-position: center center;
-                    opacity: .9;
-                }
-
-            }
-            .header{
-                width: 195px;
-                height:25px;
-                background: linear-gradient(-90deg, $services-pink-dark 0%, $services-pink-light 100%); 
-                margin-right: 45px;
-                font-weight: 900;
-                color: white;
-                font-size: .8rem;
-                padding: 5px 53px 0 0 ;
-                position: relative;
-                z-index: 2;
-                margin-bottom: 3px;
-
-                &::after{
-                    content: '';
-                    display: block;
-                    position: absolute;
-                    width: 20px;
-                    height: 25px;
-                    border-radius: .55rem 0 0 0 ;
-                    background-color: $services-pink-light;
-                    right: 100%;
-                    top: 0;
-                    transform: skew(-25deg) translateX(7px);
-                }
-
-            }
-
-            .desc{
-                width: 255px;
-                height: 60px;
-                border-radius: 12px 0 0 12px;
-                margin-right: 45px;
-                background: linear-gradient(90deg, $services-pink-dark 0%, $services-pink-light 100%); 
-                padding: 8px 53px 5px 10px;
-                line-height:15px;
-                color:#fff;
-                font-size: 10.5px;
-                text-align: justify;
-                font-weight: 400;
-                text-shadow: 0 1px 1px rgba(black, .1);
-
-            }
-
-        }
-
-        .service:nth-child(2){
-            top: 185px;
-            .icon{
-                background:$services-orange-dark;
-                background: linear-gradient(190deg, $services-orange-dark 0%, $services-orange-light 100%); 
-                &::before{
-                    background:$services-orange-light;
-                    background: linear-gradient(0deg, $services-orange-dark 0%, $services-orange-light 100%); 
-                }
-                &::after{
-                    background-image: url('../img/svg/services-icon/desktopdev.svg');
-                    background-size: 32px auto;
-                }
-            }
-            .header{
-                    background:$services-orange-dark;
-                    background: linear-gradient(-90deg, $services-orange-dark 0%, $services-orange-light 100%); 
-                    &::after{
-                        background:$services-orange-light;
-                    }
-            }
-            .desc{
-                    background:$services-orange-light;
-                    background: linear-gradient(90deg, $services-orange-dark 0%, $services-orange-light 100%); 
-            }
-        }
-
-        .service:nth-child(3){
-            top: 289px;
-            .icon{
-                background:$services-red-dark;
-                background: linear-gradient(190deg, $services-red-dark 0%, $services-red-light 100%); 
-                &::before{
-                    background:$services-red-light;
-                    background: linear-gradient(0deg, $services-red-dark 0%, $services-red-light 100%); 
-                }
-                &::after{
-                    background-image: url('../img/svg/services-icon/android.svg');
-                    background-size: 32px auto;
-                }
-            }
-            .header{
-                    background:$services-red-dark;
-                    background: linear-gradient(-90deg, $services-red-dark 0%, $services-red-light 100%); 
-                    &::after{
-                        background:$services-red-light;
-                    }
-            }
-            .desc{
-                    background:$services-red-light;
-                    background: linear-gradient(90deg, $services-red-dark 0%, $services-red-light 100%); 
-            }
-        }
-
-
-        .service:nth-child(4){
-            top: 392px;
-            .icon{
-                background:$services-blue-dark;
-                background: linear-gradient(190deg, $services-blue-dark 0%, $services-blue-light 100%); 
-                &::before{
-                    background:$services-blue-light;
-                    background: linear-gradient(0deg, $services-blue-dark 0%, $services-blue-light 100%); 
-                }
-                &::after{
-                    background-image: url('../img/svg/services-icon/telegramrobot.svg');
-                    background-size: 33px auto;
-                }
-            }
-            .header{
-                    background:$services-blue-dark;
-                    background: linear-gradient(-90deg, $services-blue-dark 0%, $services-blue-light 100%); 
-                    &::after{
-                        background:$services-blue-light;
-                    }
-            }
-            .desc{
-                    background:$services-blue-light;
-                    background: linear-gradient(90deg, $services-blue-dark 0%, $services-blue-light 100%); 
-            }
-        } // services robot end
-
-        .service:nth-child(5){
-            top: 498px;
-            $services-green-light: #4AE9AC ;
-            $services-green-dark: #11AC69 ;
-            .icon{
-                background:$services-green-dark;
-                background: linear-gradient(190deg, $services-green-dark 0%, $services-green-light 100%); 
-                &::before{
-                    background:$services-blue-light;
-                    background: linear-gradient(0deg, $services-green-dark 0%, $services-green-light 100%); 
-                }
-                &::after{
-                    background-image: url('../img/svg/services-icon/seo.svg');
-                    background-size: 31px auto;
-                }
-            }
-            .header{
-                    background:$services-green-dark;
-                    background: linear-gradient(-90deg, $services-green-dark 0%, $services-green-light 100%); 
-                    &::after{
-                        background:$services-green-light;
-                    }
-            }
-            .desc{
-                    background:$services-green-light;
-                    background: linear-gradient(90deg, $services-green-dark 0%, $services-green-light 100%); 
-            }
-        } // services robot end
-
-    }
 } // media small end
 
 
 @media screen and ( min-width: $break-medium ){
-    section#services{
-        height: 600px;
-        &::before{
-            background-image: url(../img/svg/root-desktop.svg);
-            width: 100%;
-            background-size: 98px 486px;
-            background-position: center 57px;
-            opacity: .6;
-        }
-        div.service{
-            right:50%;
-            margin-right: 14px;
-            top: 121px;
-
-            .icon{
-                width: 105px;
-                height:105px;
-                &::before{
-                    width: 80px;
-                    height: 80px;
-                    margin: 9px;
-                }
-
+    #services{
+        max-width: 1440px;
+        margin: 0 auto;
+        padding-top: 4.5rem;
+        user-select: none;
+        margin-bottom: 7rem;
+        .head-section{
+            text-align: center;
+            position: relative;
+            margin-bottom: 3rem;
+            span{
+                color: #7d7d7d;
+                border-bottom: 4px solid #c6c6c6;
+                font-size: .9rem;
+                font-weight: 900;
+                padding: 0 .25rem .2rem;
             }
-            .header{
-                    height: 30px;
-                    width: 220px;
-                    font-size: 1rem;
-                    text-shadow: 0px 2px 0px rgba(0,0,0,.15);
-                    padding-right: 70px;
-                    margin-right: 54px;
-                    &::after{
-                        height:30px;
+            &::after{
+                position: absolute;
+                top: 100%;
+                content:'';
+                width: 0;
+                height: 0;
+                border:8px solid transparent;
+                border-top-color: #c6c6c6;
+                right: 50%;
+                transform: translateX(50%) translateY(8px);
+            }
+
+        } // .head-section
+
+        .body{
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            .service{
+                background-color: #fff;
+                width: 465px;
+                min-height: 220px;
+                border: 1px solid #d6d6d6;
+                border-radius: .2rem;
+                box-shadow: 0 2px 5px 1px #e4e4e4;
+                display: flex;
+                padding: 1.25rem ;
+                margin-bottom: 1.5rem;
+                &:not(:nth-child(3n)){
+                    margin-left: 1rem;
+                }
+                &:last-child{
+                    margin-left: 0rem;
+                }
+                &:hover{
+                    border-color: darken(#d6d6d6, 5);
+                    box-shadow: 0 3px 7px -1px darken(#e4e4e4,4);
+                }
+                .thumbnail{
+                    padding-left: .8rem;
+                    border-left: 2px solid #e4e4e4;
+                    margin-left: .8rem;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    img{
+                        width: 100px;
+                        height: 100px;
+                        display: block;
                     }
-            }
-            .desc{
-                width: 320px;
-                height: 71px;
-                font-size: 13px;
-                font-weight: 300;
-                line-height: 17px;
-                padding: 11px 73px 8px 15px;
-                text-shadow: 0 1px 0 rgba(black , .2);
-            }
-            &:nth-child(2n){
-                transform: translateX(100%);
-                margin-right: -14px;
-                .icon{
-                    float: left;
-                }
-                .header{
-                    margin-right: 25px;
-                    width: 225px;
-                    text-align: left;
-                    padding: 5px 0px 4px 63px;
+                } // .thumbnail
 
-                    &::after{
-                        right: 0;
-                        transform: skew(25deg) translateX(17px);
-                        border-radius: 0 12px 0 0;
-                        width: 25px;
-                        height:30px;
-                        background-color: $services-orange-dark;
-
+                .main{
+                    flex:1;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    .title{
+                        font-size: 1.2rem;
+                        color: #666;
+                        padding: .25rem 0;
+                        text-align: center;
+                        font-weight: 900;
+                        margin-bottom: .5rem;
                     }
-                }
-                .desc{
-                    margin-right: -60px;
-                    border-radius: 0 12px 12px 0 ;
-                    padding: 11px 13px 8px 75px;
-                }
-            }
 
-            &:nth-child(2){
-                top: 200px;
-            }
-            &:nth-child(3){
-                top:279px;
-            }
-            &:nth-child(4){
-                top:357px;
-                .header::after{
-                    background-color: $services-blue-dark;
-                }
-            }
-            &:nth-child(5){
-                top:437px;
-            }
-        }
+                    .excerpt{
+                        flex:1;
+                        font-size: .8rem;
+                        text-align: justify;
+                        color: #737373;
+                        line-height: 1.2rem;
+                        overflow-y: hidden;
+                        max-height: 6.2rem;
+                        padding: .25rem .5rem;
+                        margin-bottom: .25rem;
+                    }
 
-    }
+                    .more{
+                        background-color: blue;
+                        color: white;
+                        border-radius: .2rem;
+                        transition: opacity .25s ease-out;
+                        opacity:.7;
+                        a{
+                            text-decoration: none;
+                            color: inherit;
+                            padding: .65rem 0;
+                            font-size: .75rem;
+                            display: block;
+                            text-align: center;
+                        }
+                        &:hover{
+                            opacity: .85;
+                        }
+                    }
+                } // .main
+            } // .service
+        } // .body
+    } // #services
 
-}
+} // media min:medium end
 
 @media screen and ( resolution: 96dpi ){
     section#services{

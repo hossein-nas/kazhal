@@ -1,4 +1,4 @@
-@media screen and (min-width: $break-medium) {
+@media screen and (min-width: $break-medium+1) {
     header.header {
         position: relative;
         width: 100%;
@@ -127,6 +127,32 @@
                 font-size: 17px;
                 font-weight: 700;
                 cursor: pointer;
+            }
+        }
+
+        &.single-header{
+            background-image: unset;
+            height: 120px;
+            position: absolute;
+            .slog{
+                display: none;
+            }
+            .roban{
+                padding-top: 0px;
+                height: 120px;
+                background-color: rgba(white, .85);
+                box-shadow: 0 3px 5px -1px rgba(black, .15);
+            }
+            nav{
+                .menubar{
+
+                    .item{
+                        a{
+                            text-shadow: 0 2px 0 rgba(black, .25);
+                        }
+                    }
+                }
+
             }
         }
     }
