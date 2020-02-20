@@ -57,7 +57,7 @@
                                              ref="postExcerpt"
                                              @input="validateInputs"
                                              counter
-                                             maxlength="250"
+                                             maxlength="400"
                                              outlined
                                              :rows="5"
                                              v-model="serviceModel.excerpt"
@@ -95,9 +95,11 @@
                     <ServiceParentSelect v-model="serviceModel.parent_id"
                                          v-if="!editing" />
                     <ServiceColor v-model="color" />
-                    <ServiceSvgThumb v-model="thumbnail"
-                                     @input="validateInputs"/>
+                    <Thumbnail v-model="thumbnail"
+                               square
+                               @input="validateInputs"/>
                     <ServiceAddFeature v-model="serviceModel.features"
+                                       @input="validateInputs"
                                        v-if="serviceModel.type === 'main'"/>
                     <div class="errors"
                          v-if="anyError">
@@ -138,16 +140,17 @@
 </template>
 
 <script>
+
+import Thumbnail from '@/components/widgets/Thumbnail'
 import ServiceType from '@/components/services/serviceType'
 import ServiceColor from '@/components/services/serviceColor'
-import ServiceSvgThumb from '@/components/services/serviceSvgThumb'
 import ServiceAddFeature from '@/components/services/addFeature'
 import ServiceParentSelect from '@/components/services/serviceParentSelect'
 
 export default {
     name: 'newService',
     components: {
-        ServiceType, ServiceColor, ServiceSvgThumb, ServiceAddFeature, ServiceParentSelect
+        ServiceType, ServiceColor, Thumbnail, ServiceAddFeature, ServiceParentSelect
     },
     data () {
         return {
@@ -159,6 +162,7 @@ export default {
                 slug: '',
                 price: null,
                 content: '',
+                featured: false,
                 type: 'main',
                 features: [],
                 hardware: []
@@ -233,6 +237,10 @@ export default {
                 this.anyError = true
                 this.errors.push('تصویر شاخص انتخاب نشده است.')
             }
+            if (this.serviceModel.type === 'main' && this.serviceModel.features.length < 3) {
+                this.anyError = true
+                this.errors.push('حداقل سه مورد ویژگی باید وارد کنید.')
+            }
             return !this.anyError
         },
         SubmitSuccess (response) {
@@ -267,7 +275,10 @@ export default {
             }
 
             this.color = data.color_id
-            this.thumbnail = data.thumbnail_id
+            this.thumbnail = {
+                thumbnailId: data.thumbnail.id,
+                previewImage: data.thumbnail.specs[0].relativepath
+            }
             this.extras = data.extra
         },
         escapeWhitespace (event) {
@@ -283,52 +294,4 @@ export default {
 </script>
 
 <style lang="scss">
-#main-area{
-    border: 1px dashed $rp-gray-2;
-    min-height: 15rem;
-    padding: .5rem;
-    margin-left: .75rem #{"/* rtl:ignore */"};
-    .head-section{
-        background-color: $rp-gray-1;
-        border: 1px solid $rp-gray-2;
-        border-radius: .5rem;
-        min-height: 3rem;
-        padding: .25rem .75rem;
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        margin-bottom: 2rem;
-       .label{
-            font-size: .95rem;
-            font-weight: 600;
-            color: $rp-gray-text-1;
-       }
-    }
-}
-
-.side-widgets{
-    border-radius: .5rem;
-    border: 1px solid $rp-gray-2;
-    min-height: 15rem;
-    .submit{
-        display:flex;
-        justify-content: flex-end;
-        padding: .5rem 1rem 1rem;
-    }
-    .errors{
-        ul{
-            display: block;
-            list-style: none;
-            li{
-                display: block;
-                font-size: .75rem;
-                color : $red-4;
-                padding: .1rem;
-                .q-icon{
-                    margin-top: -5px;
-                }
-            }
-        }
-    }
-}
 </style>

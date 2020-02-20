@@ -66,6 +66,10 @@ export default {
     props: {
         value: {
             required: true
+        },
+        ratio: {
+            type: Number,
+            required: true
         }
     },
     data () {
@@ -118,9 +122,9 @@ export default {
         init_cropper () {
             let img = this.$refs.cr_img
             this.cropper = new Cropper(img, {
-                aspectRatio: 1.6,
+                aspectRatio: this.ratio,
                 dragMode: 'move',
-                autoCropArea: 0.95,
+                autoCropArea: 1,
                 highlight: false,
                 cropBoxMovable: true,
                 cropBoxResizable: false,
@@ -137,7 +141,10 @@ export default {
         async crop_image () {
             let data = this.cropper.getImageData()
             let canvas = this.cropper.getCroppedCanvas({
-                maxWidth: 1080
+                maxWidth: 1080,
+                minWidth: 1080,
+                imageSmoothingEnabled: false,
+                imageSmoothingQuality: 1
             })
             canvas.toBlob((blob) => {
                 this.cropper.destroy()

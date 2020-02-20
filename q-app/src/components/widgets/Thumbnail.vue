@@ -42,7 +42,8 @@
 
                 <q-card-section>
                     <div class="cropper-area">
-                        <cropper v-model="thumbnail" />
+                        <cropper v-model="thumbnail"
+                                 :ratio="aspectRatio" />
                     </div>
                 </q-card-section>
                 <q-card-actions class="flex justify-end">
@@ -72,6 +73,9 @@ export default {
     props: {
         value: {
             required: true
+        },
+        square: {
+            type: Boolean
         }
     },
     watch: {
@@ -91,10 +95,17 @@ export default {
             },
             ThumbnailDialog: false,
             hasThumb: false,
+            aspectRatio: 1.6,
             thumbImg: null
         }
     },
     mounted () {
+        if (this.square) {
+            this.aspectRatio = 1
+        }
+        if (this.value) {
+            this.initDefaultImage()
+        }
     },
     methods: {
         initDefaultImage () {

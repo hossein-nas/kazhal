@@ -5,7 +5,9 @@
             <div class="col-12 col-md-8">
                 <div id="main-area">
                     <div class="head-section">
-                        لیست سرویس‌ها
+                        <div class="label">
+                            لیست سرویس‌ها
+                        </div>
                     </div>
                     <div class="add-new-service-btn">
                         <q-btn unelevated
@@ -44,6 +46,13 @@
                                         {{ item.excerpt }}
                                     </div>
                                 </div>
+                            </div>
+                        </template>
+                        <template v-if="noService">
+                            <div class="no-service-yet">
+                                <span>
+                                    موردی یافت نشد.
+                                </span>
                             </div>
                         </template>
 
@@ -226,6 +235,9 @@ export default {
             if (this.selectedService === null) { return {} }
             let index = this.selectedService
             return this.allServices[index]
+        },
+        noService () {
+            return !this.allServices.length
         }
     }
 
@@ -336,6 +348,14 @@ export default {
                 } // .excerpt
             } // .info
         } // .service
+
+        .no-service-yet{
+            display: flex;
+            min-height: 4rem;
+            justify-content: center;
+            align-items: center;
+            color: $grey-6;
+        }
     }// #services-list
 
     .services-list__actions{
