@@ -10,6 +10,13 @@ class Post extends Model
         'title', 'slug', 'content', 'published', 'post_type', 'user_id', 'thumbnail_id',
     ];
 
+    protected $appends = [
+        'created_at_ts',
+    ];
+
+    public function categories(){
+        return $this->belongsToMany('App\Category', 'post_category');
+    }
 
     public function thumb()
     {
@@ -19,5 +26,10 @@ class Post extends Model
     public function author()
     {
         return $this->belongsTo('App\User', 'user_id', 'id');
+    }
+
+    public function getCreatedAtTsAttribute()
+    {
+        return $this->created_at->timestamp;
     }
 }

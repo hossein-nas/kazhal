@@ -12,6 +12,8 @@ class PostsController extends Controller
     protected $req;
     protected $resp;
     protected $attrs;
+    protected $post;
+
     public function getAllPosts()
     {
         $posts = Post::with('author')->with('thumb')->get();
@@ -35,7 +37,7 @@ class PostsController extends Controller
                 'ext'       => $post->thumb->ext,
                 'specs'     => $post->thumb->specs
             ],
-            'categories' => [],
+            'categories' => $post->categories()->get()->pluck('id'),
             'tags' => []
         ];
         return response()->json($res);
@@ -49,6 +51,7 @@ class PostsController extends Controller
         if($this->validateParams()){
             $this->addAuthor();
             $this->persistPost();
+            $this->addCategories();
             return response()->json($this->resp);
         }
         // response for false data
@@ -86,10 +89,17 @@ class PostsController extends Controller
         $this->attrs['user_id'] = auth()->user()->id;
     }
 
+    private function addCategories()
+    {
+        $this->post->categories()->sync($this->attrs['categories']);
+    }
+
     private function persistPost()
     {
         $post = new \App\Post();
         $post->fill($this->attrs)->save();
+        $this->post = $post;
+
         $this->resp = [
             'status' => 'ok',
             'message' => 'post_successfuly_added.',

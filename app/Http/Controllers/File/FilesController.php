@@ -56,6 +56,7 @@ class FilesController extends Controller
             ];
             request()->file('file')->storeAs('temp/images', "${hashname}.${ext}");
         }
+
         return 'done';
     }
 
