@@ -65,13 +65,20 @@
                                                 </td>
                                                 <td class="date_at">
                                                     <span class="date">
-                                                        پنجشنبه ۵ دی
+                                                        {{ getDate(post.created_at_ts) }}
                                                     </span><!-- /.date -->
-                                                    <span class="time"> ۲۳:۴۸</span><!-- /.time -->
+                                                    <span class="time">
+                                                        {{ getTime(post.created_at_ts) }}
+                                                    </span><!-- /.time -->
                                                 </td>
                                                 <td class="action">
-                                                    <div class="post-status not">
+                                                    <div class="post-status not"
+                                                         v-if="!post.published">
                                                         غیر قابل مشاهده
+                                                    </div><!-- /.post-status -->
+                                                    <div class="post-status "
+                                                         v-else>
+                                                        قابل مشاهده
                                                     </div><!-- /.post-status -->
                                                     <div class="buttons">
                                                         <div class="edit">
@@ -115,7 +122,9 @@
 </template>
 
 <script>
+import PersianDate from 'persian-date'
 import Category from '@/components/Category/Category'
+
 export default {
     name: 'Posts',
     components: {
@@ -139,6 +148,12 @@ export default {
         },
         getThumb ($thumb) {
             return window.baseURL + $thumb
+        },
+        getDate (_date) {
+            return new PersianDate().unix(_date).format('dddd D MMMM')
+        },
+        getTime (_date) {
+            return new PersianDate().unix(_date).format('H:mm')
         }
     }
 }

@@ -1,14 +1,23 @@
 <template>
-    <q-page padding>
-        <div class="row">
+    <q-page padding
+    >
+        <div class="row"
+             v-if="loaded">
             <div class="col-12 col-md-8 ">
                 <div class="newpost">
                     <div class="head-section">
-                        <span class="label">
+                        <span class="label"
+                              v-if="newPost">
                             ایجاد پست جــدید
                         </span><!-- /.label -->
 
-                        <div class="action-buttons">
+                        <span class="label"
+                              v-else>
+                            ویرایش پست :: {{ postModel.title }}
+                        </span><!-- /.label -->
+
+                        <div class="action-buttons"
+                             v-if="newPost">
                             <div class="label">
                                 انتخاب نوع پست :
                             </div><!-- /.label -->
@@ -70,7 +79,13 @@
                         <div class="submit-button">
                             <q-btn label="ذخیره‌ی پست"
                                    unelevated
+                                   v-if="newPost"
                                    @click="submitPost"
+                                   color="blue-9" />
+                            <q-btn label="ثبت تغییرات"
+                                   v-else
+                                   unelevated
+                                   @click="submitChanges"
                                    color="blue-9" />
 
                         </div>
@@ -100,6 +115,7 @@ export default {
     },
     data () {
         return {
+            loaded: false,
             ckData: '',
             ckConfig: {
                 language: 'fa'
@@ -119,7 +135,7 @@ export default {
             }
         }
     },
-    async beforeCreate () {
+    async beforeMount () {
         if (Object.keys(this.$route.params).length) {
             this.newPost = false
             let id = this.$route.params.id
@@ -127,13 +143,16 @@ export default {
                 let post = await this.$axios.get(`api/posts/${id}/`)
                 this.newPost = false
                 this.postModel = post.data.post
+                this.postModel.published = !!this.postModel.published
                 this.ckData = post.data.post.content
+                this.categories.init = post.data.categories
                 this.thumbnail = {
                     thumbnailId: post.data.thumbnail.id,
                     previewImage: post.data.thumbnail.specs[0].relativepath
                 }
             } catch (e) {}
         }
+        this.loaded = true
     },
     methods: {
         postTitleValidate (val) {
@@ -193,6 +212,9 @@ export default {
                         console.log(res.data)
                     })
             }
+        },
+        submitChanges () {
+
         },
         postTitleUpdate (value) {
             let slug = value.trim()
