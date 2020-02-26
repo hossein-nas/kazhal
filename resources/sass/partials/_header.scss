@@ -154,6 +154,22 @@
                 }
 
             }
+        } // .single-header
+
+        &.mini-header{
+            background-image: unset;
+            height:120px;
+            margin-bottom: 3rem;
+            background-color: #387e77;
+            .slog{
+                display: none;
+            }
+            .roban{
+                padding-top: 0px;
+                height: 100px;
+                background-color: rgba(white, .9);
+                box-shadow: 0 3px 5px -1px rgba(black, .15);
+            }
         }
     }
 }

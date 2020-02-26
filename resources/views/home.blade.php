@@ -92,16 +92,8 @@
     </section>
 
     <section id="news">
-        <div class="item">
-            <a href="#">
-                <img src="../img/1.jpg" alt="news">
-                <p>
-                    تخفیف به مناسبت نیمه شعبان
-                </p>
-            </a>
-        </div>
 
-        <div class="item">
+<!--         <div class="item">
             <a href="#">
                 <img src="../img/1.jpg" alt="news">
                 <p>
@@ -109,15 +101,20 @@
                 </p>
             </a>
         </div>
+ -->
+    @if( $posts->count() )
+        @foreach($posts as $post )
+            <div class="item">
+                <a href="/posts/{{$post->slug}}/show/#post">
+                    <img src="{{ $post->thumb->specs[1]['relativepath'] }}" alt="$post->slug">
+                    <p>
+                        {{ $post->title }}
+                    </p>
+                </a>
+            </div>
+        @endforeach
+    @endif
 
-        <div class="item">
-            <a href="#">
-                <img src="../img/1.jpg" alt="news">
-                <p>
-                    تخفیف به مناسبت نیمه شعبان
-                </p>
-            </a>
-        </div>
 
         <div class="more-news">
             <a href="#">

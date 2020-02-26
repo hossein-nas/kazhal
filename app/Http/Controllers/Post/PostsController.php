@@ -14,6 +14,11 @@ class PostsController extends Controller
     protected $attrs;
     protected $post;
 
+    public function show($slug){
+        $post = Post::where('slug', $slug)->with(['author', 'thumb', 'categories'])->first();
+        return view('Posts.single', compact('post'));
+    }
+
     public function getAllPosts()
     {
         $posts = Post::with('author')->with('thumb')->get();

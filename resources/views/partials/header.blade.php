@@ -16,7 +16,6 @@
         </nav>
         <div class="slog">
             <div class="main-picture">
-
             </div>
             <p class="first">به دنیای فناوری سلام کنید.</p>
             <p class="second">

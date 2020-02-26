@@ -1,0 +1,42 @@
+.comments-section{
+	margin-bottom: 2rem;
+	.new-comment{
+		margin: 0 auto;
+		width: 90%;
+		padding: 2rem 3rem;
+		background-color: #fff;
+		border-radius: .5rem;
+		border: 1px solid #d4d4d4;
+
+		.head-section{
+			padding-right: 1rem;
+			vertical-align: middle;
+			>span{
+				display: inline-block;
+				color: #444;
+				font-size: 1.1rem;
+			}
+			.reply-to{
+				cursor: pointer;
+				margin-right: 1rem;
+				padding: .5rem .75rem;
+				border-radius: .25rem;
+				background-color: #d4d4d4;
+				transition: all .2s;
+				display: none;
+				&.active{
+					display: inline-block;
+				}
+				&:hover{
+					opacity:.9;
+				}
+				&::before{
+					content: 'در پاسخ به :: ';
+					font-size: .9rem;
+					color: #666;
+				}
+			}
+			margin-bottom: 2rem;
+		}
+	}
+}

@@ -85,7 +85,7 @@
                             <q-btn label="ثبت تغییرات"
                                    v-else
                                    unelevated
-                                   @click="submitChanges"
+                                   @click="submitPost"
                                    color="blue-9" />
 
                         </div>
@@ -212,9 +212,6 @@ export default {
                         console.log(res.data)
                     })
             }
-        },
-        submitChanges () {
-
         },
         postTitleUpdate (value) {
             let slug = value.trim()
