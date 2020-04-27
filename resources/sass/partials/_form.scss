@@ -87,6 +87,33 @@
 				}
 			}
 		}
+
+		.messages{
+			user-select :none;
+			margin: .5rem 0 1rem;
+			color: $text-2;
+			font-size: .85rem;
+			font-weight: 500;
+			ul{
+				list-style:none;
+				li{
+					margin-bottom: .5rem;
+					transition: all .2s ;
+					i{
+						color: $text-1;
+						font-size: .9rem;
+					}
+					&.error{
+						color: #9e5757;
+						i{ color: inherit; }
+					}
+					&.valid{
+						color: #6f9e57;
+						i{ color: inherit; }
+					}
+				}
+			}
+		}
 	} // . form-control
 
 	.form-group{

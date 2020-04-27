@@ -60,13 +60,13 @@
 			</div>
 
 			<form action="/comments/add-new/" method="POST" class="form">
-				<input type="hidden" name="parent_id" value="" class="parent_id" />
+				<input type="hidden" name="parent_id" value="" class="parent_id"  />
 
 				<div class="form-control required">
 					<div class="label">
 						متن دیدگاه  را بنویسید :
 					</div>
-					<textarea class="input" name="comment-content" id="cm-content"   rows="5"></textarea>
+					<textarea class="input" name="comment_content" id="cm-content"   rows="5" data-tippy-content="hey you"></textarea>
 				</div>
 
 				<div class="form-group">
@@ -74,13 +74,13 @@
 						<div class="label">
 							نــام :
 						</div>
-						<input type="text" class="input" id="cm-name" placeholder="" >
+						<input type="text" name="comment_name" class="input" id="cm-name" placeholder="" >
 					</div>
 					<div class="form-control">
 						<div class="label">
 							ایمیل :
 						</div>
-						<input type="email" class="input" id="cm-email" placeholder="" dir="ltr" >
+						<input type="email" name="comment_email" class="input" id="cm-email" placeholder="" dir="ltr" >
 					</div>
 				</div>
 
