@@ -55,10 +55,42 @@ function getInputs(args) {
 function sendAjax(fields) {
     let inputs = getInputValues(fields);
     axios({
-        url: "/hey",
+        url: "/comment/add",
         method: "POST",
         data: inputs,
+    })
+        .then((resposne) => {
+            console.log("succes");
+            clearInputs(fields);
+            addSuccessMessage();
+        })
+        .catch((err) => {
+            alert("error");
+            // showErrorMessages();
+        });
+}
+
+function clearInputs(inputs) {
+    inputs = getInputs(inputs);
+    inputs.map((elem, ind) => {
+        elem.state.el.val("");
     });
+}
+
+function addSuccessMessage() {
+    let _form = $(".form");
+    let elem = $(
+        `
+        <div class="success-message">
+            <i class="material-icons">check_circle</i>
+            دیدگاه با موفقیت افزوده شد.
+        </div>
+    `.trim()
+    );
+    elem.insertBefore(_form);
+    setTimeout(() => {
+        elem.remove();
+    }, 3000);
 }
 
 function getInputValues(fields) {
@@ -71,5 +103,6 @@ function getInputValues(fields) {
     // this is for adding hidden inputs
 
     res["parent_id"] = $(".form .parent_id").val();
+    res["post_id"] = $(".form .post_id").val();
     return res;
 }

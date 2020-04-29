@@ -39,7 +39,7 @@ return [
     'digits_between' => 'The :attribute must be between :min and :max digits.',
     'dimensions' => 'The :attribute has invalid image dimensions.',
     'distinct' => 'The :attribute field has a duplicate value.',
-    'email' => 'The :attribute must be a valid email address.',
+    'email' => 'فرمت ایمیل به درستی وارد نشده است.',
     'ends_with' => 'The :attribute must end with one of the following: :values',
     'exists' => 'The selected :attribute is invalid.',
     'file' => 'The :attribute must be a file.',
@@ -77,7 +77,7 @@ return [
         'array' => 'The :attribute must not have more than :value items.',
     ],
     'max' => [
-        'numeric' => 'The :attribute may not be greater than :max.',
+        'numeric' => 'برای این فیلد حداکثر می‌توایند :max کاراکتر وارد کنید.',
         'file' => 'The :attribute may not be greater than :max kilobytes.',
         'string' => 'The :attribute may not be greater than :max characters.',
         'array' => 'The :attribute may not have more than :max items.',
@@ -85,7 +85,7 @@ return [
     'mimes' => 'The :attribute must be a file of type: :values.',
     'mimetypes' => 'The :attribute must be a file of type: :values.',
     'min' => [
-        'numeric' => 'The :attribute must be at least :min.',
+        'numeric' => 'برای این فیلد حداقل باید :min کاراکتر وارد کنید.',
         'file' => 'The :attribute must be at least :min kilobytes.',
         'string' => 'The :attribute must be at least :min characters.',
         'array' => 'The :attribute must have at least :min items.',
@@ -95,7 +95,7 @@ return [
     'numeric' => 'The :attribute must be a number.',
     'present' => 'The :attribute field must be present.',
     'regex' => 'The :attribute format is invalid.',
-    'required' => 'The :attribute field is required.',
+    'required' => 'فیلد :attribute را وارد نکردید.',
     'required_if' => 'The :attribute field is required when :other is :value.',
     'required_unless' => 'The :attribute field is required unless :other is in :values.',
     'required_with' => 'The :attribute field is required when :values is present.',
@@ -159,6 +159,11 @@ return [
                 'numeric' => 'تعداد کاراکتر بیوگرافی حداقل باید :min کاراکتر باشد.',
             ]
         ],
+        'comment_name' => [
+            'required' => ':attribute را وارد نکردید.',
+            'min' => 'برای :attribute حداقل باید :min کارارکتر وارد شود.',
+            'max' => 'برای :attribute حداکثر باید :max کارارکتر وارد شود.',
+        ],
     ],
 
     /*
@@ -172,6 +177,13 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'comment_name' => 'نام کاربری',
+        'email' => 'ایمیل',
+        'username' => 'نام کاربری',
+        'comment_content' => 'متن دیدگاه',
+        'comment_email' => 'ایمیل',
+        'bio' => 'بیوگرافی'
+    ],
 
 ];

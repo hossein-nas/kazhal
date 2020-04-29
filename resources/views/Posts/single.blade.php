@@ -55,12 +55,12 @@
 		<div class="new-comment">
 			<div class="head-section">
 					<span>ارسال دیدگاه </span>
-					<span class="reply-to ">
+					<span class="reply-to">
 					</span>
 			</div>
-
 			<form action="/comments/add-new/" method="POST" class="form">
 				<input type="hidden" name="parent_id" value="" class="parent_id"  />
+				<input type="hidden" name="post_id" value="{{$post->id}}" class="post_id"  />
 
 				<div class="form-control required">
 					<div class="label">

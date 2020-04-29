@@ -19,9 +19,9 @@ class CreateCommentsTable extends Migration
             $table->string('email')->nullable();
             $table->ipAddress('ip')->nullable();
             $table->string('content');
-            $table->unsignedBigInteger('parent_id');
+            $table->unsignedBigInteger('parent_id')->nullable();
             $table->unsignedBigInteger('post_id');
-            $table->boolean('verified');
+            $table->boolean('verified')->default(0);
             $table->timestamps();
 
             $table->foreign('parent_id')
