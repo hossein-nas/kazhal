@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Traits;
 
 use Intervention\Image\ImageManagerStatic as Image;
 
-trait FileTrait {
+trait FileTrait
+{
 
     /*
     * @return string
@@ -42,7 +43,7 @@ trait FileTrait {
 
     private function isResizable($ext)
     {
-        if ( $this->getResizableImages()->contains($ext)){
+        if ($this->getResizableImages()->contains($ext)) {
             return true;
         }
         return false;
@@ -63,7 +64,7 @@ trait FileTrait {
 
         $height = $image->height();
         $width = $image->width();
-        $ratio = ( (float) $width / $height);
+        $ratio = ((float) $width / $height);
         return [
             'height'    => $height,
             'width'    => $width,
@@ -79,16 +80,16 @@ trait FileTrait {
         $basedir = $this->resp['tmp_file_path']['basedir'];
         $image = Image::make($tmp_file_full_path);
 
-        foreach( $cropFrame as $frameName => $frame ){
+        foreach ($cropFrame as $frameName => $frame) {
             $width = $frame['width'];
             $height = $frame['height'];
-            $ratio = ( (float) $width / $height );
+            $ratio = ((float) $width / $height);
             $filename = $this->hashname . "_h" . $height . "." . $this->resp['ext'];
             $newName = $basedir . $filename;
             $uriName = $this->resp['base_url'] . '/' . $filename;
-            $image->resize($width, $height)->save($newName,100);
+            $image->resize($width, $height)->save($newName, 100);
             $this->resp['specs'][] = [
-                'size' => $frameName,
+            'size' => $frameName,
                 'width' => $width,
                 'height' => $height,
                 'ratio' => $ratio,
@@ -106,10 +107,9 @@ trait FileTrait {
 
     public function generateImageSpecs()
     {
-        if( $this->resp['is_responsive'] ){
+        if ($this->resp['is_responsive']) {
             $this->cropImage();
-        }
-        else{
+        } else {
             $this->resp['specs'] = [
                 [
                     'size' => 'default',
@@ -122,14 +122,13 @@ trait FileTrait {
                 ]
             ];
         }
-
     }
 
     public function moveTempFiles()
     {
         // moving specs temp location to actual location
         $files = $this->resp['specs'];
-        foreach( $files as $in => $f ){
+        foreach ($files as $in => $f) {
             $old_path = $f['fullpath'];
             $basedir = $this->resp['basedir'];
             $filename = $this->hashname . "_H" . $f['height'] . "." . $this->resp['ext'];
@@ -142,8 +141,9 @@ trait FileTrait {
 
         // this is for unlinking actual uploaded file
         $uploaded_file = $this->resp['tmp_file_path']['fullpath'];
-        if( file_exists($uploaded_file) )
+        if (file_exists($uploaded_file)) {
             unlink($uploaded_file);
+        }
         // unseting 'tmp_file_path' index
         unset($this->resp['tmp_file_path']);
     }
@@ -160,5 +160,4 @@ trait FileTrait {
         $file->fill($this->resp)->save();
         return $file;
     }
-
 }

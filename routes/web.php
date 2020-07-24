@@ -13,17 +13,16 @@
 
 Route::get('/', 'HomeController@index');
 
-Route::group(['prefix' => 'services'], function(){
-	Route::get('{slug}/show/', 'Service\ServicesController@index');
+Route::group(['prefix' => 'services'], function () {
+    Route::get('{slug}/show/', 'Service\ServicesController@index');
 });
 
-Route::group(['prefix' => 'posts'], function(){
-	Route::get('{slug}/show/', 'Post\PostsController@show');
+Route::group(['prefix' => 'posts'], function () {
+    Route::get('{slug}/show/', 'Post\PostsController@show');
 });
 
 Route::post('/upload', "File\FilesController@index");
 
-
-Route::group(['prefix' => 'comment'], function(){
-	Route::post('/add/', "CommentsController@create");
+Route::group(['prefix' => 'comment'], function () {
+    Route::post('/add/', "CommentsController@create");
 });
