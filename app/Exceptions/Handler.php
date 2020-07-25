@@ -2,8 +2,10 @@
 
 namespace App\Exceptions;
 
+use App\Exceptions\FileUploadException;
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Validation\ValidationException;
 
 class Handler extends ExceptionHandler
 {
@@ -46,6 +48,11 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if ($exception instanceof ValidationException) {
+            throw new FileUploadException($exception);
+            return;
+        }
+
         return parent::render($request, $exception);
     }
 }

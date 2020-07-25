@@ -21,7 +21,7 @@ Route::group(['prefix' => 'posts'], function () {
     Route::get('{slug}/show/', 'Post\PostsController@show');
 });
 
-Route::post('/upload', "File\FilesController@index");
+Route::post('/upload', "File\FilesController@store")->name('file-upload.store');
 
 Route::group(['prefix' => 'comment'], function () {
     Route::post('/add/', "CommentsController@create");

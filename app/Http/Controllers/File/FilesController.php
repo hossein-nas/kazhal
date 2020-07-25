@@ -5,6 +5,7 @@ namespace App\Http\Controllers\File;
 use App\File;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Traits\FileTrait;
+use App\Http\Requests\FileRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -16,6 +17,14 @@ class FilesController extends Controller
     protected $hashname = null;
 
     protected $resp = [];
+
+    public function store(FileRequest $request)
+    {
+        if ($request->hasFile('file')) {
+            $request->file('file')->store('public');
+        }
+        return response([], 200);
+    }
 
     public function index(Request $req)
     {
