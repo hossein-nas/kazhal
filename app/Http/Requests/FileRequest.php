@@ -23,23 +23,33 @@ class FileRequest extends FormRequest
      */
     public function rules()
     {
-        // dd(request()->all());
         return [
-            'file' => 'required|file|mimes:png,jpg,jpeg,svg|max:4096',
-            'title' => 'required|regex:/^[^\_\:\#\$]+$/i|min:5',
-            'desc' => 'nullable|regex:/^[^\_\:\#\$]+$/i|min:5',
-            'name' => 'required|regex:/^[\w\d\_\-\.\(\)]+\.[\w]{2,}$/i',
+            'file'     => 'required|file|mimes:png,jpg,jpeg,svg|max:4096',
+            'title'    => 'required|regex:/^[^\_\:\#\$]+$/i|min:5',
+            'desc'     => 'nullable|regex:/^[^\_\:\#\$]+$/i|min:5',
+            'name'     => 'required|regex:/^[\w\d\_\-\.\(\)]+\.[\w]{2,}$/i',
             'keywords' => 'nullable|array',
         ];
     }
 
-    public function attributes ()
+    public function validated()
+    {
+        return array_filter($this->all(), function ($key) {
+            if ($key == 'file') {
+                return false;
+            }
+
+            return true;
+        }, ARRAY_FILTER_USE_KEY);
+    }
+
+    public function attributes()
     {
         return [
-            'title' => 'عنوان تصویر',
-            'file' => 'فایل',
-            'desc' => 'توضیحات',
-            'name' => 'عنوان اصلی فایل',
+            'title'    => 'عنوان تصویر',
+            'file'     => 'فایل',
+            'desc'     => 'توضیحات',
+            'name'     => 'عنوان اصلی فایل',
             'keywords' => 'کلید واژه‌ها',
         ];
     }
@@ -48,10 +58,10 @@ class FileRequest extends FormRequest
     {
         return [
             'required' => 'فیلد :attribute وارد نشده است.',
-            'regex' => ':attribute حاوی کاراکترهای غیرمجاز است.',
-            'min' => 'تعداد کاراکتر وارد شده برای :attribute کافی نیست.',
-            'mimes' => 'فرمت تصویر ارسال شده برای :attribute صحیح نیست.',
-            'array' => 'ساختار ارسالی باری :attribute ناصحیح است.',
+            'regex'    => ':attribute حاوی کاراکترهای غیرمجاز است.',
+            'min'      => 'تعداد کاراکتر وارد شده برای :attribute کافی نیست.',
+            'mimes'    => 'فرمت تصویر ارسال شده برای :attribute صحیح نیست.',
+            'array'    => 'ساختار ارسالی باری :attribute ناصحیح است.',
         ];
     }
 }

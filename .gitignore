@@ -20,4 +20,5 @@ package-lock.json
 oracle.sqlite
 .php_cs.cache
 .idea
+store-flag.d.ts
 /public/mix-manifest.json
