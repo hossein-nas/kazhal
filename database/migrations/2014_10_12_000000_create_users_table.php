@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
             $table->enum('gender', ['male', 'female']);
             $table->timestamp('email_verified_at')->nullable();
             $table->boolean('activated')->default(0);
-            $table->unsignedBigInteger('thumbnail_id');
+            $table->unsignedBigInteger('thumbnail_id')->nullable();
             $table->unsignedBigInteger('role_id');
             $table->text('bio')->nullable();
             $table->string('password');

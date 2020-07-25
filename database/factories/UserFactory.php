@@ -28,7 +28,7 @@ $factory->define(User::class, function (Faker $faker) {
         'lastname' => $faker->name,
         'username' => $faker->name,
         'gender' => 'male',
-        'activated' => 1,
+        'activated' => true,
         'role_id' => 1,
         'thumbnail_id' => 1,
         'email' => $faker->unique()->safeEmail,
