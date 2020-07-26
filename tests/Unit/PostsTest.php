@@ -2,10 +2,9 @@
 
 namespace Tests\Unit;
 
-use App\Category;
 use App\Post;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class PostsTest extends TestCase
 {
@@ -42,15 +41,9 @@ class PostsTest extends TestCase
     }
 
     /** @test */
-    public function a_authorized_user_can_post_new_post()
+    public function it_()
     {
-        $post = factory(Post::class)->raw();
-
-        $post['categories'] = [
-            factory(Category::class)->create()->id,
-            factory(Category::class)->create()->id,
-        ];
-
-        $response = $this->json('post', route('posts.store'), $post);
+        //
     }
+
 }
