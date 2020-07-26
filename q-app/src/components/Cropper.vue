@@ -106,7 +106,7 @@ export default {
     methods: {
         emitEvent (imageData) {
             let data = {
-                previewImage: imageData.data.specs[2].relativepath,
+                previewImage: imageData.data.specs[0].relativepath,
                 thumbnailId: imageData.data.id
             }
             this.$emit('input', data)
@@ -171,7 +171,7 @@ export default {
                 }
             })
                 .then((res) => {
-                    if (res.data.status === 'ok') {
+                    if (res.data.status === 'success') {
                         this.uploading = false
                         this.uploadingDone = true
                         this.uploadingValue = 0

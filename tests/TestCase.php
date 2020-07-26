@@ -12,6 +12,6 @@ abstract class TestCase extends BaseTestCase
     {
         $user = $user ?: factory('App\User')->create();
 
-        $this->actingAs($user);
+        $this->actingAs($user, 'api');
     }
 }

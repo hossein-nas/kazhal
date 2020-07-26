@@ -44,7 +44,7 @@ Route::group(['middleware' => 'auth:api'], function(){
 
 // Files pecific routes
 Route::group(['middleware' => 'auth:api'], function(){
-	Route::post('/files/upload', 'File\FilesController@index');
+	Route::post('/files/upload', "File\FilesController@store")->name('file-upload.store');
 });
 
 // Colors pecific routes
