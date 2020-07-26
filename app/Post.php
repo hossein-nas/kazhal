@@ -14,7 +14,14 @@ class Post extends Model
         'created_at_ts',
     ];
 
-    public function categories(){
+    protected $with = [
+        'thumb',
+        'author',
+        'categories',
+    ];
+
+    public function categories()
+    {
         return $this->belongsToMany('App\Category', 'post_category');
     }
 

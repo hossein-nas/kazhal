@@ -1,15 +1,14 @@
 <?php
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-use App\User;
+use App\Category;
 use App\File;
 use App\Permission;
-use App\Role;
 use App\Post;
-use App\Category;
-use Illuminate\Support\Str;
+use App\Role;
+use App\User;
 use Faker\Generator as Faker;
-use Faker\Factory as _Faker;
+use Illuminate\Support\Str;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +19,7 @@ use Faker\Factory as _Faker;
 | your application. Factories provide a convenient way to generate new
 | model instances for testing / seeding your application's database.
 |
-*/
+ */
 
 $factory->define(User::class, function (Faker $faker) {
     return [
@@ -38,50 +37,55 @@ $factory->define(User::class, function (Faker $faker) {
     ];
 });
 
-
-$factory->define(File::class, function(Faker $faker){
+$factory->define(File::class, function (Faker $faker) {
     return [
-        'title'     => $faker->word,
-        'name'      => $faker->file('/','../', false),
-        'desc'      => $faker->text,
-        'hashname'  => $faker->text,
-        'ext'       => $faker->text,
-        'basedir'   => $faker->text,
-        'base_url'  => $faker->text,
+        'title' => $faker->word,
+        'name' => str_slug($faker->sentence(3), '_') . '.png' ,
+        'desc' => $faker->text,
+        'hashname' => \Illuminate\Support\Str::uuid()->toString(),
+        'ext' => 'png',
+        'basedir' => $faker->text,
+        'base_url' => $faker->text,
         'is_responsive' => 1,
-        'keywords'  => "system_pics,avatar",
-        'specs'      => "{}",
+        'keywords' => "system_pics,avatar",
+        'specs' => "{}",
     ];
 });
 
-$factory->define(Post::class, function(Faker $faker){
+$factory->define(Post::class, function (Faker $faker) {
+    $title = $faker->sentence(3);
     return [
-        'title'     => $faker->word,
+        'title' => $title,
         'content' => $faker->text,
-        'slug' => 'some_slug',
+        'slug' => str_slug($title),
         'published' => 0,
-        'user_id' => 1,
-        'thumbnail_id' => 1,
+        'user_id' => function () {
+            return factory('App\User')->create()->id;
+        },
+        'thumbnail_id' => function () {
+            return factory('App\File')->create()->id;
+        },
         'post_type' => 1,
     ];
 });
-$factory->define(Role::class, function(Faker $faker){
+
+$factory->define(Role::class, function (Faker $faker) {
     return [
         'title' => $faker->word,
-        'desc'  => $faker->text,
+        'desc' => $faker->text,
         'slug' => $faker->word,
     ];
 });
 
-$factory->define(Permission::class, function(Faker $faker){
+$factory->define(Permission::class, function (Faker $faker) {
     return [
         'title' => $faker->word,
-        'desc'  => $faker->text,
+        'desc' => $faker->text,
         'slug' => $faker->word,
     ];
 });
 
-$factory->define(Category::class, function(Faker $faker){
+$factory->define(Category::class, function (Faker $faker) {
     return [
         'title' => $faker->word,
         'parent_id' => null,
