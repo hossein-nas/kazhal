@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Post;
 
+use App\Post;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Post;
+use App\Http\Requests\NewPostRequest;
 use Illuminate\Support\Facades\Validator;
 
 class PostsController extends Controller
@@ -47,6 +48,15 @@ class PostsController extends Controller
         ];
         return response()->json($res);
     }
+
+    /*
+     * Function for :: store ::
+     *
+     */
+    public function store(NewPostRequest $request)
+    {
+    }
+    
 
     public function add(Request $request)
     {
