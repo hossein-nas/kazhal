@@ -103,6 +103,6 @@ $factory->define(Comment::class, function (Faker $faker) {
             return factory(Post::class)->create()->id;
         },
         'parent_id' => null,
-        'verified'  => 1,
+        'verified'  => 0,
     ];
 });
