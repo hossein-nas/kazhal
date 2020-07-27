@@ -100,7 +100,9 @@ class PostsController extends Controller
      */
     public function destroy(Post $post)
     {
-        if( auth()->id() != $post->user_id) abort('You can not delete this post', 422);
+        if (auth()->id() != $post->user_id) {
+            abort('You can not delete this post', 422);
+        }
 
         $post->delete();
     }

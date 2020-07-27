@@ -9,9 +9,10 @@ class Comment extends Model
 	protected $fillable = [
 		'name',
 		'ip',
-		'content',
+		'body',
 		'email',
 		'parent_id',
 		'post_id',
+        'verified',
 	];
 }

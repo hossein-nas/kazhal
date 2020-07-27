@@ -27,8 +27,7 @@ class validString implements Rule
     {
         $re = '/[\^&=!\\\\\/#$%@<>]+/m';
 
-        preg_match_all($re, $value, $matches, PREG_SET_ORDER, 0);
-        return !sizeof($matches);
+        return  ! preg_match_all($re, $value, $matches, PREG_SET_ORDER, 0);
     }
 
     /**

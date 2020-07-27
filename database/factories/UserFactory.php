@@ -5,6 +5,7 @@ use App\File;
 use App\Post;
 use App\Role;
 use App\User;
+use App\Comment;
 use App\Category;
 use App\Permission;
 use Illuminate\Support\Str;
@@ -90,5 +91,18 @@ $factory->define(Category::class, function (Faker $faker) {
     return [
         'title'     => $faker->word,
         'parent_id' => null,
+    ];
+});
+
+$factory->define(Comment::class, function (Faker $faker) {
+    return [
+        'name'      => $faker->name,
+        'body'      => $faker->text,
+        'email'     => $faker->unique()->safeEmail,
+        'post_id'   => function () {
+            return factory(Post::class)->create()->id;
+        },
+        'parent_id' => null,
+        'verified'  => 1,
     ];
 });

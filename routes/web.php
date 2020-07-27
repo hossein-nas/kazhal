@@ -21,8 +21,8 @@ Route::group(['prefix' => 'posts'], function () {
     Route::get('{slug}/show/', 'Post\PostsController@show');
 });
 
-Route::group(['prefix' => 'comment'], function () {
-    Route::post('/add/', "CommentsController@create");
+Route::group(['prefix' => 'comments'], function () {
+    Route::post('/create/', 'CommentsController@store')->name('comment.store');
 });
 
 // Route::post('/posts/create', 'Post\PostsController@store')->name('posts.store');

@@ -2,8 +2,8 @@
 
 namespace App\Rules;
 
-use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Support\Facades\App;
+use Illuminate\Contracts\Validation\Rule;
 
 class validAlpha implements Rule
 {
@@ -25,10 +25,9 @@ class validAlpha implements Rule
      */
     public function passes($attribute, $value)
     {
-        $re = '/^[A-Z0-9a-zپچجحخهعغفقثصضشسیبلاتنمکگوئدذرزطظژؤإأءًٌٍَُِّ _۰-۹]+$/m';
+        $re = '/^[A-Z0-9a-zپچجحخهعغفقثصضشسیبلاتنمکگوئدذرزطظژؤإأءًٌٍَُِّ _۰-۹\.]+$/m';
 
-        preg_match_all($re, $value, $matches, PREG_SET_ORDER, 0);
-        return !!sizeof($matches);
+        return preg_match_all($re, $value, $matches, PREG_SET_ORDER, 0);
     }
 
     /**
@@ -38,9 +37,6 @@ class validAlpha implements Rule
      */
     public function message()
     {
-        if( App::getLocale('fa')){
-            return "برای :attribute فقط مجاز هستید از حروف فارسی و انگلیسی و اعداد و \"_\" استفاده کنید.";
-        }
-        return 'The validation error message.';
+        return "برای :attribute فقط مجاز هستید از حروف فارسی و انگلیسی و اعداد و \"_\" استفاده کنید.";
     }
 }

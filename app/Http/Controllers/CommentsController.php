@@ -6,15 +6,53 @@ use App\Comment;
 use App\Rules\validAlpha;
 use App\Rules\validString;
 use Illuminate\Http\Request;
+use App\Http\Requests\CommentRequest;
 
 class CommentsController extends Controller
 {
+    /**
+     * @var mixed
+     */
     protected $validator;
+    /**
+     * @var mixed
+     */
     protected $params;
+    /**
+     * @var mixed
+     */
     protected $errors;
+    /**
+     * @var mixed
+     */
     protected $resp;
+    /**
+     * @var mixed
+     */
     protected $done;
 
+    /**
+     * Description about :: store ::
+     */
+    public function store(CommentRequest $request)
+    {
+        Comment::create($request->validated());
+
+        if ($request->expectsJson()) {
+            return response()->json([
+                'status'  => 'success',
+                'message' => 'comment_added_successfully',
+                'text'    => 'دیدگاه شما با موفقیت افزوده شد. پس از تائید به نمایش خواهد آمد',
+                'data'    => $request->validated(),
+            ], 201);
+        }
+
+        return response([], 201)->with(['flash' => 'دیدگاه شما با موفقیت افزوده شد. پس از تائید به نمایش خواهد آمد']);
+    }
+
+    /**
+     * @param Request $request
+     */
     public function create(Request $request)
     {
         $this->validator();
@@ -30,54 +68,66 @@ class CommentsController extends Controller
         } else {
             return response()->json($this->errors, 400);
         }
+
     }
 
+    /**
+     * @param $params
+     */
     private function persistComment($params)
     {
         $params = $this->translateParams($params);
         $cm = new Comment();
         $cm->fill($params);
         $cm->ip = request()->ip();
+
         if ($cm->save()) {
             $this->makeResponse();
             $this->done = true;
         }
+
     }
 
     private function makeResponse()
     {
         $this->resp = [
-            'status' => 'ok',
-            'text' => 'post_added_successfully',
+            'status'  => 'ok',
+            'text'    => 'post_added_successfully',
             'message' => 'پست با موفقیت افزوده شد.',
-            'data' => null,
+            'data'    => null,
         ];
     }
 
+    /**
+     * @param $params
+     * @return mixed
+     */
     private function translateParams($params)
     {
         $res = [];
+
         foreach ($params as $key => $value) {
             $key = str_replace('comment_', '', $key);
             $res[$key] = $value;
         }
+
         return $res;
     }
 
     private function validator()
     {
         $this->validator = Validator::make(request()->all(), [
-            'comment_name' => [
+            'comment_name'    => [
                 'required',
                 'min:3',
                 'max:30',
                 new validAlpha(),
             ],
-            'parent_id' => [
+            'parent_id'       => [
                 'nullable',
                 'integer',
             ],
-            'post_id' => [
+            'post_id'         => [
                 'required',
                 'integer',
             ],
@@ -87,14 +137,16 @@ class CommentsController extends Controller
                 'max:500',
                 new validString,
             ],
-            'comment_email' => [
+            'comment_email'   => [
                 'nullable',
                 'email',
             ],
         ]);
 
-        if (!$this->validator->fails()) {
+        if ( ! $this->validator->fails()) {
             $this->params = $this->validator->validated();
         }
+
     }
+
 }
