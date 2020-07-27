@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
+use \Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use \Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -38,6 +38,9 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
+    /**
+     * @param Request $req
+     */
     public function login(Request $req)
     {
         $http = new \GuzzleHttp\Client;
@@ -47,27 +50,30 @@ class LoginController extends Controller
             'password' => 'required|min:3',
         ]);
 
-        $response = $http->post('http://kazhal.test/oauth/token', [
+        $response = $http->post(confing('app.url') . 'oauth/token', [
             'form_params' => [
-                'grant_type' => 'password',
-                'client_id' => '1',
+                'grant_type'    => 'password',
+                'client_id'     => '1',
                 'client_secret' => 'gOAxqm4uQGdPTbSI67lSHMRjN5QHTI8Q2OupmlPV',
-                'username' => $req->get('username'),
-                'password' => $req->get('password'),
-                'scope' => '',
+                'username'      => $req->get('username'),
+                'password'      => $req->get('password'),
+                'scope'         => '',
             ],
         ]);
 
         return json_decode((string) $response->getBody(), true);
     }
-    
+
+    /**
+     * @param Request $req
+     */
     public function logout(Request $req)
     {
         $req->user()->token()->revoke();
-        
+
         return response()->json([
             'status'  => "ok",
-            'message' => 'Loged Out'
+            'message' => 'Loged Out',
         ]);
     }
 }
