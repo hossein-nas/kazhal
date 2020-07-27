@@ -3,15 +3,21 @@
 namespace App\Utilities;
 
 use App\File;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 use Intervention\Image\ImageManagerStatic as Image;
 
 class Filer
 {
+    /**
+     * @var mixed
+     */
     protected $attributes;
 
+    /**
+     * @param $attributes
+     */
     public function __construct($attributes)
     {
         $this->attributes = $attributes;
@@ -27,13 +33,36 @@ class Filer
     public function getResponse()
     {
         return [
-            'status' => 'success',
-            'text' => 'file_uploaded_successfully',
+            'status'  => 'success',
+            'text'    => 'file_uploaded_successfully',
             'message' => 'فایل با موفقیت آپلود شد.',
-            'data' => $this->getParams(),
+            'data'    => $this->getParams(),
         ];
     }
 
+    protected function storeUnresponsiveFiles()
+    {
+        if ($this->attributes['file']) {
+            $filename = $this->attributes['hashname'] . '_default' . "." . $this->attributes['ext'];
+            $this->attributes['file']->storeAs('public/images', $filename);
+
+            $fullpath = Storage::path('public/images/' . $filename);
+            $relativepath = Storage::url('public/images/' . $filename);
+
+            $this->attributes['specs'][] = [
+                'width'        => 0,
+                'height'       => 0,
+                'ratio'        => 0,
+                'filesize'     => filesize($fullpath),
+                'fullpath'     => $fullpath,
+                'relativepath' => $relativepath,
+            ];
+        }
+    }
+
+    /**
+     * @return mixed
+     */
     public function crop()
     {
         $cropFrame = $this->getCropFrames();
@@ -51,35 +80,44 @@ class Filer
             $image->resize($width, $height)->save($fullpath, 100, 'png');
 
             $this->attributes['specs'][] = [
-                'size' => $frameName,
-                'width' => $width,
-                'height' => $height,
-                'ratio' => $ratio,
-                'filesize' => filesize($fullpath),
-                'fullpath' => $fullpath,
+                'size'         => $frameName,
+                'width'        => $width,
+                'height'       => $height,
+                'ratio'        => $ratio,
+                'filesize'     => filesize($fullpath),
+                'fullpath'     => $fullpath,
                 'relativepath' => $relativepath,
             ];
         }
 
-        // this makes small dimenssion image goes first item
+// this makes small dimenssion image goes first item
         // array_reverse($this->attributes['specs']);
 
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
     public function init()
     {
         $this->attributes = array_merge($this->attributes, [
-            'ext' => $ext = $this->attributes['file']->extension(),
-            'hashname' => Str::uuid()->toString(),
+            'ext'           => $ext = $this->attributes['file']->extension(),
+            'hashname'      => Str::uuid()->toString(),
             'is_responsive' => (int) $this->isResizable($ext),
-            'keywords' => (request()->get('keywords')) ? implode(',', request()->input('keywords')) : null,
-            'basedir' => storage_path('app/public/images/'),
-            'base_url' => '/storage/images',
+            'keywords'      => (request()->get('keywords')) ? implode(',', request()->input('keywords')) : null,
+            'basedir'       => storage_path('app/public/images/'),
+            'base_url'      => '/storage/images',
         ]);
 
         $this->tempDiskStore();
         $this->originalFileSpec();
+
+        if ($this->attributes['is_responsive'] === 1) {
+            $this->crop();
+        } else {
+            $this->storeUnresponsiveFiles();
+        }
 
         return $this;
     }
@@ -91,20 +129,32 @@ class Filer
         if ($this->attributes['file']) {
             $this->attributes['file']->storeAs('public/images', $filename);
         }
+
     }
 
     protected function originalFileSpec()
     {
         $filepath = 'public/images/' . $this->attributes['filename'];
         $file = Storage::get($filepath);
-        $image = Image::make($file);
+
+        if($this->attributes['is_responsive']){
+            $image = Image::make($file);
+            $height = $image->height();
+            $width = $image->width();
+            $ratio = ($image->width() * 1.0) / $image->height();
+        }
+        else{
+            $height = 0;
+            $width = 0;
+            $ratio = 0;
+        }
 
         $this->attributes['specs']['original'] = [
-            'filesize' => Storage::size($filepath),
-            'height' => $image->height(),
-            'width' => $image->width(),
-            'ratio' => ($image->width() * 1.0) / $image->height(),
-            'fullpath' => Storage::path('public/images/' . $filepath),
+            'filesize'     => Storage::size($filepath),
+            'height'       => $height,
+            'width'        => $width,
+            'ratio'        => $ratio,
+            'fullpath'     => Storage::path('public/images/' . $filepath),
             'relativepath' => Storage::url('public/images/' . $filepath),
         ];
     }
@@ -126,6 +176,7 @@ class Filer
 
             throw $e;
         }
+
     }
 
     protected function removeOriginalFile()
@@ -140,6 +191,9 @@ class Filer
         $this->attributes['specs'] = array_reverse($this->attributes['specs']);
     }
 
+    /**
+     * @param $id
+     */
     public function pushIdToParams($id)
     {
         $this->attributes['id'] = $id;
@@ -182,22 +236,30 @@ class Filer
         ]);
     }
 
+    /**
+     * @return mixed
+     */
     protected function getCropFrames()
     {
         $base_ratio = $this->attributes['specs']['original']['ratio'];
         $frames = collect([
-            'large' => ['width' => 1080, 'height' => 1080 / $base_ratio],
+            'large'  => ['width' => 1080, 'height' => 1080 / $base_ratio],
             'medium' => ['width' => 480, 'height' => 480 / $base_ratio],
-            'small' => ['width' => 240, 'height' => 240 / $base_ratio],
+            'small'  => ['width' => 240, 'height' => 240 / $base_ratio],
         ]);
+
         return $frames;
     }
 
+    /**
+     * @param $ext
+     */
     protected function isResizable($ext)
     {
         if ($this->getResizableImages()->contains($ext)) {
             return true;
         }
+
         return false;
     }
 
@@ -207,4 +269,5 @@ class Filer
             'png', 'jpeg', 'jpg',
         ]);
     }
+
 }

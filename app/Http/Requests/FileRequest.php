@@ -24,7 +24,7 @@ class FileRequest extends FormRequest
     public function rules()
     {
         return [
-            'file'     => 'required|file|mimes:png,jpg,jpeg,svg|max:4096',
+            'file'     => 'required|file|mimes:png,jpg,jpeg,svg,zip,pdf,rar|max:4096',
             'title'    => 'required|regex:/^[^\_\:\#\$]+$/i|min:5',
             'desc'     => 'nullable|regex:/^[^\_\:\#\$]+$/i|min:5',
             'name'     => 'required|regex:/^[\w\d\_\-\.\(\)]+\.[\w]{2,}$/i',

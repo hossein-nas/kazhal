@@ -29,17 +29,7 @@ class FileUploadTest extends TestCase
     /** @test */
     public function after_successful_upload_original_file_is_removed()
     {
-        // $this->withoutExceptionHandling();
-        $this->signIn();
-
-        $file = UploadedFile::fake()->image('avatar.png', 1500, 1000);
-
-        $response = $this->json('POST', route('file-upload.store'), [
-            'title' => 'New File',
-            'desc'  => 'without desc',
-            'name'  => 'new_file_13.jpeg',
-            'file'  => $file,
-        ]);
+        $response = $this->createFile();
 
         tap($response->json()['data'], function ($data) {
             $filename = $data['hashname'] . '.' . $data['ext'];
@@ -51,34 +41,15 @@ class FileUploadTest extends TestCase
     /** @test */
     public function user_can_upload_valid_image_to_server()
     {
-        // $this->withoutExceptionHandling();
-        $this->signIn();
+        $this->createFile();
 
-        $file = UploadedFile::fake()->image('avatar.png', 1500, 1000);
-
-        $response = $this->json('POST', route('file-upload.store'), [
-            'title' => 'New File',
-            'desc'  => 'without desc',
-            'name'  => 'new_file_13.jpeg',
-            'file'  => $file,
-        ]);
-
-        $this->assertEquals('New File', \App\File::latest()->first()->title);
+        $this->assertEquals('New File Title', \App\File::latest()->first()->title);
     }
 
     /** @test */
     public function image_requires_valid_title_to_be_uploaded()
     {
-        $this->signIn();
-
-        $file = UploadedFile::fake()->image('avatar.jpg', 1500, 1000);
-
-        $response = $this->json('POST', route('file-upload.store'), [
-            'title' => 'New_',
-            'desc'  => 'Valid Description',
-            'name'  => 'new_file_13.jpeg',
-            'file'  => $file,
-        ]);
+        $response = $this->createFile(['title' => 'New_']);
 
         tap($response->json(), function ($data) use ($response) {
             $response->assertStatus(422);
@@ -90,15 +61,11 @@ class FileUploadTest extends TestCase
     /** @test */
     public function image_requires_valid_name_to_be_uploaded()
     {
-        $this->signIn();
+        // $this->signIn();
 
         $file = UploadedFile::fake()->image('avatar.jpg', 1500, 1000);
 
-        $response = $this->json('POST', route('file-upload.store'), [
-            'title' => 'New title',
-            'desc'  => 'Valid Description',
-            'file'  => $file,
-        ]);
+        $response = $this->createFile(['name' => null]);
 
         tap($response->json(), function ($data) use ($response) {
             $response->assertStatus(422);
@@ -106,12 +73,7 @@ class FileUploadTest extends TestCase
             $this->assertCount(1, $data['name']);
         });
 
-        $response = $this->json('POST', route('file-upload.store'), [
-            'title' => 'New title',
-            'desc'  => 'Valid Description',
-            'name'  => 'new_file_13$.jpeg',
-            'file'  => $file,
-        ]);
+        $response = $this->createFile(['name' => 'new_file_13$.jpeg']);
 
         tap($response->json(), function ($data) use ($response) {
             $response->assertStatus(422);
@@ -123,29 +85,13 @@ class FileUploadTest extends TestCase
     /** @test */
     public function image_keywords_param_should_be_array()
     {
-        $this->signIn();
-
-        $file = UploadedFile::fake()->image('avatar.jpg', 1500, 1000);
-
-        $response = $this->json('POST', route('file-upload.store'), [
-            'title'    => 'New title',
-            'desc'     => 'Valid Description',
-            'file'     => $file,
-            'name'     => 'new_file_13.jpeg',
-            'keywords' => 'hey',
-        ]);
+        $response = $this->createFile(['keywords' => 'hey']);
 
         $this->assertTrue(
             array_key_exists('keywords', $response->json())
         );
 
-        $response = $this->json('POST', route('file-upload.store'), [
-            'title'    => 'New title',
-            'desc'     => 'Valid Description',
-            'file'     => $file,
-            'name'     => 'new_file_13.jpeg',
-            'keywords' => ['hey'],
-        ]);
+        $response = $this->createFile(['keywords' => ['hey']]);
 
         $this->assertEquals('success', $response->json()['status']);
     }
@@ -153,37 +99,55 @@ class FileUploadTest extends TestCase
     /** @test */
     public function image_keywords_with_empty_string_can_be_handled()
     {
-        $this->signIn();
-
-        $file = UploadedFile::fake()->image('avatar.jpg', 1500, 1000);
-
-        $response = $this->json('POST', route('file-upload.store'), [
-            'title'    => 'New title',
-            'desc'     => 'Valid Description',
-            'file'     => $file,
-            'name'     => 'new_file_13.jpeg',
-            'keywords' => '',
-        ])->assertStatus(200);
+        $this->createFile(['keywords' => ''])
+             ->assertStatus(200);
     }
 
     /** @test */
     public function file_upload_response_contains_file_persisted_id()
     {
-        $this->signIn();
-
-        $file = UploadedFile::fake()->image('avatar.jpg', 1500, 1000);
-
-        $response = $this->json('POST', route('file-upload.store'), [
-            'title'    => 'New title',
-            'desc'     => 'Valid Description',
-            'file'     => $file,
-            'name'     => 'new_file_13.jpeg',
-            'keywords' => '',
-        ])->json();
+        $response = $this->createFile();
 
         $this->assertTrue(
-            array_key_exists('id', $response['data'])
+            array_key_exists('id', $response->json()['data'])
         );
+    }
+
+    /** @test */
+    public function uploading_regular_file_can_be_handled()
+    {
+        $response = $this->createFile([], 'image', 'avatar.svg')->json();
+
+        $this->assertCount(1, $response['data']['specs']);
+
+        $response = $this->createFile([], 'file', 'file1.pdf')->json();
+
+        $this->assertCount(1, $response['data']['specs']);
+    }
+
+    /**
+     * Description about :: createFile ::
+     */
+    public function createFile($overrides = [], $file = 'image', $filename = 'avatar.jpg')
+    {
+        $this->signIn();
+
+        if ($file == 'image') {
+            $file = UploadedFile::fake()->image($filename, 1500, 1000);
+        } else {
+            $file = UploadedFile::fake()->create($filename);
+        }
+
+        $defaults = [
+            'title' => 'New File Title',
+            'desc'  => 'Valid Description',
+            'file'  => $file,
+            'name'  => 'new_file_13.jpeg',
+        ];
+
+        $array = array_merge($defaults, $overrides);
+
+        return $this->json('POST', route('file-upload.store'), $array);
     }
 
 }

@@ -22,8 +22,7 @@ class FilesController extends Controller
     public function store(FileRequest $request)
     {
         $filer = new Filer($request->all());
-        $filer->crop()
-            ->persist();
+            $filer->persist();
 
         if ($request->expectsJson()) {
             return response()->json($filer->getResponse());
