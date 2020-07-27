@@ -2,10 +2,10 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
-use Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class FileUploadTest extends TestCase
 {
@@ -19,6 +19,14 @@ class FileUploadTest extends TestCase
     }
 
     /** @test */
+    public function unauthorized_user_may_not_send_new_file()
+    {
+        $response = $this->json('POST', route('file-upload.store'), []);
+
+        $response->assertRedirect('/login');
+    }
+
+    /** @test */
     public function after_successful_upload_original_file_is_removed()
     {
         // $this->withoutExceptionHandling();
@@ -28,9 +36,9 @@ class FileUploadTest extends TestCase
 
         $response = $this->json('POST', route('file-upload.store'), [
             'title' => 'New File',
-            'desc' => 'without desc',
-            'name' => 'new_file_13.jpeg',
-            'file' => $file,
+            'desc'  => 'without desc',
+            'name'  => 'new_file_13.jpeg',
+            'file'  => $file,
         ]);
 
         tap($response->json()['data'], function ($data) {
@@ -50,9 +58,9 @@ class FileUploadTest extends TestCase
 
         $response = $this->json('POST', route('file-upload.store'), [
             'title' => 'New File',
-            'desc' => 'without desc',
-            'name' => 'new_file_13.jpeg',
-            'file' => $file,
+            'desc'  => 'without desc',
+            'name'  => 'new_file_13.jpeg',
+            'file'  => $file,
         ]);
 
         $this->assertEquals('New File', \App\File::latest()->first()->title);
@@ -67,15 +75,15 @@ class FileUploadTest extends TestCase
 
         $response = $this->json('POST', route('file-upload.store'), [
             'title' => 'New_',
-            'desc' => 'Valid Description',
-            'name' => 'new_file_13.jpeg',
-            'file' => $file,
+            'desc'  => 'Valid Description',
+            'name'  => 'new_file_13.jpeg',
+            'file'  => $file,
         ]);
 
         tap($response->json(), function ($data) use ($response) {
             $response->assertStatus(422);
-            $this->assertTrue(array_key_exists('title', $data['data']));
-            $this->assertCount(2, $data['data']['title']);
+            $this->assertTrue(array_key_exists('title', $data));
+            $this->assertCount(2, $data['title']);
         });
     }
 
@@ -88,27 +96,27 @@ class FileUploadTest extends TestCase
 
         $response = $this->json('POST', route('file-upload.store'), [
             'title' => 'New title',
-            'desc' => 'Valid Description',
-            'file' => $file,
+            'desc'  => 'Valid Description',
+            'file'  => $file,
         ]);
 
         tap($response->json(), function ($data) use ($response) {
             $response->assertStatus(422);
-            $this->assertTrue(array_key_exists('name', $data['data']));
-            $this->assertCount(1, $data['data']['name']);
+            $this->assertTrue(array_key_exists('name', $data));
+            $this->assertCount(1, $data['name']);
         });
 
         $response = $this->json('POST', route('file-upload.store'), [
             'title' => 'New title',
-            'desc' => 'Valid Description',
-            'name' => 'new_file_13$.jpeg',
-            'file' => $file,
+            'desc'  => 'Valid Description',
+            'name'  => 'new_file_13$.jpeg',
+            'file'  => $file,
         ]);
 
         tap($response->json(), function ($data) use ($response) {
             $response->assertStatus(422);
-            $this->assertTrue(array_key_exists('name', $data['data']));
-            $this->assertCount(1, $data['data']['name']);
+            $this->assertTrue(array_key_exists('name', $data));
+            $this->assertCount(1, $data['name']);
         });
     }
 
@@ -120,22 +128,22 @@ class FileUploadTest extends TestCase
         $file = UploadedFile::fake()->image('avatar.jpg', 1500, 1000);
 
         $response = $this->json('POST', route('file-upload.store'), [
-            'title' => 'New title',
-            'desc' => 'Valid Description',
-            'file' => $file,
-            'name' => 'new_file_13.jpeg',
+            'title'    => 'New title',
+            'desc'     => 'Valid Description',
+            'file'     => $file,
+            'name'     => 'new_file_13.jpeg',
             'keywords' => 'hey',
         ]);
 
         $this->assertTrue(
-            array_key_exists('keywords', $response->json()['data'])
+            array_key_exists('keywords', $response->json())
         );
 
         $response = $this->json('POST', route('file-upload.store'), [
-            'title' => 'New title',
-            'desc' => 'Valid Description',
-            'file' => $file,
-            'name' => 'new_file_13.jpeg',
+            'title'    => 'New title',
+            'desc'     => 'Valid Description',
+            'file'     => $file,
+            'name'     => 'new_file_13.jpeg',
             'keywords' => ['hey'],
         ]);
 
@@ -150,26 +158,26 @@ class FileUploadTest extends TestCase
         $file = UploadedFile::fake()->image('avatar.jpg', 1500, 1000);
 
         $response = $this->json('POST', route('file-upload.store'), [
-            'title' => 'New title',
-            'desc' => 'Valid Description',
-            'file' => $file,
-            'name' => 'new_file_13.jpeg',
+            'title'    => 'New title',
+            'desc'     => 'Valid Description',
+            'file'     => $file,
+            'name'     => 'new_file_13.jpeg',
             'keywords' => '',
         ])->assertStatus(200);
     }
 
     /** @test */
-    public function file_upload_should_return_file_id_in_response()
+    public function file_upload_response_contains_file_persisted_id()
     {
         $this->signIn();
 
         $file = UploadedFile::fake()->image('avatar.jpg', 1500, 1000);
 
         $response = $this->json('POST', route('file-upload.store'), [
-            'title' => 'New title',
-            'desc' => 'Valid Description',
-            'file' => $file,
-            'name' => 'new_file_13.jpeg',
+            'title'    => 'New title',
+            'desc'     => 'Valid Description',
+            'file'     => $file,
+            'name'     => 'new_file_13.jpeg',
             'keywords' => '',
         ])->json();
 

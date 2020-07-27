@@ -40,39 +40,39 @@ class PostsTest extends TestCase
         });
     }
 
-    /** @test */
-    public function post_knows_its_own_path()
-    {
-        //
-    }
+    // /** @test */
+    // public function post_knows_its_own_path()
+    // {
+    //     //
+    // }
 
-    /** @test */
-    public function post_can_calculate_its_own_view_counts()
-    {
-        //
-    }
+    // /** @test */
+    // public function post_can_calculate_its_own_view_counts()
+    // {
+    //     //
+    // }
 
-    /** @test */
-    public function post_can_be_invisible()
-    {
-        //
-    }
+    // /** @test */
+    // public function post_can_be_invisible()
+    // {
+    //     //
+    // }
 
-    /** @test */
-    public function post_can_be_visible()
-    {
-        //
-    }
+    // /** @test */
+    // public function post_can_be_visible()
+    // {
+    //     //
+    // }
 
-    /** @test */
-    public function post_can_be_set_on_need_to_be_review_state()
-    {
-        //
-    }
+    // /** @test */
+    // public function post_can_be_set_on_need_to_be_review_state()
+    // {
+    //     //
+    // }
 
-    /** @test */
-    public function post_can_be_archived()
-    {
-        //
-    }
+    // /** @test */
+    // public function post_can_be_archived()
+    // {
+    //     //
+    // }
 }

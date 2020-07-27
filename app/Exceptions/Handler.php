@@ -2,10 +2,10 @@
 
 namespace App\Exceptions;
 
-use App\Exceptions\FileUploadException;
 use Exception;
-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
 {
@@ -48,11 +48,16 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if ($exception instanceof \Illuminate\Auth\AuthenticationException) {
+            return redirect('/login');
+        }
+
         if ($exception instanceof ValidationException) {
-            throw new FileUploadException($exception);
-            return;
+            throw new HttpResponseException(response()
+                    ->json($exception->validator->errors(), 422));
         }
 
         return parent::render($request, $exception);
     }
+
 }

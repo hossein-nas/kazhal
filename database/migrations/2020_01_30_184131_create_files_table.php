@@ -20,7 +20,7 @@ class CreateFilesTable extends Migration
             $table->text('desc');
             $table->string('hashname')->unique();
             $table->string('ext');
-            $table->string('basedir');
+            $table->text('basedir');
             $table->string('base_url');
             $table->boolean('is_responsive')->default(1);
             $table->string('keywords')->nullable();

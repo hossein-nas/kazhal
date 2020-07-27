@@ -73,10 +73,24 @@ class PostsController extends Controller
     }
 
     /**
+     * api for creation post
      * @param NewPostRequest $request
      */
     public function store(NewPostRequest $request)
     {
+        $post = Post::create($request->validated());
+
+        if ($request->expectsJson()) {
+            return response()->json([
+                'status'  => 'success',
+                'message' => 'post_created_successfully',
+                'text'    => 'پست با اموفقیت افزوده شد.',
+                'data'    => $post->toArray(),
+            ]);
+        }
+
+        return redirect('/admin/dashboard')
+            ->with(['flash' => 'فایل با موفقیت افزوده شد.']);
     }
 
     /**
