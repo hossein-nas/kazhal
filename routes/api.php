@@ -40,6 +40,7 @@ Route::group(['middleware' => 'auth:api'], function(){
 	Route::get('/posts/all-posts', "Post\PostsController@getAllPosts");
 	Route::get('/posts/{id}', "Post\PostsController@getSinglePost");
 	Route::post('/posts/add-new/post', "Post\PostsController@store")->name('posts.store');
+	Route::delete('/posts/delete/{post}', "Post\PostsController@destroy")->name('posts.destroy');
 });
 
 // Files pecific routes

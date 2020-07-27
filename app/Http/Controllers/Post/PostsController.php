@@ -80,6 +80,8 @@ class PostsController extends Controller
     {
         $post = Post::create($request->validated());
 
+        $post->syncCategories($request->input('categories'));
+
         if ($request->expectsJson()) {
             return response()->json([
                 'status'  => 'success',
@@ -91,6 +93,16 @@ class PostsController extends Controller
 
         return redirect('/admin/dashboard')
             ->with(['flash' => 'فایل با موفقیت افزوده شد.']);
+    }
+
+    /**
+     * @param Post $post
+     */
+    public function destroy(Post $post)
+    {
+        if( auth()->id() != $post->user_id) abort('You can not delete this post', 422);
+
+        $post->delete();
     }
 
     /**
