@@ -52,6 +52,24 @@
 		</article>
 	</section>
 	<section class="comments-section">
+		<article id="comments-index">
+			@foreach($comments as $comment)
+				<div class="comments-item">
+					<div class="head-section">
+						<span class="avatar"></span>
+						{{ $comment->name }}
+					</div>
+					<div class="body">
+					{{ $comment->body }}
+					</div>
+
+					<div class="footer">
+						<span>{{ $comment->local_time }}</span>
+						<span class="reply-btn">پاسخ به دیدگاه</span>
+					</div>
+				</div>
+			@endforeach
+		</article>
 		<div class="new-comment">
 			<div class="head-section">
 					<span>ارسال دیدگاه </span>
@@ -66,7 +84,7 @@
 					<div class="label">
 						متن دیدگاه  را بنویسید :
 					</div>
-					<textarea class="input" name="comment_content" id="cm-content"   rows="5" data-tippy-content="hey you"></textarea>
+					<textarea class="input" name="body" id="cm-content"   rows="5" data-tippy-content="hey you"></textarea>
 				</div>
 
 				<div class="form-group">
@@ -74,13 +92,13 @@
 						<div class="label">
 							نــام :
 						</div>
-						<input type="text" name="comment_name" class="input" id="cm-name" placeholder="" >
+						<input type="text" name="name" class="input" id="cm-name" placeholder="" >
 					</div>
 					<div class="form-control">
 						<div class="label">
 							ایمیل :
 						</div>
-						<input type="email" name="comment_email" class="input" id="cm-email" placeholder="" dir="ltr" >
+						<input type="email" name="email" class="input" id="cm-email" placeholder="" dir="ltr" >
 					</div>
 				</div>
 

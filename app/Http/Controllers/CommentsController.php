@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Comment;
+use App\Http\Requests\CommentRequest;
 use App\Rules\validAlpha;
 use App\Rules\validString;
 use Illuminate\Http\Request;
-use App\Http\Requests\CommentRequest;
 
 class CommentsController extends Controller
 {
@@ -40,10 +40,10 @@ class CommentsController extends Controller
 
         if ($request->expectsJson()) {
             return response()->json([
-                'status'  => 'success',
+                'status' => 'success',
                 'message' => 'comment_added_successfully',
-                'text'    => 'دیدگاه شما با موفقیت افزوده شد. پس از تائید به نمایش خواهد آمد',
-                'data'    => $request->validated(),
+                'text' => 'دیدگاه شما با موفقیت افزوده شد. پس از تائید به نمایش خواهد آمد',
+                'data' => $request->validated(),
             ], 201);
         }
 
@@ -52,13 +52,18 @@ class CommentsController extends Controller
 
     public function show(Comment $comment)
     {
-        if(request()->expectsJson()){
+        if (request()->expectsJson()) {
             return response()->json($comment, 201);
         }
 
         return response($comment, 201);
     }
-    
+
+    public function index(Post $post)
+    {
+        $comments = $post->comments;
+        dd($comments);
+    }
 
     /**
      * @param Request $request
@@ -78,7 +83,6 @@ class CommentsController extends Controller
         } else {
             return response()->json($this->errors, 400);
         }
-
     }
 
     /**
@@ -95,16 +99,15 @@ class CommentsController extends Controller
             $this->makeResponse();
             $this->done = true;
         }
-
     }
 
     private function makeResponse()
     {
         $this->resp = [
-            'status'  => 'ok',
-            'text'    => 'post_added_successfully',
+            'status' => 'ok',
+            'text' => 'post_added_successfully',
             'message' => 'پست با موفقیت افزوده شد.',
-            'data'    => null,
+            'data' => null,
         ];
     }
 
@@ -127,17 +130,17 @@ class CommentsController extends Controller
     private function validator()
     {
         $this->validator = Validator::make(request()->all(), [
-            'comment_name'    => [
+            'comment_name' => [
                 'required',
                 'min:3',
                 'max:30',
                 new validAlpha(),
             ],
-            'parent_id'       => [
+            'parent_id' => [
                 'nullable',
                 'integer',
             ],
-            'post_id'         => [
+            'post_id' => [
                 'required',
                 'integer',
             ],
@@ -147,16 +150,14 @@ class CommentsController extends Controller
                 'max:500',
                 new validString,
             ],
-            'comment_email'   => [
+            'comment_email' => [
                 'nullable',
                 'email',
             ],
         ]);
 
-        if ( ! $this->validator->fails()) {
+        if (!$this->validator->fails()) {
             $this->params = $this->validator->validated();
         }
-
     }
-
 }

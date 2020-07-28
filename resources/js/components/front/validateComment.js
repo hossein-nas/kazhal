@@ -55,14 +55,13 @@ function getInputs(args) {
 function sendAjax(fields) {
     let inputs = getInputValues(fields);
     axios({
-        url: "/comment/add",
+        url: "/comments/create",
         method: "POST",
         data: inputs,
     })
-        .then((resposne) => {
-            console.log("succes");
+        .then(({ data }) => {
             clearInputs(fields);
-            addSuccessMessage();
+            addSuccessMessage(data.text);
         })
         .catch((err) => {
             alert("error");
@@ -77,20 +76,20 @@ function clearInputs(inputs) {
     });
 }
 
-function addSuccessMessage() {
+function addSuccessMessage(message) {
     let _form = $(".form");
     let elem = $(
         `
         <div class="success-message">
             <i class="material-icons">check_circle</i>
-            دیدگاه با موفقیت افزوده شد.
+            ${message}
         </div>
     `.trim()
     );
     elem.insertBefore(_form);
     setTimeout(() => {
         elem.remove();
-    }, 3000);
+    }, 3500);
 }
 
 function getInputValues(fields) {

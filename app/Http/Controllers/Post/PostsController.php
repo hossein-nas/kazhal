@@ -33,12 +33,13 @@ class PostsController extends Controller
     public function show($slug)
     {
         $post = Post::where('slug', $slug)->first();
+        $comments = $post->comments;
 
         if (request()->expectsJson()) {
             return response()->json($post, 201);
         }
 
-        return view('Posts.single', compact('post'));
+        return view('Posts.single', compact('post', 'comments'));
     }
 
     public function getAllPosts()

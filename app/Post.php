@@ -28,6 +28,7 @@ class Post extends Model
         'thumb',
         'author',
         'categories',
+        // 'comments',
     ];
 
     /**
@@ -44,6 +45,11 @@ class Post extends Model
     public function thumb()
     {
         return $this->hasOne('App\File', 'id', 'thumbnail_id');
+    }
+
+    public function comments()
+    {
+        return $this->hasMany('App\Comment', 'post_id', 'id');
     }
 
     /**
@@ -84,4 +90,4 @@ class Post extends Model
     {
         return $this->path();
     }
-
+}
