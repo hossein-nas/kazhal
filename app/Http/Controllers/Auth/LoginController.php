@@ -50,11 +50,11 @@ class LoginController extends Controller
             'password' => 'required|min:3',
         ]);
 
-        $response = $http->post(confing('app.url') . 'oauth/token', [
+        $response = $http->post(config('app.url') . 'oauth/token', [
             'form_params' => [
                 'grant_type'    => 'password',
                 'client_id'     => '1',
-                'client_secret' => 'gOAxqm4uQGdPTbSI67lSHMRjN5QHTI8Q2OupmlPV',
+                'client_secret' => 'vHqGoDqPDFwwqiPeqT8qXTBFbBPO8AZX2HiJvfOd',
                 'username'      => $req->get('username'),
                 'password'      => $req->get('password'),
                 'scope'         => '',
