@@ -3,8 +3,8 @@
 namespace Tests\Feature;
 
 use App\Comment;
-use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class CreateCommentTest extends TestCase
 {
@@ -35,7 +35,7 @@ class CreateCommentTest extends TestCase
 
         $response = $this->json('post', route('comment.store'), $comment);
 
-        $this->assertFalse(!! Comment::latest()->first()->verified);
+        $this->assertFalse(!!Comment::latest()->first()->verified);
     }
 
     /** @test */
@@ -64,5 +64,59 @@ class CreateCommentTest extends TestCase
         $this->assertTrue(
             array_key_exists('body', $response->json())
         );
+    }
+
+    /** @test */
+    public function unvalid_email_address_should_produce_error()
+    {
+        $comment = factory(Comment::class)->raw();
+        $comment['email'] = 'example.com';
+
+        $response = $this->json('post', route('comment.store'), $comment);
+
+        $response->assertStatus(422);
+        $this->assertTrue(
+            array_key_exists('email', $response->json())
+        );
+    }
+
+    /** @test */
+    public function empty_email_address_should_not_produce_error()
+    {
+        $comment = factory(Comment::class)->raw();
+        $comment['email'] = null;
+
+        $response = $this->json('post', route('comment.store'), $comment);
+
+        $response->assertStatus(201);
+    }
+
+    /** @test */
+    public function post_should_be_available_in_comment_instance()
+    {
+        $comment = factory(Comment::class)->create();
+
+        $response = $this->json('get', route('comment.show', $comment->id));
+
+        $this->assertTrue(
+            array_key_exists('post', $response->json())
+        );
+    }
+
+    /** @test */
+    public function comments_parent_should_be_available_in_comment_instance()
+    {
+        $comment = factory(Comment::class)->create();
+
+        $response = $this->json('get', route('comment.show', $comment->id));
+
+        $this->assertNull($response->json()['parent']);
+
+        $commentOne = factory(Comment::class)->create();
+        $commentTwo = factory(Comment::class)->create(['parent_id' => $commentOne->id]);
+
+        $response = $this->json('get', route('comment.show', $commentTwo->id));
+
+        $this->assertEquals($commentOne->id, $response->json()['parent']['id']);
     }
 }

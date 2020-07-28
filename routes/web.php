@@ -18,11 +18,12 @@ Route::group(['prefix' => 'services'], function () {
 });
 
 Route::group(['prefix' => 'posts'], function () {
-    Route::get('{slug}/show/', 'Post\PostsController@show');
+    Route::get('{slug}/show/', 'Post\PostsController@show')->name('post.show');
 });
 
 Route::group(['prefix' => 'comments'], function () {
     Route::post('/create/', 'CommentsController@store')->name('comment.store');
+    Route::get('/{comment}/show', 'CommentsController@show')->name('comment.show');
 });
 
 // Route::post('/posts/create', 'Post\PostsController@store')->name('posts.store');

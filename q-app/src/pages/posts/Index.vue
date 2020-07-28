@@ -82,7 +82,7 @@
                                                     </div><!-- /.post-status -->
                                                     <div class="buttons">
                                                         <div class="edit">
-                                                            <router-link :to="`/posts/edit/post/${post.id}/`">
+                                                            <router-link :to="`/posts/edit/post/${post.slug}/`">
                                                                 <q-icon name="text_format"></q-icon>
                                                             </router-link>
                                                         </div><!-- /.edit -->

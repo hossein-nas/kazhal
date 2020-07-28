@@ -3,8 +3,8 @@
 namespace Tests\Unit;
 
 use App\Post;
-use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class PostsTest extends TestCase
 {
@@ -37,6 +37,26 @@ class PostsTest extends TestCase
 
         tap($post->fresh()->toArray(), function ($post) {
             $this->assertTrue(array_key_exists('author', $post));
+        });
+    }
+
+    /** @test */
+    public function a_post_knows_its_own_path()
+    {
+        $post = factory(Post::class)->create();
+
+        $this->assertEquals("/posts/{$post->slug}/show", $post->path());
+    }
+
+    /** @test */
+    public function post_instance_include_its_own_path()
+    {
+        $post = factory(Post::class)->create();
+
+        tap($post->fresh()->toArray(), function ($post) {
+            $this->assertTrue(
+                array_key_exists('path', $post)
+            );
         });
     }
 

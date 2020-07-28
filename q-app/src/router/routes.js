@@ -10,7 +10,7 @@ const routes = [
             // posts specifc routes ::
             { path: '/posts', component: () => import('pages/posts/Index') },
             { path: '/posts/new/post', component: () => import('pages/posts/newPost') },
-            { path: '/posts/edit/post/:id/', component: () => import('pages/posts/newPost'), props: true },
+            { path: '/posts/edit/post/:slug/', component: () => import('pages/posts/newPost'), props: true },
 
             // posts specifc routes ::
             { path: '/services/', component: () => import('pages/services/Index') },

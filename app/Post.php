@@ -18,6 +18,7 @@ class Post extends Model
      */
     protected $appends = [
         'created_at_ts',
+        'path',
     ];
 
     /**
@@ -73,4 +74,14 @@ class Post extends Model
     {
         return 'slug';
     }
-}
+
+    public function path()
+    {
+        return "/posts/{$this->slug}/show";
+    }
+
+    public function getPathAttribute()
+    {
+        return $this->path();
+    }
+

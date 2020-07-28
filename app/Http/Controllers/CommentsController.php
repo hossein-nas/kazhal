@@ -50,6 +50,16 @@ class CommentsController extends Controller
         return response([], 201)->with(['flash' => 'دیدگاه شما با موفقیت افزوده شد. پس از تائید به نمایش خواهد آمد']);
     }
 
+    public function show(Comment $comment)
+    {
+        if(request()->expectsJson()){
+            return response()->json($comment, 201);
+        }
+
+        return response($comment, 201);
+    }
+    
+
     /**
      * @param Request $request
      */

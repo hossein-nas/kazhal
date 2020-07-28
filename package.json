@@ -22,7 +22,7 @@
         "eslint_d": "^8.1.1",
         "jquery": "^3.5.1",
         "laravel-mix": "^4.0.7",
-        "lodash": "^4.17.13",
+        "lodash": "^4.17.19",
         "popper.js": "^1.12",
         "prettier": "^1.19.1",
         "resolve-url-loader": "^2.3.1",

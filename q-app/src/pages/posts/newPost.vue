@@ -138,17 +138,16 @@ export default {
     async beforeMount () {
         if (Object.keys(this.$route.params).length) {
             this.newPost = false
-            let id = this.$route.params.id
+            let slug = this.$route.params.slug
             try {
-                let post = await this.$axios.get(`api/posts/${id}/`)
-                this.newPost = false
-                this.postModel = post.data.post
+                let { data } = await this.$axios.get(`/posts/${slug}/show`)
+                this.postModel = data
                 this.postModel.published = !!this.postModel.published
-                this.ckData = post.data.post.content
-                this.categories.init = post.data.categories
+                this.ckData = this.postModel.content
+                this.categories.init = this.pluckIds(this.postModel.categories)
                 this.thumbnail = {
-                    thumbnailId: post.data.thumbnail.id,
-                    previewImage: post.data.thumbnail.specs[0].relativepath
+                    thumbnailId: this.postModel.thumb.id,
+                    previewImage: this.postModel.thumb.specs[0].relativepath
                 }
             } catch (e) {}
         }
@@ -227,7 +226,12 @@ export default {
             range.selectNodeContents(el.childNodes[1])
             sel.removeAllRanges()
             sel.addRange(range)
+        },
+
+        pluckIds (obj) {
+            return Object.keys(obj).map(f => obj[f].id)
         }
+
     },
     computed: {
         slugURL () {
