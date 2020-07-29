@@ -44,6 +44,10 @@ section#content{
     }
 }
 
+%user-select {
+    user-select: none;
+}
+
 @mixin header-before {
     display: inline-block;
     position: absolute;

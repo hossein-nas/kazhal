@@ -56,16 +56,25 @@
 			@foreach($comments as $comment)
 				<div class="comments-item">
 					<div class="head-section">
-						<span class="avatar"></span>
-						{{ $comment->name }}
+						<span class="avatar">
+							<img src="/images/unregistered.svg" alt="">
+						</span>
+						<span class="user-name">
+							{{ $comment->name }}
+						</span>
+						<span class="time">
+							{{ $comment->local_time }}
+						</span>
 					</div>
 					<div class="body">
 					{{ $comment->body }}
 					</div>
 
 					<div class="footer">
-						<span>{{ $comment->local_time }}</span>
-						<span class="reply-btn">پاسخ به دیدگاه</span>
+						<span class="reply-btn">
+							<i class="material-icons">reply</i>
+							پاسخ به دیدگاه
+						</span>
 					</div>
 				</div>
 			@endforeach

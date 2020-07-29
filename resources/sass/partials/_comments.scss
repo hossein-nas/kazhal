@@ -1,5 +1,110 @@
 .comments-section{
 	margin-bottom: 2rem;
+
+	#comments-index{
+		width: 95%;
+		margin: 0 auto;
+		padding: 1rem 1rem;
+		.comments-item{
+			background-color: $comment-item-bg;
+			position: relative;
+			border:1px solid $comment-item-border-color;
+			border-radius: .5rem;
+			box-shadow: 0 6px 8px 0 rgba(black, .08);
+			margin-bottom: 1.5rem;
+			padding: 1rem 1rem .75rem;
+
+			.head-section{
+				display: block;
+				height: 2rem;
+				@extend %user-select;
+
+				span{
+					display: inline-block;
+					height: 100%;
+					vertical-align: middle;
+
+					&.avatar{
+						img{
+							display: inline-block;
+							height: 100%;
+						}
+					}
+
+					&.user-name{
+						color: $comment-header-title-color;
+						font-size: 1rem;
+						margin: auto 1rem auto 1.25rem;
+						font-weight: 700;
+						vertical-align: baseline;
+					}
+
+					&.time{
+						vertical-align: baseline;
+						font-size: .75rem;
+						font-weight: 400;
+						color: $comment-header-time-color;
+						&::before{
+							content:'';
+							display: inline-block;
+							width: 7px;
+							height:7px;
+							border-radius:100%;
+							margin-left: 1.25rem;
+							background-color: $comment-item-border-color;
+						}
+					}
+				}
+			} // .head-section
+
+			.body{
+				margin-right: 1rem;
+				border-right: 4px solid $comment-item-border-color;
+				padding: .25rem .5rem .25rem;
+				margin-top: .75rem;
+				margin-bottom: .25rem;
+				line-height: $comment-body-line-height;
+				color: $comment-body-color;	
+				font-size: $comment-body-font-size;
+				min-height: 48px;
+			} // .body
+
+			.footer{
+				text-align: left;
+				height: 28px;
+
+				span.reply-btn{
+					// margin-left: .25rem;
+					vertical-align: baseline;
+					font-size: .75rem;
+					color: $comment-footer-btn-color;
+					font-weight: 800;
+					height: 100%;
+					transition-duration: .2s;
+					display: inline-block;
+					border-radius: .25rem;
+					padding: 2px 12px;
+					line-height: 1.5rem;
+					cursor: pointer;
+					opacity: .75;
+
+					i.material-icons{
+						margin-top: -3px;
+						color: rgba(#A36262, .6);
+						margin-left: .5rem;
+						font-size: 1.5rem;
+					}
+
+					&:hover{
+						opacity: .95;
+						background-color: $comment-footer-reply-btn-color;
+					}
+				}
+			}// .footer
+
+		} // .comments-item
+	}// #comments-index
+
 	.new-comment{
 		margin: 0 auto;
 		width: 90%;
