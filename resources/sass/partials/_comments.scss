@@ -14,7 +14,7 @@
 			margin-bottom: 1.5rem;
 			padding: 1rem 1rem .75rem;
 
-			.head-section{
+			>.head-section{
 				display: block;
 				height: 2rem;
 				@extend %user-select;
@@ -57,7 +57,7 @@
 				}
 			} // .head-section
 
-			.body{
+			>.body{
 				margin-right: 1rem;
 				border-right: 4px solid $comment-item-border-color;
 				padding: .25rem .5rem .25rem;
@@ -67,6 +67,31 @@
 				color: $comment-body-color;	
 				font-size: $comment-body-font-size;
 				min-height: 48px;
+
+				> .replier{
+					padding-right: .5rem;
+					margin-bottom: .75rem;
+					font-size: .75rem;
+					cursor: pointer;
+
+					.header{
+						font-weight: bold;
+						color: #7C6E52;
+
+						&::before{
+							content:'در پاسخ به :: ';
+							font-size: 11px;
+							color: #8F8F8F;
+						}
+					} // .header 
+
+					.body{
+						color: $comment-replier-color;
+						padding-right: .5rem;
+						border-right: 4px solid $comment-replier-border-color;
+
+					} // .replier .body
+				} // .replier
 			} // .body
 
 			.footer{

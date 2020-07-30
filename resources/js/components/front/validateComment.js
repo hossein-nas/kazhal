@@ -1,7 +1,13 @@
 import validation from "../../modules/validation";
+import addReply from "../../modules/addReplyBtn";
 import axios from "axios";
 
 $(document).ready(() => {
+    /**
+     * Managing AddReply Button functionality
+     */
+    addReply();
+
     let name = validation("#cm-name", {
         required: true,
         name: "نام کاربری",

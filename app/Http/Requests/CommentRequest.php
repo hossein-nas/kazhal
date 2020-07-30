@@ -28,7 +28,7 @@ class CommentRequest extends FormRequest
             'body'      => ['required', 'min:10', 'max:500',new \App\Rules\validString],
             'email'     => 'nullable|email',
             'post_id'   => 'required|exists:posts,id|numeric',
-            'parent_id' => 'nullable|numeric|exists:comments:id',
+            'parent_id' => 'nullable|numeric|exists:comments,id',
             'verified'  => 'nullable|numeric',
         ];
     }

@@ -67,11 +67,19 @@
 						</span>
 					</div>
 					<div class="body">
+						@if($comment->parent)
+						<div class="replier">
+							<div class="header">{{ $comment->parent->name }}</div>
+							<div class="body">
+								{{ $comment->parent->body }}		
+							</div>
+						</div>
+						@endif
 					{{ $comment->body }}
 					</div>
 
 					<div class="footer">
-						<span class="reply-btn">
+						<span class="reply-btn" data-reply-id="{{ $comment->id }}">
 							<i class="material-icons">reply</i>
 							پاسخ به دیدگاه
 						</span>

@@ -33,7 +33,7 @@ class PostsController extends Controller
     public function show($slug)
     {
         $post = Post::where('slug', $slug)->first();
-        $comments = $post->comments;
+        $comments = $post->comments()->latest()->get();
 
         if (request()->expectsJson()) {
             return response()->json($post, 201);
