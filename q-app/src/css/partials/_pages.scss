@@ -1,3 +1,4 @@
+
 #main-area{
     border: 1px dashed $rp-gray-2;
     min-height: 15rem;
@@ -8,16 +9,61 @@
         border: 1px solid $rp-gray-2;
         border-radius: .5rem;
         min-height: 3rem;
-        padding: .25rem .75rem;
+        position: relative;
+        // padding: .25rem .75rem;
         display: flex;
         justify-content: flex-start;
         align-items: center;
         margin-bottom: 2rem;
        .label{
             font-size: .95rem;
-            font-weight: 600;
-            color: $rp-gray-text-1;
+            font-weight: 800;
+            padding-right: 1rem  #{"/* rtl:ignore */"};
+            flex:1;
+            color: $rp-gray-text-2;
        }
+
+        .action{
+            font-size: .875rem;
+            font-weight: bold;
+            color: $rp-gray-text-1;
+            text-decoration: none;
+            float: left #{"/* rtl:ignore */"};
+            background-color: white;
+            border: 2px solid $rp-gray-2;
+            padding: .4rem 1.25rem;
+            height: 46px;
+            text-align: center;
+            border-radius: .5rem;
+            line-height: 1.9rem;
+            transition-duration: .2s;
+            cursor: pointer;
+            background-color: $rp-gray-4;
+            color: white;
+            &:hover{
+                background-color: darken($rp-gray-4, 6);
+            }
+            i{
+                font-size: 1.25rem;
+                transform: translateX(-.125rem) translateY(-2px) #{"/* rtl:ignore */"};
+            }
+
+            &.success{
+                background-color: $rp-dark-green;
+                color: white;
+                &:hover{
+                    background-color: darken($rp-dark-green, 4);
+                }
+            }
+
+            &.primary{
+                background-color: $rp-blue;
+                color: white;
+                &:hover{
+                    background-color: darken($rp-blue, 4);
+                }
+            }
+        } // .action.button.
     }
 }
 

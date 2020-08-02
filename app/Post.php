@@ -47,6 +47,9 @@ class Post extends Model
         return $this->hasOne('App\File', 'id', 'thumbnail_id');
     }
 
+    /**
+     * @return mixed
+     */
     public function comments()
     {
         return $this->hasMany('App\Comment', 'post_id', 'id');
@@ -86,6 +89,9 @@ class Post extends Model
         return "/posts/{$this->slug}/show";
     }
 
+    /**
+     * @return mixed
+     */
     public function getPathAttribute()
     {
         return $this->path();

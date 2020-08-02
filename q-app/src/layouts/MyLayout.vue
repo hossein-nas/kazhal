@@ -61,9 +61,11 @@
             show-if-above
             bordered
             :width="250"
+            content-style="overflow:hidden"
             content-class="bg-grey-2 ">
 
-            <q-list class="sidebar">
+            <q-list class="sidebar"
+            >
 
                 <q-item clickable
                         tag="a"

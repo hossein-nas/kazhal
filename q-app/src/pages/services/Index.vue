@@ -4,19 +4,18 @@
              v-if="loaded">
             <div class="col-12 col-md-8">
                 <div id="main-area">
-                    <div class="head-section">
-                        <div class="label">
-                            لیست سرویس‌ها
-                        </div>
-                    </div>
-                    <div class="add-new-service-btn">
-                        <q-btn unelevated
-                               size=".8rem"
-                               to="/services/new/service"
-                               class="q-px-md q-py-xs"
-                               color="light-blue-14"
-                               label="افزودن سرویس جدید" />
-                    </div>
+                    <div class="head-section user-select">
+                        <span class="label">
+                            بخش مدیریت سرویس‌ها
+                        </span>
+                        <router-link to="/services/new/service"
+                                     class="action primary">
+                            افزودن سرویس جدید
+                            <q-icon name="add_box"
+                                    size="sm">
+                            </q-icon>
+                        </router-link>
+                    </div><!-- /.head-section -->
 
                     <div id="services-list">
                         <template v-for="(item, index) in allServices" >

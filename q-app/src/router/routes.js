@@ -17,6 +17,13 @@ const routes = [
             { path: '/services/new/service', component: () => import('pages/services/newService') },
             { path: '/services/edit/:id/', component: () => import('pages/services/newService') },
 
+            // comments specific routes ::
+            { path: '/comments', redirect: 'comments/index' },
+            { path: '/comments/index', component: () => import('pages/comments/index') },
+            { path: '/comments/show/:commentId/', component: () => import('pages/comments/index') },
+            { path: '/comments/edit/:commentId/', component: () => import('pages/comments/index') },
+            { path: '/comments/answer/comment/:commentId/', component: () => import('pages/comments/index') },
+
             { path: '/user/preferences',
                 component: () => import('pages/userPreferences/index'),
                 children: [

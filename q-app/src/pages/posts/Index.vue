@@ -4,18 +4,17 @@
             <div class="row">
 
                 <div class="col-md-9 col-12">
-                    <div class="main-area">
+                    <div id="main-area">
                         <div class="head-section user-select">
-                            <span>
+                            <span class="label">
                                 بخش مدیریت پست‌ها
                             </span>
-                            <router-link to="/posts/new/post">
-                                <div class="action button ">
-                                    ایجاد پست جدید
-                                    <q-icon name="add_box"
-                                            size="xs">
-                                    </q-icon>
-                                </div><!-- /.action button newpost -->
+                            <router-link to="/posts/new/post"
+                                         class="action success">
+                                ایجاد پست جدید
+                                <q-icon name="add_box"
+                                        size="sm">
+                                </q-icon>
                             </router-link>
                         </div><!-- /.head-section -->
 
@@ -109,7 +108,7 @@
                     </div><!-- /.main-area -->
                 </div><!-- /.col -->
                 <div class="col-12 col-md-3">
-                    <div class="sidebar">
+                    <div class="side-widgets">
                         <category v-model="categories" />
                     </div><!-- /.sidebar -->
                 </div><!-- /.col -->
@@ -161,47 +160,8 @@ export default {
 
 <style lang="scss">
 #posts{
-    .main-area{
-        margin-left: .5rem #{"/* rtl:ignore */"};
-        border: 1px dashed $rp-gray-2;
-        padding: .75rem;
+    #main-area{
         >.head-section{
-            margin-bottom: 1.5rem;
-            border-radius: .75rem;
-            background-color: $rp-gray-1;
-            border: 1px solid $rp-gray-2;
-            padding: 0 .5rem;
-            min-height: 3rem;
-            line-height: 1;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            span{
-                padding-right: .5rem #{"/* rtl:ignore */"};
-                display: block;
-                font-weight: 900;
-                color: $rp-gray-text-2;
-                font-size: 1.05rem;
-            }
-            .action{
-                font-size: .85rem;
-                color: $rp-gray-text-1;
-                float: left #{"/* rtl:ignore */"};
-                background-color: white;
-                border: 1px solid $rp-gray-2;
-                padding: .4rem 1.25rem;
-                text-align: center;
-                border-radius: .5rem;
-                line-height: 1.25;
-                &:hover{
-                    border-color: lighten($rp-blue, 15);
-                    color: darken($rp-blue,8);
-                    cursor: pointer;
-                }
-                i{
-                    transform: translateX(-.125rem) #{"/* rtl:ignore */"};
-                }
-            } // .action.button.
         } // .head-section
         .body{
             .all-news{
@@ -389,13 +349,6 @@ export default {
 
         } // main-area > .body
     } // .main-area
-
-    .sidebar{
-        // background-color: $rp-gray-1;
-        min-height: 10rem;
-        border-radius: .5rem;
-        border: 1px solid $rp-gray-2;
-    } // .sidebar
 
 } // #posts
 

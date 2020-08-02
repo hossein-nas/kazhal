@@ -59,10 +59,16 @@ class CommentsController extends Controller
         return response($comment, 201);
     }
 
-    public function index(Post $post)
+    public function index()
     {
-        $comments = $post->comments;
-        dd($comments);
+        if( request()->has("all") && request()->get('all') === '1'){
+            $comments = Comment::all();
+        }
+        else {
+            $comments = Comment::whereVerified('1')->get();
+        }
+
+        return $comments;
     }
 
     /**
