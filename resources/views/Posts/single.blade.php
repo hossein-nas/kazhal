@@ -2,6 +2,16 @@
 
 @section('header-class','mini-header')
 
+@section('scripts')
+<script src="https://cdn.jsdelivr.net/npm/intersection-observer@0.7.0/intersection-observer.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.1.0/dist/lazyload.min.js"></script>
+<script>
+var lazyLoadInstance = new LazyLoad({
+    // Your custom settings go here
+});
+</script>
+@endsection
+
 @section('content')
 <div class="container">
 	<section id="post">
@@ -33,7 +43,10 @@
 				</div>
 			</div>
 			<div class="thumbnail-area">
-				<img src="{{ $post->thumb->specs[0]['relativepath'] }}" alt="{{$post->slug}}">
+				<img class="lazy" 
+					 src="{{ $post->thumb->specs[0]['relativepath'] }}"
+					 data-srcset="{{ $post->thumb->src_set }}"
+					 alt="{{$post->slug}}">
 				<div class="info">
 					<div class="created_at gen-date" data-date="{{$post->created_at_ts}}">
 						{{ $post->created_at }}
