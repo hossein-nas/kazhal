@@ -15,14 +15,16 @@ class User extends JsonResource
     public function toArray($request)
     {
         return [
-            'firstname'         => $this->firstname,
-            'lastname'          => $this->lastname,
-            'email'             => $this->email,
-            'bio'               => $this->bio,
-            'photo'             => new File($this->thumb),
-            'role'              => $this->role,
-            'activated'         => $this->activated,
-            'created_at'        => $this->created_at,
+            'id'         => $this->id,
+            'firstname'  => $this->firstname,
+            'lastname'   => $this->lastname,
+            'email'      => $this->email,
+            'bio'        => $this->bio,
+            'photo'      => new File($this->thumb),
+            'role'       => $this->role,
+            'activated'  => $this->activated,
+            'created_at' => $this->created_at,
+            'ip'         => request()->ip(),
         ];
     }
 }

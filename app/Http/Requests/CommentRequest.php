@@ -25,7 +25,7 @@ class CommentRequest extends FormRequest
     {
         return [
             'name'      => ['required', 'min:5', 'max:30', new \App\Rules\validAlpha],
-            'body'      => ['required', 'min:10', 'max:500',new \App\Rules\validString],
+            'body'      => ['required', 'min:10', 'max:500', new \App\Rules\validString],
             'email'     => 'nullable|email',
             'post_id'   => 'required|exists:posts,id|numeric',
             'parent_id' => 'nullable|numeric|exists:comments,id',
@@ -38,7 +38,15 @@ class CommentRequest extends FormRequest
      */
     public function validated()
     {
-        return $this->all() + ['ip' => $this->ip()];
+        $array = $this->all();
+
+        if (auth('api')->check()) {
+            $array = $array + ['user_id' => auth('api')->id()];
+            $array['verified'] = 1;
+            $array['verified_by'] = auth('api')->id();
+        }
+
+        return $array + ['ip' => $this->ip()];
     }
 
     public function attributes()

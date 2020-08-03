@@ -12,8 +12,10 @@ class Comment extends Model
         'body',
         'email',
         'parent_id',
+        'user_id',
         'post_id',
         'verified',
+        'verified_by',
     ];
 
     protected $appends = [
@@ -25,9 +27,31 @@ class Comment extends Model
         'parent',
     ];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope('verified', function (\Illuminate\Database\Eloquent\Builder $builder) {
+            $builder->whereVerified('1');
+        });
+
+        /**
+         * This is for handling above global scoping issue when
+         * using route model binding
+         */
+        \Illuminate\Support\Facades\Route::bind('comment', function ($id) {
+            return \App\Comment::withoutGlobalScope('verified')->findOrFail($id);
+        });
+    }
+
     public function post()
     {
         return $this->belongsTo('App\Post');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo("App\User");
     }
 
     public function parent()
@@ -38,9 +62,21 @@ class Comment extends Model
     public function getLocalTimeAttribute()
     {
         $date = \Morilog\Jalali\Jalalian::fromCarbon($this->created_at);
+
         if ($this->created_at->diffInDays(\Carbon\Carbon::now()) > 7) {
             return \Morilog\Jalali\CalendarUtils::convertNumbers($date->format('%A, %d %B %y - %H:%M'));
         }
+
         return \Morilog\Jalali\CalendarUtils::convertNumbers($date->ago());
+    }
+
+    public function verify()
+    {
+        $this->update(['verified' => 1, 'verified_by' => auth()->id()]);
+    }
+
+    public function unverify()
+    {
+        $this->update(['verified' => 0, 'verified_by' => null]);
     }
 }

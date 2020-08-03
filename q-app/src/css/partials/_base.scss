@@ -9,3 +9,15 @@
 .user-select{
     user-select:none;
 }
+
+
+/**
+ * Typography Helpers
+ */
+
+ .slim-text{
+    font-size: 1rem ;
+    line-height: 1rem;
+    font-weight: 300;
+    color: #666666;
+ }

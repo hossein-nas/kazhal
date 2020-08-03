@@ -20,7 +20,7 @@
                         <div>
                             <q-table
                                 :flat="true"
-                                :data="comments"
+                                :data="unapprovedComments"
                                 :columns="columns"
                                 :pagination.sync="pagination"
                                 row-key="id"
@@ -45,6 +45,7 @@
 
                 <div class="col-md-3 col-12">
                     <section class="side-widgets">
+                        <user-stats v-model="userStats"></user-stats>
 
                     </section>
                 </div>
@@ -54,13 +55,20 @@
 </template>
 
 <script>
+import UserStats from '@/components/UserStats'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
     name: 'index',
 
+    components: {
+        UserStats
+    },
+
     data () {
         return {
             comments: [],
+            userStats: {},
             pagination: {
                 rowsPerPage: 10,
                 page: 1,
@@ -72,24 +80,25 @@ export default {
     },
 
     created () {
-        this.fetchComments()
+        this.fetchAllComments()
     },
 
     methods: {
-        fetchComments () {
-            this.$axios.get('/comments?all=1')
-                .then((res) => {
-                    this.comments = res.data
-                })
-        }
+        ...mapActions('comment', [
+            'fetchAllComments'
+        ])
     },
 
     computed: {
+        ...mapGetters('comment', [
+            'allComments',
+            'unapprovedComments'
+        ]),
         columns () {
             return [
                 { name: 'id', required: true, label: '', align: 'right', sortable: true, field: 'id' },
                 { name: 'username', required: true, label: 'نام ارسال کننده', align: 'center', sortable: false, field: 'name' },
-                { name: 'content', required: true, label: 'متن دیدگاه', align: 'center', sortable: false, field: 'body', style: 'max-width: 50%' },
+                { name: 'content', required: true, label: 'متن دیدگاه', align: 'center', sortable: false, field: 'body', style: 'width: 50%' },
                 { name: 'date', required: true, label: 'تاریخ ارسال', align: 'center', sortable: true, field: 'local_time' }
             ]
         }

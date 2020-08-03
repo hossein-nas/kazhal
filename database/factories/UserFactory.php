@@ -49,7 +49,7 @@ $factory->define(File::class, function (Faker $faker) {
         'base_url'      => $faker->text,
         'is_responsive' => 1,
         'keywords'      => "system_pics,avatar",
-        'specs'         => "{}",
+        'specs'         => [["width" => 0, "height" => 0, "ratio" => 0, "filesize" => 9659, "relativepath" => "\/storage\/images\/f50e7867-6b2f-471b-b53e-8e2e90a19828.png"]],
     ];
 });
 
@@ -104,5 +104,11 @@ $factory->define(Comment::class, function (Faker $faker) {
         },
         'parent_id' => null,
         'verified'  => 0,
+    ];
+});
+
+$factory->state(Comment::class, 'verified', function () {
+    return [
+        'verified' => 1,
     ];
 });

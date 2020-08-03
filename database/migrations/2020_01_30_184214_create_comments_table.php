@@ -21,7 +21,9 @@ class CreateCommentsTable extends Migration
             $table->text('body');
             $table->unsignedBigInteger('parent_id')->nullable();
             $table->unsignedBigInteger('post_id');
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->boolean('verified')->default(0);
+            $table->unsignedBigInteger('verified_by')->nullable();
             $table->timestamps();
 
             $table->foreign('parent_id')
@@ -33,6 +35,11 @@ class CreateCommentsTable extends Migration
                 ->references('id')
                 ->on('posts')
                 ->onDelete('cascade');
+
+            $table->foreign('verified_by')
+                ->references('id')
+                ->on('users')
+                ->onDelete('set null');
         });
     }
 

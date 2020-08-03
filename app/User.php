@@ -2,9 +2,9 @@
 
 namespace App;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'firstname', 'lastname', 'email' ,'gender', 'username','activated', 'bio',
+        'firstname', 'lastname', 'email', 'gender', 'username', 'activated', 'bio',
     ];
 
     /**
@@ -40,11 +40,6 @@ class User extends Authenticatable
     protected $appends = [
     ];
 
-    // public function findForPassport($username)
-    // {
-    //     return $this->where('username', $username)->first();
-    // }
-
     public function thumb()
     {
         return $this->hasOne('App\File', 'id', 'thumbnail_id');
@@ -58,5 +53,10 @@ class User extends Authenticatable
     public function getPhotoAttribute()
     {
         return $this->photo()->get();
+    }
+
+    public function comments()
+    {
+        return $this->hasMany('App\Comment')->withoutGlobalScopes();
     }
 }
