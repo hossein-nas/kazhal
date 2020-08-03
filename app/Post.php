@@ -42,6 +42,11 @@ class Post extends Model
         return $this->belongsTo('App\User', 'user_id', 'id');
     }
 
+    public function path()
+    {
+        return config('app.url') . "posts/" . $this->slug . "/show/";
+    }
+
     public function getCreatedAtTsAttribute()
     {
         return $this->created_at->timestamp;
@@ -55,11 +60,6 @@ class Post extends Model
     public function getRouteKeyName()
     {
         return 'slug';
-    }
-
-    public function path()
-    {
-        return "/posts/{$this->slug}/show";
     }
 
     public function getPathAttribute()

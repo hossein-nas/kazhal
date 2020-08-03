@@ -20,6 +20,7 @@ class Comment extends Model
 
     protected $appends = [
         'local_time',
+        'path',
     ];
 
     protected $with = [
@@ -78,5 +79,15 @@ class Comment extends Model
     public function unverify()
     {
         $this->update(['verified' => 0, 'verified_by' => null]);
+    }
+
+    public function path()
+    {
+        return $this->post->path . "#comment-no-" . $this->id;
+    }
+
+    public function getPathAttribute()
+    {
+        return $this->path();
     }
 }

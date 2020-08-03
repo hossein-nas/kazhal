@@ -50,4 +50,14 @@ class CommentTest extends TestCase
 
         $this->assertCount(2, $user->fresh()->comments);
     }
+
+    /** @test */
+    public function comment_knows_its_own_path()
+    {
+        $comment = factory(Comment::class)->create();
+        $expectedPath = $comment->post->path . '#comment-no-' . $comment->id;
+
+        $this->assertEquals($expectedPath, $comment->path());
+    }
+    
 }

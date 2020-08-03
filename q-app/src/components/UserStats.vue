@@ -55,7 +55,7 @@ export default {
 
             if (typeof item.data === 'object') {
                 if (item.data.type === 'link') {
-                    return `<a href="${item.data.path}" > ${item.data.text} </a>`
+                    return `<a href="${item.data.path}" target="_blank"> ${item.data.text} </a>`
                 }
             }
         }
@@ -99,7 +99,7 @@ export default {
             let lastComment = this.userSentComments.slice(-1)[0]
             return {
                 type: 'link',
-                path: '#',
+                path: lastComment.path,
                 text: lastComment.post.title
             }
         }

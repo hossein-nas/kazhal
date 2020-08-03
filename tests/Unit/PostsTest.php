@@ -45,7 +45,7 @@ class PostsTest extends TestCase
     {
         $post = factory(Post::class)->create();
 
-        $this->assertEquals("/posts/{$post->slug}/show", $post->path());
+        $this->assertEquals(config('app.url') . "posts/{$post->slug}/show/", $post->path());
     }
 
     /** @test */
