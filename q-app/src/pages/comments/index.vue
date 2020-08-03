@@ -19,10 +19,10 @@
 
                         <div>
                             <q-table
-                                :grid="false"
                                 :flat="true"
                                 :data="comments"
                                 :columns="columns"
+                                :pagination.sync="pagination"
                                 row-key="id"
                             >
                                 <template v-slot:body-cell-content="props">
@@ -33,7 +33,12 @@
                                         </div>
                                     </q-td>
                                 </template>
-                            </q-table>
+<!--                                 <template v-slot:body-cell-username="props">
+                                    <q-td :props="props"
+                                    >
+                                    </q-td>
+                                </template>
+ -->                            </q-table>
                         </div>
                     </div>
                 </div>
@@ -55,7 +60,14 @@ export default {
 
     data () {
         return {
-            comments: []
+            comments: [],
+            pagination: {
+                rowsPerPage: 10,
+                page: 1,
+                sortBy: 'date',
+                descending: false
+                // rowsNumber: xx if getting data from a server
+            }
         }
     },
 
@@ -75,10 +87,10 @@ export default {
     computed: {
         columns () {
             return [
-                { name: 'id', required: true, label: '', align: 'right', sortable: false, field: 'id' },
+                { name: 'id', required: true, label: '', align: 'right', sortable: true, field: 'id' },
                 { name: 'username', required: true, label: 'نام ارسال کننده', align: 'center', sortable: false, field: 'name' },
                 { name: 'content', required: true, label: 'متن دیدگاه', align: 'center', sortable: false, field: 'body', style: 'max-width: 50%' },
-                { name: 'date', required: true, label: 'تاریخ ارسال', align: 'center', sortable: false, field: 'local_time' }
+                { name: 'date', required: true, label: 'تاریخ ارسال', align: 'center', sortable: true, field: 'local_time' }
             ]
         }
     }
