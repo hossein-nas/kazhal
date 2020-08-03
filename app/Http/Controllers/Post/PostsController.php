@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Post;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\NewPostRequest;
 use App\Post;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\NewPostRequest;
 use Illuminate\Support\Facades\Validator;
 
 class PostsController extends Controller
@@ -61,10 +61,10 @@ class PostsController extends Controller
 
         if ($request->expectsJson()) {
             return response()->json([
-                'status' => 'success',
+                'status'  => 'success',
                 'message' => 'post_created_successfully',
-                'text' => 'پست با اموفقیت افزوده شد.',
-                'data' => $post->toArray(),
+                'text'    => 'پست با اموفقیت افزوده شد.',
+                'data'    => $post->toArray(),
             ]);
         }
 
@@ -109,21 +109,21 @@ class PostsController extends Controller
     {
         $params = $this->req->all();
         $validate = Validator::make($params, [
-            'title' => 'required|min:10',
-            'slug' => 'required|min:10',
-            'content' => 'required|min:15',
-            'published' => 'boolean',
-            'post_type' => 'required|numeric',
-            'categories' => 'required|array',
+            'title'        => 'required|min:10',
+            'slug'         => 'required|min:10',
+            'content'      => 'required|min:15',
+            'published'    => 'boolean',
+            'post_type'    => 'required|numeric',
+            'categories'   => 'required|array',
             'thumbnail_id' => 'required|numeric',
         ]);
 
         if ($validate->fails()) {
             $this->resp = [
-                'status' => 'error',
+                'status'  => 'error',
                 'message' => 'there_is_an_adding_post',
-                'text' => 'خطایی در ثبت اطلاعات پست به وجود آمد.',
-                'data' => $validate->errors(),
+                'text'    => 'خطایی در ثبت اطلاعات پست به وجود آمد.',
+                'data'    => $validate->errors(),
             ];
 
             return false;
@@ -151,10 +151,11 @@ class PostsController extends Controller
         $this->post = $post;
 
         $this->resp = [
-            'status' => 'ok',
+            'status'  => 'ok',
             'message' => 'post_successfuly_added.',
-            'text' => 'پست با موفقیت افزوده شد.',
-            'data' => $post,
+            'text'    => 'پست با موفقیت افزوده شد.',
+            'data'    => $post,
         ];
     }
+
 }

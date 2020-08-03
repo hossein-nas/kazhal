@@ -44,5 +44,5 @@ export function userSentCommentsCount (state, getters) {
 }
 
 export function commentsLoaded (state) {
-    return !!state.comments.length
+    return state.loading
 }

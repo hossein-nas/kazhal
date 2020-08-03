@@ -7,7 +7,7 @@
         <div class="body">
             <q-markup-table v-if="commentsLoaded"
                             flat
-                            dense>
+            >
                 <tbody>
                     <tr v-for="(row, index) in table"
                         :key="index">
@@ -45,7 +45,11 @@ export default {
 
     methods: {
         createDomElem (item) {
-            if (typeof item.data === 'string' || typeof item.data === 'number') return `<span> ${item.data} </span>`
+            if (typeof item.data === 'string' || typeof item.data === 'number') {
+                let str = `<span> ${item.data} </span>`
+                str += (item.suffix) ?? ''
+                return str
+            }
 
             if (item.data === null) return '<span> داده‌ای ثبت نشده </span>'
 
@@ -76,11 +80,13 @@ export default {
                 },
                 {
                     label: 'تعداد دیدگاه‌های شما',
-                    data: this.userSentCommentsCount
+                    data: this.userSentCommentsCount,
+                    suffix: 'پاسخ'
                 },
                 {
                     label: 'تعداد تأیید کرده‌ها',
-                    data: this.approvedByUserCount
+                    data: this.approvedByUserCount,
+                    suffix: 'دیدگاه'
                 },
                 {
                     label: 'آی پی آدرس شما',
