@@ -55,8 +55,8 @@ export default {
     methods: {
 
         replier (item) {
-            if (this.owns === false && item.user) {
-                return [item.user.firstname, item.user.lastname].join(' ')
+            if (this.owns === false && item.verified) {
+                return [item.verifier.firstname, item.verifier.lastname].join(' ')
             }
             return this.defaultReplier
         }

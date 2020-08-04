@@ -48,6 +48,57 @@
                                     </q-td>
                                 </template>
  -->                            </q-table>
+                            <div class="single-actions"
+                                 v-if="isItemSelected && ! isMultipleItemSelected">
+                                <q-btn outline
+                                       class="cm-detail"
+                                       color="teal-7"
+                                       padding="4px 8px"
+                                       size="sm"
+                                       @click="approve"
+                                       label="تأییـــد دیــــدگاه" />
+                                <q-btn outline
+                                       class="cm-detail"
+                                       color="blue-grey-5"
+                                       padding="4px 8px"
+                                       :to="detailPageLink"
+                                       size="sm"
+                                       label="مشاهده‌ی جزئیات" />
+                                <q-btn outline
+                                       class="cm-answer"
+                                       color="lime-7"
+                                       padding="4px 8px"
+                                       :to="answerToLink"
+                                       size="sm"
+                                       label="ارسال پاسخ" />
+                                <q-btn outline
+                                       class="cm-edit"
+                                       color="green-5"
+                                       padding="4px 8px"
+                                       :to="editPageLink"
+                                       size="sm"
+                                       label="ویـرایش" />
+                                <q-btn outline
+                                       color="red-4"
+                                       padding="4px 8px"
+                                       size="sm"
+                                       label="جذف دیدگاه" />
+
+                            </div>
+                            <div class="bulk-actions"
+                                 v-if="isMultipleItemSelected">
+                                <q-btn outline
+                                       class="cm-detail"
+                                       color="teal-7"
+                                       padding="4px 8px"
+                                       size="sm"
+                                       label="تأییـــد دیــــدگاهها" />
+                                <q-btn outline
+                                       color="red-4"
+                                       padding="4px 8px"
+                                       size="sm"
+                                       label="جذف دیدگاهها" />
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -56,10 +107,10 @@
                     <section class="side-widgets">
                         <user-stats v-model="userStats"></user-stats>
                         <latest-approved :value="approvedCommentsByUser"
-                                         title="اخرین پاسخ‌های شما"></latest-approved>
+                                         title="آخرین تأیید کرده‌های شما"></latest-approved>
 
                         <latest-approved :value="approvedNotByMe"
-                                         title="آخرین پاسخ ادمین‌های دیگر"
+                                         title="آخرین تأیید شده‌ها توسط ادمین‌های دیگر"
                                          :owns="false"></latest-approved>
                     </section>
                 </div>
@@ -102,8 +153,19 @@ export default {
 
     methods: {
         ...mapActions('comment', [
-            'fetchAllComments'
-        ])
+            'fetchAllComments',
+            'approveComment'
+        ]),
+
+        approve () {
+            let comment_id = this.selectedComments[0].id
+            let uri = '/api/comments/approve/' + comment_id
+            let data = {
+                comment_id, uri
+            }
+            this.approveComment(data)
+            this.selectedComments = []
+        }
     },
 
     computed: {
@@ -136,6 +198,18 @@ export default {
 
         approvedNotByMe () {
             return this.approvedComments.filter(comment => comment.verified_by !== this.getUserInfo.id)
+        },
+
+        answerToLink () {
+            return 'answer/to/' + this.selectedComments[0].id + '/'
+        },
+
+        detailPageLink () {
+            return 'detail/comment/' + this.selectedComments[0].id + '/'
+        },
+
+        editPageLink () {
+            return 'edit/comment/' + this.selectedComments[0].id + '/'
         }
     }
 }
@@ -164,5 +238,21 @@ export default {
             content: ' مورد )';
         }
     }
+}
+
+#main-area{
+    .cm-delete{
+        color: $red-4;
+        border-color: $red-8;
+    }
+
+    .single-actions, .bulk-actions{
+        display: flex;
+        justify-content: flex-end  #{"/* rtl:ignore */"};
+        > * {
+            margin-right: .25rem  #{"/* rtl:ignore */"};
+        }
+    }
+
 }
 </style>

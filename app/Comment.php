@@ -27,6 +27,7 @@ class Comment extends Model
         'post',
         'parent',
         'user',
+        'verifier',
     ];
 
     protected static function boot()
@@ -35,14 +36,6 @@ class Comment extends Model
 
         static::addGlobalScope('verified', function (\Illuminate\Database\Eloquent\Builder $builder) {
             $builder->whereVerified('1');
-        });
-
-        /**
-         * This is for handling above global scoping issue when
-         * using route model binding
-         */
-        \Illuminate\Support\Facades\Route::bind('comment', function ($id) {
-            return \App\Comment::withoutGlobalScope('verified')->findOrFail($id);
         });
     }
 
@@ -54,6 +47,11 @@ class Comment extends Model
     public function user()
     {
         return $this->belongsTo("App\User");
+    }
+
+    public function verifier()
+    {
+        return $this->belongsTo("App\User", 'verified_by', 'id');
     }
 
     public function parent()

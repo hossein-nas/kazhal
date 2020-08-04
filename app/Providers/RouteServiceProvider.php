@@ -26,6 +26,14 @@ class RouteServiceProvider extends ServiceProvider
         //
 
         parent::boot();
+        
+        /**
+         * This is for handling above global scoping issue when
+         * using route model binding
+         */
+        \Illuminate\Support\Facades\Route::bind('comment', function ($id) {
+            return \App\Comment::withoutGlobalScope('verified')->findOrFail($id);
+        });
     }
 
     /**
