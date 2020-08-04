@@ -18,11 +18,20 @@
                         </div><!-- /.head-section -->
 
                         <div>
+                            <h2 class="table-header">
+                                دیدگاه‌های در انتظار تأیید
+                                <span class="count"
+                                      v-text="unapprovedCount">
+
+                                </span>
+                            </h2><!--  /.table-header -->
                             <q-table
                                 :flat="true"
                                 :data="unapprovedComments"
                                 :columns="columns"
                                 :pagination.sync="pagination"
+                                selection="multiple"
+                                :selected.sync="selectedComments"
                                 row-key="id"
                             >
                                 <template v-slot:body-cell-content="props">
@@ -46,7 +55,12 @@
                 <div class="col-md-3 col-12">
                     <section class="side-widgets">
                         <user-stats v-model="userStats"></user-stats>
+                        <latest-approved :value="approvedCommentsByUser"
+                                         title="اخرین پاسخ‌های شما"></latest-approved>
 
+                        <latest-approved :value="approvedNotByMe"
+                                         title="آخرین پاسخ ادمین‌های دیگر"
+                                         :owns="false"></latest-approved>
                     </section>
                 </div>
             </div>
@@ -56,17 +70,20 @@
 
 <script>
 import UserStats from '@/components/UserStats'
+import LatestApproved from '@/components/LatestApproved'
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
     name: 'index',
 
     components: {
-        UserStats
+        UserStats,
+        LatestApproved
     },
 
     data () {
         return {
+            selectedComments: [],
             comments: [],
             userStats: {},
             pagination: {
@@ -92,19 +109,60 @@ export default {
     computed: {
         ...mapGetters('comment', [
             'allComments',
-            'unapprovedComments'
+            'unapprovedComments',
+            'approvedComments',
+            'unapprovedCount',
+            'approvedCommentsByUser'
         ]),
+
+        ...mapGetters('auth', ['getUserInfo']),
+
         columns () {
             return [
-                { name: 'id', required: true, label: '', align: 'right', sortable: true, field: 'id' },
+                // { name: 'id', required: true, label: '', align: 'right', sortable: true, field: 'id' },
                 { name: 'username', required: true, label: 'نام ارسال کننده', align: 'center', sortable: false, field: 'name' },
                 { name: 'content', required: true, label: 'متن دیدگاه', align: 'center', sortable: false, field: 'body', style: 'width: 50%' },
                 { name: 'date', required: true, label: 'تاریخ ارسال', align: 'center', sortable: true, field: 'local_time' }
             ]
+        },
+
+        isItemSelected () {
+            return !!this.selectedComments.length
+        },
+
+        isMultipleItemSelected () {
+            return this.selectedComments.length >= 2
+        },
+
+        approvedNotByMe () {
+            return this.approvedComments.filter(comment => comment.verified_by !== this.getUserInfo.id)
         }
     }
 }
 </script>
 
-<style>
+<style lang="scss">
+.table-header{
+    font-size: 1.125rem;
+    color: $rp-table-header-color;
+    padding-right: .75rem  #{"/* rtl:ignore */"};
+    margin: 0;
+    line-height: 1;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+
+    span{
+        margin-right: 1rem  #{"/* rtl:ignore */"};
+        font-size: 1rem;
+        font-weight: normal;
+        color: $rp-gray-text-1;
+
+        &::before{
+            content: '( ';
+        }
+        &::after{
+            content: ' مورد )';
+        }
+    }
+}
 </style>

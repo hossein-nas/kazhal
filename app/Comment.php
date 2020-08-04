@@ -26,6 +26,7 @@ class Comment extends Model
     protected $with = [
         'post',
         'parent',
+        'user',
     ];
 
     protected static function boot()

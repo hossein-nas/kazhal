@@ -67,7 +67,7 @@ var lazyLoadInstance = new LazyLoad({
 	<section class="comments-section">
 		<article id="comments-index">
 			@foreach($comments as $comment)
-				<div class="comments-item">
+				<div class="comments-item" id="comment-no-{{ $comment->id }}">
 					<div class="head-section">
 						<span class="avatar">
 							<img src="/images/unregistered.svg" alt="">
