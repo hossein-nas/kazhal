@@ -59,5 +59,24 @@ class CommentTest extends TestCase
 
         $this->assertEquals($expectedPath, $comment->path());
     }
-    
+
+    /** @test */
+    public function comments_can_be_trashed()
+    {
+        $comment = factory(Comment::class)->create();
+
+        $comment->trash();
+
+        $this->assertTrue( !  ! $comment->fresh()->trashed);
+    }
+
+    /** @test */
+    public function comments_can_be_untrashed()
+    {
+        $comment = factory(Comment::class)->states('trashed')->create();
+
+        $comment->untrash();
+
+        $this->assertFalse( !  ! $comment->fresh()->trashed);
+    }
 }

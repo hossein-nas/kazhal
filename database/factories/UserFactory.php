@@ -96,19 +96,27 @@ $factory->define(Category::class, function (Faker $faker) {
 
 $factory->define(Comment::class, function (Faker $faker) {
     return [
-        'name'      => $faker->name,
-        'body'      => $faker->text,
-        'email'     => $faker->unique()->safeEmail,
-        'post_id'   => function () {
+        'name'        => $faker->name,
+        'body'        => $faker->text,
+        'email'       => $faker->unique()->safeEmail,
+        'post_id'     => function () {
             return factory(Post::class)->create()->id;
         },
-        'parent_id' => null,
-        'verified'  => 0,
+        'parent_id'   => null,
+        'verified'    => 0,
+        'trashed'     => 0,
+        'verified_by' => null,
     ];
 });
 
 $factory->state(Comment::class, 'verified', function () {
     return [
         'verified' => 1,
+    ];
+});
+
+$factory->state(Comment::class, 'trashed', function () {
+    return [
+        'trashed' => 1,
     ];
 });

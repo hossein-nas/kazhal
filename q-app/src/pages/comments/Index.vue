@@ -82,6 +82,7 @@
                                        color="red-4"
                                        padding="4px 8px"
                                        size="sm"
+                                       @click="trash"
                                        label="جذف دیدگاه" />
 
                             </div>
@@ -154,7 +155,8 @@ export default {
     methods: {
         ...mapActions('comment', [
             'fetchAllComments',
-            'approveComment'
+            'approveComment',
+            'trashComment'
         ]),
 
         approve () {
@@ -171,12 +173,35 @@ export default {
                 })
         },
 
+        trash () {
+            let comment_id = this.selectedComments[0].id
+            let uri = '/api/comments/trash/' + comment_id
+            let data = {
+                comment_id, uri
+            }
+            this.trashComment(data)
+                .then(() => {
+                    this.selectedComments = []
+
+                    this.trashedNotify()
+                })
+        },
+
         approvedNotify () {
             this.$q.notify({
                 message: 'دیدگاه مورد نظر تأیید گردید.',
                 progress: true,
                 timeout: 2500,
                 type: 'positive'
+            })
+        },
+
+        trashedNotify () {
+            this.$q.notify({
+                message: 'دیدگاه مورد نظر با موفقیت حذف گردید.',
+                progress: true,
+                timeout: 2500,
+                type: 'danger'
             })
         }
     },

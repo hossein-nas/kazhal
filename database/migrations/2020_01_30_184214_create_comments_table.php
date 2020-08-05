@@ -23,6 +23,7 @@ class CreateCommentsTable extends Migration
             $table->unsignedBigInteger('post_id');
             $table->unsignedBigInteger('user_id')->nullable();
             $table->boolean('verified')->default(0);
+            $table->boolean('trashed')->default(0);
             $table->unsignedBigInteger('verified_by')->nullable();
             $table->timestamps();
 

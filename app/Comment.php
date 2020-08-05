@@ -15,6 +15,7 @@ class Comment extends Model
         'user_id',
         'post_id',
         'verified',
+        'trashed',
         'verified_by',
     ];
 
@@ -40,6 +41,10 @@ class Comment extends Model
 
         static::addGlobalScope('latest', function (\Illuminate\Database\Eloquent\Builder $builder) {
             $builder->orderByDesc('created_at');
+        });
+
+        static::addGlobalScope('trashed', function (\Illuminate\Database\Eloquent\Builder $builder) {
+            $builder->whereTrashed(0);
         });
     }
 
@@ -82,6 +87,16 @@ class Comment extends Model
     public function unverify()
     {
         $this->update(['verified' => 0, 'verified_by' => null]);
+    }
+
+    public function trash()
+    {
+        $this->update(['trashed' => 1]);
+    }
+
+    public function untrash()
+    {
+        $this->update(['trashed' => 0]);
     }
 
     public function path()

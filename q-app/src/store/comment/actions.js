@@ -15,3 +15,10 @@ export async function approveComment ({ commit, dispatch }, payload) {
             dispatch('fetchAllComments')
         })
 }
+
+export async function trashComment ({ commit, dispatch }, payload) {
+    _axios.post(payload.uri)
+        .then(({ data }) => {
+            dispatch('fetchAllComments')
+        })
+}

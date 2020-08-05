@@ -241,4 +241,30 @@ class CreateCommentTest extends TestCase
             $this->assertEquals($this->user->id, $comment->fresh()->verified_by);
         }
     }
+
+    /** @test */
+    public function a_user_can_trash_a_comment()
+    {
+        $this->signIn();
+
+        $comment = factory(Comment::class)->create();
+
+        $response = $this->json('POST', route('trash.comment', $comment->id));
+
+        $response->assertStatus(201);
+        $this->assertTrue(!! $comment->fresh()->trashed);
+    }
+
+    /** @test */
+    public function a_user_can_untrash_a_comment()
+    {
+        $this->signIn();
+
+        $comment = factory(Comment::class)->states('trashed')->create();
+
+        $response = $this->json('DELETE', route('trash.comment', $comment->id));
+
+        $response->assertStatus(201);
+        $this->assertFalse(!! $comment->fresh()->trashed);
+    }
 }

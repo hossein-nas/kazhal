@@ -72,4 +72,8 @@ Route::group(['middleware' => 'auth:api', 'prefix' => 'comments'], function () {
     Route::post('bulk-approve', 'Comments\ApproveCommentsController@bulk')->name('bulk-approve.comment');
     Route::delete('approve/{comment}/', 'Comments\ApproveCommentsController@destroy')->name('unapprove.comment');
 
+    //trashing and untrashing
+    Route::post('trash/{comment}/', 'Comments\TrashCommentsController@store')->name('trash.comment');
+    Route::delete('trash/{comment}/', 'Comments\TrashCommentsController@destroy')->name('untrash.comment');
+
 });
