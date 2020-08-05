@@ -8,7 +8,7 @@
                             <span class="label">
                                 بخش مدیریت نظرات
                             </span>
-                            <router-link to=""
+                            <router-link to="answer/to/"
                                          class="action success">
                                 ارسال نظر جدید
                                 <q-icon name="add_box"

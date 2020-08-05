@@ -42,6 +42,13 @@ class PostsController extends Controller
         return view('Posts.single', compact('post', 'comments'));
     }
 
+    public function index()
+    {
+        $posts = Post::latest()->where('published', 1)->get();
+
+        return $posts;
+    }
+
     public function getAllPosts()
     {
         $posts = Post::with('author')->with('thumb')->get();
@@ -157,5 +164,4 @@ class PostsController extends Controller
             'data'    => $post,
         ];
     }
-
 }

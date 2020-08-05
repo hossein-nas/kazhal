@@ -96,7 +96,7 @@ export default {
         },
         lastUserComment () {
             if (!this.userSentCommentsCount) return null
-            let lastComment = this.userSentComments.slice(-1)[0]
+            let lastComment = this.userSentComments.slice(0)[0]
             return {
                 type: 'link',
                 path: lastComment.path,

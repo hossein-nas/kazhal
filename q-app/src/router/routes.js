@@ -19,10 +19,10 @@ const routes = [
 
             // comments specific routes ::
             { path: '/comments', redirect: 'comments/index' },
-            { path: '/comments/index', component: () => import('pages/comments/index') },
-            { path: '/comments/show/:commentId/', component: () => import('pages/comments/index') },
-            { path: '/comments/edit/:commentId/', component: () => import('pages/comments/index') },
-            { path: '/comments/answer/comment/:commentId/', component: () => import('pages/comments/index') },
+            { path: '/comments/index', component: () => import('pages/comments/Index') },
+            { path: '/comments/show/:commentId/', component: () => import('pages/comments/Edit') },
+            { path: '/comments/edit/:commentId/', component: () => import('pages/comments/Edit') },
+            { path: '/comments/answer/to/:commentId?/', component: () => import('pages/comments/Answer') },
 
             { path: '/user/preferences',
                 component: () => import('pages/userPreferences/index'),

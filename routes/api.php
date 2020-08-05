@@ -69,5 +69,7 @@ Route::group(['middleware' => 'auth:api', 'prefix' => 'comments'], function () {
 
     // approving
     Route::post('approve/{comment}/', 'Comments\ApproveCommentsController@index')->name('approve.comment');
+    Route::post('bulk-approve', 'Comments\ApproveCommentsController@bulk')->name('bulk-approve.comment');
     Route::delete('approve/{comment}/', 'Comments\ApproveCommentsController@destroy')->name('unapprove.comment');
+
 });

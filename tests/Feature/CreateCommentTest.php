@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Post;
 use App\User;
 use App\Comment;
 use Tests\TestCase;
@@ -221,5 +222,23 @@ class CreateCommentTest extends TestCase
             $this->user->id,
             $this->user->comments->last()->user_id
         );
+    }
+
+    /** @test */
+    public function a_user_can_approve_multiple_comment_at_once()
+    {
+        $this->signIn();
+
+        $post = factory(Post::class)->create();
+        $comments = factory(Comment::class, 5)->create(['post_id' => $post->id]);
+
+        $ids = $comments->pluck('id');
+
+        $response = $this->json('POST', route('bulk-approve.comment'), ['comments' => $ids]);
+
+        foreach($comments as $comment){
+            $this->assertEquals(1, $comment->fresh()->verified);
+            $this->assertEquals($this->user->id, $comment->fresh()->verified_by);
+        }
     }
 }
