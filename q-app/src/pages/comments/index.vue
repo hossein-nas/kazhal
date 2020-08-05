@@ -164,7 +164,20 @@ export default {
                 comment_id, uri
             }
             this.approveComment(data)
-            this.selectedComments = []
+                .then(() => {
+                    this.selectedComments = []
+
+                    this.approvedNotify()
+                })
+        },
+
+        approvedNotify () {
+            this.$q.notify({
+                message: 'دیدگاه مورد نظر تأیید گردید.',
+                progress: true,
+                timeout: 2500,
+                type: 'positive'
+            })
         }
     },
 

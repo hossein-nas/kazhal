@@ -50,7 +50,8 @@ module.exports = function (ctx) {
 
             // Quasar plugins
             plugins: [
-                'LoadingBar'
+                'LoadingBar',
+                'Notify'
             ],
             config: {
                 loadingBar: {

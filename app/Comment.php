@@ -37,6 +37,10 @@ class Comment extends Model
         static::addGlobalScope('verified', function (\Illuminate\Database\Eloquent\Builder $builder) {
             $builder->whereVerified('1');
         });
+
+        static::addGlobalScope('latest', function (\Illuminate\Database\Eloquent\Builder $builder) {
+            $builder->orderByDesc('created_at');
+        });
     }
 
     public function post()

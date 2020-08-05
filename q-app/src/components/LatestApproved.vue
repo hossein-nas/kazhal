@@ -6,7 +6,7 @@
         <div class="body">
             <template v-if="hasContent">
                 <div
-                    v-for="(item, index) in value"
+                    v-for="(item, index) in data"
                     :key="index"
                     class="item-box">
                     <p class="reply-to">
@@ -22,6 +22,18 @@
                         <a :href="item.path"
                            v-text="item.post.title"></a>
                     </p>
+                </div>
+                <div class="flex flex-center"
+                     v-if="maxPages > 1">
+
+                    <q-pagination
+                        size="sm"
+                        flat
+                        color="grey-7"
+                        text-color="white"
+                        v-model="currentPage"
+                        :max="maxPages"
+                    ></q-pagination>
                 </div>
             </template>
 
@@ -42,13 +54,28 @@ export default {
 
     data () {
         return {
-            defaultReplier: 'شما'
+            defaultReplier: 'شما',
+            currentPage: 1,
+            totalPages: 4
         }
     },
 
     computed: {
         hasContent () {
             return this.value.length
+        },
+
+        data () {
+            let startingPoint = (this.currentPage - 1) * (this.totalPages)
+            let endingPoint = startingPoint + this.totalPages
+            return this.value.slice(startingPoint, endingPoint)
+        },
+
+        maxPages () {
+            let allCount = this.value.length
+            let allPages = parseInt((allCount / this.totalPages), 10) + (allCount % this.totalPages ? 1 : 0)
+
+            return allPages
         }
     },
 
