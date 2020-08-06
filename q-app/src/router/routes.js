@@ -19,10 +19,10 @@ const routes = [
 
             // comments specific routes ::
             { path: '/comments', redirect: 'comments/index' },
-            { path: '/comments/index', component: () => import('pages/comments/Index') },
-            { path: '/comments/show/:commentId/', component: () => import('pages/comments/Edit') },
-            { path: '/comments/edit/:commentId/', component: () => import('pages/comments/Edit') },
-            { path: '/comments/answer/to/:commentId?/', component: () => import('pages/comments/Answer') },
+            { path: '/comments/index', component: () => import('pages/comments/Index'), name: 'comment.index' },
+            { path: '/comments/detail/comment/:commentId/', component: () => import('pages/comments/Edit'), name: 'comment.detail' },
+            { path: '/comments/edit/:commentId/', component: () => import('pages/comments/Edit'), name: 'comment.edit' },
+            { path: '/comments/answer/to/:commentId?/', component: () => import('pages/comments/Answer'), name: 'comment.answer' },
 
             { path: '/user/preferences',
                 component: () => import('pages/userPreferences/index'),
@@ -34,7 +34,9 @@ const routes = [
                 ]
             },
 
-            { path: '/user/logout', component: () => import('pages/Logout') }
+            { path: '/user/logout', component: () => import('pages/Logout') },
+
+            { path: '/goto', name: 'goto', component: () => {}, beforeEnter: (to, from, next) => { window.open(to.query.path, '_blank') } }
         ]
     },
     {

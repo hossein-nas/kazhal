@@ -5,24 +5,38 @@
         </div><!--  /.header -->
         <div class="body">
             <template v-if="hasContent">
-                <div
-                    v-for="(item, index) in data"
-                    :key="index"
-                    class="item-box">
-                    <p class="reply-to">
-                        پاسخ
-                        <span class="replier"
-                              v-text="replier(item)">
-                        </span>
-                        به ::
-                        <span> <router-link :to="'/comments/show/' + item.id + '/detail'">{{ item.name }}</router-link></span>
-                    </p>
-                    <p class="reply-post">
-                        در پست ::
-                        <a :href="item.path"
-                           v-text="item.post.title"></a>
-                    </p>
-                </div>
+                <q-list>
+                    <template v-for="(item, index) in data">
+                        <q-item
+                            :key="index"
+                            clickable
+                            :to="'detail/comment/' + item.id + '/'"
+                        >
+                            <q-item-section>
+                                <q-item-label >
+                                    <span>تأیید دیدگاه </span>
+                                    {{ item.name }}
+                                </q-item-label>
+                                <q-item-label caption
+                                              lines="2"
+                                              v-text="item.body"> </q-item-label>
+                            </q-item-section>
+
+                            <q-item-section side
+                                            top
+                            >
+                                <q-item-label v-text="item.local_time"
+                                              style="font-size:10px"></q-item-label>
+                            </q-item-section>
+                        </q-item>
+
+                        <q-separator spaced
+                                     inset
+                                     v-if="index != Object.keys(data).length - 1"
+                                     :key="index"></q-separator>
+                    </template>
+                </q-list>
+
                 <div class="flex flex-center"
                      v-if="maxPages > 1">
 
@@ -92,51 +106,14 @@ export default {
 </script>
 
 <style lang="scss">
-.item-box{
-    padding:.5rem .75rem;
-    border: 1px dashed $rp-input-border;
-    margin-bottom: .5rem;
-
-    &:hover{
-        border-color: darken($rp-input-border, 4);
-        background-color: $rp-bg-gray;
-    }
-
-    p{
-        color: $rp-gray-text-3;
-        font-size: .75rem;
-        line-height: 14px;
-        margin: 0;
-
-        &.reply-to{
-            margin-bottom: .5rem;
-
-            span,a{
-                text-decoration: none;
-                font-size: .875rem;
-                font-weight: 600;
-                color: $rp-gray-text-4;
-                padding: 0 .125rem;
-
-                &.replier{
-                color: $rp-gray-text-2;
-                }
-            }
-        }
-
-        &.reply-post{
-
-            a{
-                font-weight: 600;
-                font-size: .875rem;
-                padding-right: .25rem;
-                text-decoration: none;
-                color: #437D96;
-            }
+.q-list{
+    .q-item__label{
+        >span{
+            color: $grey-7;
+            font-weight: normal;
         }
     }
-}// !.item-box
-
+}
 .no-data{
     margin: 0;
     text-align: center;
