@@ -93,6 +93,7 @@
                                        color="teal-7"
                                        padding="4px 8px"
                                        size="sm"
+                                       @click.prevent="bulkApprove"
                                        label="تأییـــد دیــــدگاهها" />
                                 <q-btn outline
                                        color="red-4"
@@ -156,6 +157,7 @@ export default {
         ...mapActions('comment', [
             'fetchAllComments',
             'approveComment',
+            'approveMultipleComments',
             'trashComment'
         ]),
 
@@ -166,6 +168,16 @@ export default {
                 comment_id, uri
             }
             this.approveComment(data)
+                .then(() => {
+                    this.selectedComments = []
+
+                    this.approvedNotify()
+                })
+        },
+
+        bulkApprove () {
+            let comments = this.selectedComments.map(comment => comment.id)
+            this.approveMultipleComments(comments)
                 .then(() => {
                     this.selectedComments = []
 
@@ -238,16 +250,20 @@ export default {
             return this.approvedComments.filter(comment => comment.verified_by !== this.getUserInfo.id)
         },
 
+        selectedId () {
+            return this.selectedComments[0].id
+        },
+
         answerToLink () {
-            return 'answer/to/' + this.selectedComments[0].id + '/'
+            return { name: 'comment.answer', params: { commentId: this.selectedId } }
         },
 
         detailPageLink () {
-            return 'detail/comment/' + this.selectedComments[0].id + '/'
+            return { name: 'comment.detail', params: { commentId: this.selectedId } }
         },
 
         editPageLink () {
-            return 'edit/comment/' + this.selectedComments[0].id + '/'
+            return { name: 'comment.edit', params: { commentId: this.selectedId } }
         }
     }
 }

@@ -8,7 +8,7 @@
                 <q-list>
                     <template v-for="(item, index) in data">
                         <q-item
-                            :key="index"
+                            :key="item.id"
                             clickable
                             :to="'detail/comment/' + item.id + '/'"
                         >

@@ -22,3 +22,11 @@ export async function trashComment ({ commit, dispatch }, payload) {
             dispatch('fetchAllComments')
         })
 }
+
+export async function approveMultipleComments ({ commit, dispatch }, payload) {
+    let uri = '/api/comments/bulk-approve'
+    _axios.post(uri, { comments: payload })
+        .then(({ data }) => {
+            dispatch('fetchAllComments')
+        })
+}

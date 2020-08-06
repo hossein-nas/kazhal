@@ -1,5 +1,6 @@
 <template>
-    <q-page padding>
+    <q-page padding
+            :key="this.$route.name">
         <div class="row"
              v-if="loaded">
             <div class="col-8 offset-2"
@@ -8,7 +9,8 @@
                     <span class="label ">مشاهده‌ی جزئیات دیدگاه</span>
 
                     <router-link :to="'/comments/answer/to/' + comment.id + '/' "
-                                 class="action primary">
+                                 class="action primary"
+                                 tabindex="0">
                         پاسخ به این دیدگاه
                         <q-icon size="sm"
                                 name="reply"></q-icon>
@@ -43,13 +45,20 @@
                                  class="user-select"
                                  disabled
                                  readonly
-
+                                 v-if="!editing"
                         >
                             <template v-slot:control >
-                                <div v-text="comment.body"
-                                     style="min-height: 6rem"></div>
+                                <div
+                                    v-text="comment.body"
+                                    style="min-height: 6rem"></div>
                             </template>
                         </q-field>
+
+                        <q-input type="textarea"
+                                 outlined
+                                 ref="formbody"
+                                 v-else
+                                 v-model="form.body" ></q-input>
                     </div>
                 </div><!--  /.row detail-body -->
 
@@ -59,6 +68,7 @@
                     </div>
                     <div class="col-12 col-md-9 q-px-lg">
                         <a :href="comment.post.path"
+                           tabindex="-1"
                            target="_blank"
                            v-text="comment.post.title"></a>
                     </div>
@@ -90,7 +100,8 @@
                 <q-separator spaced
                 ></q-separator>
 
-                <div class="action-buttons flex q-my-lg q-px-md" >
+                <div class="action-buttons flex q-my-lg q-px-md"
+                     v-if="!editing">
                     <div class="right-buttons"
                          style="flex : 1">
                         <q-btn outline
@@ -132,7 +143,19 @@
                             :label="trashUntrashBtnText"
                         ></q-btn>
                     </div>
-                </div>
+                </div> <!-- !.action-buttons -->
+
+                <div class="action-buttons flex justify-end q-ma-md q-mt-lg"
+                     v-else>
+                    <q-btn unelevated
+                           color="primary"
+                           label="ثبت تغییرات"
+                           tabindex="0"
+                           @click="submitChange"
+                           size=".9rem"
+                           padding=".75rem 2.5rem"></q-btn>
+
+                </div><!--  /.action-buttons -->
 
             </div>
 
@@ -147,12 +170,26 @@ export default {
     data () {
         return {
             loaded: false,
-            comment: []
+            comment: [],
+            editing: false,
+            form: {}
         }
     },
 
     created () {
         this.fetchComment()
+    },
+    updated () {
+        if (this.$route.name === 'comment.edit') {
+            this.editing = true
+            this.form.body = this.comment.body
+
+            this.$refs.formbody.focus()
+        } else if (this.$route.name === 'comment.detail') {
+            this.editing = false
+
+            this.form = []
+        }
     },
 
     computed: {
@@ -174,8 +211,11 @@ export default {
                     this.loaded = true
                     this.comment = data
                 })
-        }
+        },
 
+        submitChange () {
+
+        }
     }
 }
 </script>
