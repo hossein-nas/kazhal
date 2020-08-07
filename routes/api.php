@@ -66,14 +66,15 @@ Route::group(['middleware' => 'auth:api', 'prefix' => 'comments'], function () {
     Route::get('/', 'CommentsController@index')->name('comments.index');
     Route::post('/create/', 'CommentsController@store')->name('api.comment.store');
     Route::get('/{comment}/show', 'CommentsController@show')->name('comment.show');
+    Route::patch('/update/{comment}', 'CommentsController@update')->name('comment.update');
 
     // approving
-    Route::post('approve/{comment}/', 'Comments\ApproveCommentsController@index')->name('approve.comment');
-    Route::post('bulk-approve', 'Comments\ApproveCommentsController@bulk')->name('bulk-approve.comment');
-    Route::delete('approve/{comment}/', 'Comments\ApproveCommentsController@destroy')->name('unapprove.comment');
+    Route::post('/approve/{comment}/', 'Comments\ApproveCommentsController@index')->name('approve.comment');
+    Route::post('/bulk-approve', 'Comments\ApproveCommentsController@bulk')->name('bulk-approve.comment');
+    Route::delete('/approve/{comment}/', 'Comments\ApproveCommentsController@destroy')->name('unapprove.comment');
 
     //trashing and untrashing
-    Route::post('trash/{comment}/', 'Comments\TrashCommentsController@store')->name('trash.comment');
-    Route::delete('trash/{comment}/', 'Comments\TrashCommentsController@destroy')->name('untrash.comment');
+    Route::post('/trash/{comment}/', 'Comments\TrashCommentsController@store')->name('trash.comment');
+    Route::delete('/trash/{comment}/', 'Comments\TrashCommentsController@destroy')->name('untrash.comment');
 
 });

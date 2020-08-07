@@ -236,10 +236,11 @@ class CreateCommentTest extends TestCase
 
         $response = $this->json('POST', route('bulk-approve.comment'), ['comments' => $ids]);
 
-        foreach($comments as $comment){
+        foreach ($comments as $comment) {
             $this->assertEquals(1, $comment->fresh()->verified);
             $this->assertEquals($this->user->id, $comment->fresh()->verified_by);
         }
+
     }
 
     /** @test */
@@ -252,12 +253,13 @@ class CreateCommentTest extends TestCase
         $response = $this->json('POST', route('trash.comment', $comment->id));
 
         $response->assertStatus(201);
-        $this->assertTrue(!! $comment->fresh()->trashed);
+        $this->assertTrue( !  ! $comment->fresh()->trashed);
     }
 
     /** @test */
     public function a_user_can_untrash_a_comment()
     {
+        $this->withoutExceptionHandling();
         $this->signIn();
 
         $comment = factory(Comment::class)->states('trashed')->create();
@@ -265,6 +267,25 @@ class CreateCommentTest extends TestCase
         $response = $this->json('DELETE', route('trash.comment', $comment->id));
 
         $response->assertStatus(201);
-        $this->assertFalse(!! $comment->fresh()->trashed);
+        $this->assertFalse( !  ! $comment->fresh()->trashed);
     }
+
+    /** @test */
+    public function comments_can_be_updated_by_admins_and_post_author()
+    {
+        $this->signIn();
+
+        $comment = factory(Comment::class)->create(['body' => 'A standard comment text.']);
+
+        $text = 'Body of comment has been changed!';
+        $data = [
+            'body' => $text,
+        ];
+
+        $response = $this->json('PATCH', route('comment.update', $comment->id), $data);
+
+        $response->assertStatus(201);
+        $this->assertEquals($text, $comment->fresh()->body);
+    }
+
 }

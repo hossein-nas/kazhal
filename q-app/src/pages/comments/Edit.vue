@@ -53,12 +53,15 @@
                                     style="min-height: 6rem"></div>
                             </template>
                         </q-field>
-
                         <q-input type="textarea"
+                                 v-model="body"
                                  outlined
-                                 ref="formbody"
+                                 standout
+                                 autogrow
+                                 inputStyle="min-height: 7rem"
                                  v-else
-                                 v-model="form.body" ></q-input>
+                                 autofocus
+                        />
                     </div>
                 </div><!--  /.row detail-body -->
 
@@ -148,12 +151,12 @@
                 <div class="action-buttons flex justify-end q-ma-md q-mt-lg"
                      v-else>
                     <q-btn unelevated
-                           color="primary"
+                           color="secondary"
                            label="ثبت تغییرات"
                            tabindex="0"
-                           @click="submitChange"
-                           size=".9rem"
-                           padding=".75rem 2.5rem"></q-btn>
+                           @click.prevent="submitChange"
+                           size=".95rem"
+                           padding=".95rem 2.5rem"></q-btn>
 
                 </div><!--  /.action-buttons -->
 
@@ -172,23 +175,30 @@ export default {
             loaded: false,
             comment: [],
             editing: false,
-            form: {}
+            body: ''
         }
     },
 
     created () {
         this.fetchComment()
     },
+
+    watch: {
+        editing (val, old) {
+            if (val === true && old === false) {
+                this.changeToEditing()
+            } else {
+                this.revertEditing()
+            }
+        }
+
+    },
+
     updated () {
         if (this.$route.name === 'comment.edit') {
             this.editing = true
-            this.form.body = this.comment.body
-
-            this.$refs.formbody.focus()
         } else if (this.$route.name === 'comment.detail') {
             this.editing = false
-
-            this.form = []
         }
     },
 
@@ -213,8 +223,38 @@ export default {
                 })
         },
 
-        submitChange () {
+        changeToEditing () {
+            this.body = this.comment.body
+        },
 
+        revertEditing () {
+            this.fetchComment()
+
+            this.body = null
+        },
+
+        submitChange () {
+            if (this.editing) {
+                let uri = `/api/comments/update/${this.comment.id}/`
+
+                this.$axios.patch(uri, { body: this.body })
+                    .then(() => {
+                        this.notify()
+
+                        setTimeout(() => {
+                            this.$router.push({ name: 'comment.detail', params: { commentId: this.comment.id } })
+                        }, 1000)
+                    })
+            }
+        },
+
+        notify () {
+            this.$q.notify({
+                type: 'positive',
+                color: 'secondary',
+                message: 'دیدگاه با موفقیت ویرایش شد',
+                timeout: 950
+            })
         }
     }
 }

@@ -6,9 +6,9 @@
         <div class="body">
             <template v-if="hasContent">
                 <q-list>
-                    <template v-for="(item, index) in data">
+                    <div  v-for="(item, index) in data"
+                          :key="item.id">
                         <q-item
-                            :key="item.id"
                             clickable
                             :to="'detail/comment/' + item.id + '/'"
                         >
@@ -33,8 +33,8 @@
                         <q-separator spaced
                                      inset
                                      v-if="index != Object.keys(data).length - 1"
-                                     :key="index"></q-separator>
-                    </template>
+                        ></q-separator>
+                    </div>
                 </q-list>
 
                 <div class="flex flex-center"

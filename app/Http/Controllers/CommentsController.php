@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Comment;
+use App\Rules\validString;
 use Illuminate\Http\Request;
 use App\Http\Requests\CommentRequest;
 
@@ -59,5 +60,16 @@ class CommentsController extends Controller
         }
 
         return $comments;
+    }
+
+    public function update (Comment $comment)
+    {
+        $data= request()->validate([
+            'body' => ['required', 'min:10', 'max:500', new \App\Rules\validString],
+        ]);
+
+        $comment->update($data);
+
+        return response([], 201);
     }
 }

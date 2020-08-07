@@ -32,7 +32,7 @@ class RouteServiceProvider extends ServiceProvider
          * using route model binding
          */
         \Illuminate\Support\Facades\Route::bind('comment', function ($id) {
-            return \App\Comment::withoutGlobalScope('verified')->findOrFail($id);
+            return \App\Comment::withoutGlobalScopes()->findOrFail($id);
         });
     }
 

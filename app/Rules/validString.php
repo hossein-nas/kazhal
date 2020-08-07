@@ -25,7 +25,7 @@ class validString implements Rule
      */
     public function passes($attribute, $value)
     {
-        $re = '/[\^&=!\\\\\/#$%@<>]+/m';
+        $re = '/[\^&=\\\\\/#$%@<>]+/m';
 
         return  ! preg_match_all($re, $value, $matches, PREG_SET_ORDER, 0);
     }

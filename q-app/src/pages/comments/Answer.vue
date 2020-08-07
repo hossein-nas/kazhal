@@ -48,7 +48,6 @@
                                      standout
                                      inputStyle="min-height: 15rem"
                                      outlined
-                                     min-row="5"
                                      v-model="form.body"></q-input>
                         </div>
                     </div><!--  /.row -->
