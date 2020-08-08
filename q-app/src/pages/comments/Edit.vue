@@ -108,6 +108,7 @@
                     <div class="right-buttons"
                          style="flex : 1">
                         <q-btn outline
+                               v-show="commentVisibility"
                                size=".8rem"
                                padding=".3rem 1.5rem"
                                color="grey-7"
@@ -212,6 +213,14 @@ export default {
 
         trashUntrashBtnText () {
             return this.comment.trashed ? 'بازگردانی حذف' : 'حذف دیدگاه'
+        },
+
+        commentVisibility () {
+            return !!(this.comment.verified && !this.comment.trashed)
+        },
+
+        isVerified () {
+            return !!this.comment.verified
         }
     },
 

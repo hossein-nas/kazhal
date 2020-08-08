@@ -7,6 +7,10 @@ export function allComments (state) {
     return state.comments
 }
 
+export function allTrashed (state) {
+    return state.trashed
+}
+
 export function isLoading (state) {
     return state.loading
 }

@@ -114,6 +114,10 @@
                         <latest-approved :value="approvedNotByMe"
                                          title="آخرین تأیید شده‌ها توسط ادمین‌های دیگر"
                                          :owns="false"></latest-approved>
+
+                        <latest-approved :value="allTrashed"
+                                         title="دیدگاه‌های موجود در زباله‌دان"
+                                         :owns="false"></latest-approved>
                     </section>
                 </div>
             </div>
@@ -161,22 +165,22 @@ export default {
             'trashComment'
         ]),
 
-        approve () {
+        async approve () {
             let comment_id = this.selectedComments[0].id
             let uri = '/api/comments/approve/' + comment_id
             let data = {
-                comment_id, uri
+                uri
             }
-            this.approveComment(data)
-                .then(() => {
-                    this.selectedComments = []
 
-                    this.approvedNotify()
-                })
+            await this.approveComment(data)
+
+            this.selectedComments = []
+            this.approvedNotify()
         },
 
         bulkApprove () {
             let comments = this.selectedComments.map(comment => comment.id)
+
             this.approveMultipleComments(comments)
                 .then(() => {
                     this.selectedComments = []
@@ -221,6 +225,7 @@ export default {
     computed: {
         ...mapGetters('comment', [
             'allComments',
+            'allTrashed',
             'unapprovedComments',
             'approvedComments',
             'unapprovedCount',

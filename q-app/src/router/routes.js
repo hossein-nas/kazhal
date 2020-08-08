@@ -36,7 +36,7 @@ const routes = [
 
             { path: '/user/logout', component: () => import('pages/Logout') },
 
-            { path: '/goto', name: 'goto', component: () => {}, beforeEnter: (to, from, next) => { window.open(to.query.path, '_blank') } }
+            { path: '/goto', name: 'goto', component: () => {}, beforeEnter: (to, from, next) => { window.open(to.query.path + to.hash, '_blank') } }
         ]
     },
     {

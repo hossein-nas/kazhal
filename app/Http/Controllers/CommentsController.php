@@ -47,13 +47,11 @@ class CommentsController extends Controller
     {
         if (request()->has("all") && request()->get('all') === '1') {
             $comments = Comment::withoutGlobalScope('verified')->get();
-        } else
-
-        if (request()->has("unapproved") && request()->get('unapproved') === '1') {
+        } else if (request()->has("unapproved") && request()->get('unapproved') === '1') {
             $comments = Comment::withoutGlobalScope('verified')->whereVerified('0')->get();
-        } else
-
-        if (request()->has("own") && request()->get('own') === '1') {
+        } else if (request()->has("trashed") && request()->get('trashed') === '1') {
+            $comments = Comment::withoutGlobalScopes(['verified','trashed'])->whereTrashed(1)->get();
+        } else if (request()->has("own") && request()->get('own') === '1') {
             $comments = Comment::withoutGlobalScope('verified')->whereVerified('1')->where('verified_by', auth('api')->id())->get();
         } else {
             $comments = Comment::all();
@@ -62,9 +60,9 @@ class CommentsController extends Controller
         return $comments;
     }
 
-    public function update (Comment $comment)
+    public function update(Comment $comment)
     {
-        $data= request()->validate([
+        $data = request()->validate([
             'body' => ['required', 'min:10', 'max:500', new \App\Rules\validString],
         ]);
 
@@ -72,4 +70,5 @@ class CommentsController extends Controller
 
         return response([], 201);
     }
+
 }
