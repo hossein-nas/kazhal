@@ -110,7 +110,7 @@ export default {
             this.lastname = this.user.lastname
             this.email = this.user.email
             this.bio = this.user.bio
-            this.photo = this.user.photo.specs[0].fullpath
+            this.photo = this.user.photo.specs[0].relativepath
             this.role = this.user.role.title
         },
         submitChanges () {

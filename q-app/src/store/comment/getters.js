@@ -7,6 +7,10 @@ export function allComments (state) {
     return state.comments
 }
 
+export function isLoading (state) {
+    return state.loading
+}
+
 export function unapprovedComments (state) {
     return state.comments.filter(comment => !comment.verified)
 }

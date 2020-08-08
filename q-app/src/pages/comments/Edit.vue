@@ -134,6 +134,7 @@
                             unelevated
                             class="q-mr-sm"
                             padding=".3rem 1.5rem"
+                            @click.prevent="verificationMethod"
                             :color="comment.verified? 'orange-5': 'light-green-7'"
                             :label="verifyUnverifyBtnText"
                         ></q-btn>
@@ -142,6 +143,7 @@
                             size=".8rem"
                             unelevated
                             padding=".3rem 1.5rem"
+                            @click.prevent="trashMethod"
                             :color="comment.trashed? 'brown-5' : 'red-4'"
                             :label="trashUntrashBtnText"
                         ></q-btn>
@@ -167,6 +169,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
     name: 'Edit',
 
@@ -213,13 +216,21 @@ export default {
     },
 
     methods: {
+        ...mapActions('comment', [
+            'approveComment',
+            'trashComment'
+        ]),
+
         fetchComment () {
+            this.loaded = false
+
             let comment_id = this.$route.params.commentId
             let uri = `/api/comments/${comment_id}/show`
             this.$axios.get(uri)
                 .then(({ data }) => {
-                    this.loaded = true
                     this.comment = data
+
+                    this.$nextTick(() => { this.loaded = true })
                 })
         },
 
@@ -255,6 +266,44 @@ export default {
                 message: 'دیدگاه با موفقیت ویرایش شد',
                 timeout: 950
             })
+        },
+
+        verificationMethod () {
+            let uri = `/api/comments/approve/${this.comment.id}/`,
+                message = '',
+                type = 'post'
+
+            if (this.comment.verified === 1) {
+                message = 'دیدگاه مرود نظر با موفقیت از حالت تأیید بازگردانی شد.'
+                type = 'delete'
+            } else {
+                message = 'دیدگاه مورد نظر با موفقیت تأیید گردید.'
+            }
+
+            let data = {
+                uri, type
+            }
+
+            this.approveComment(data)
+                .then(() => {
+                    this.comment.verified = !this.comment.verified
+                })
+        },
+
+        trashMethod () {
+            let uri = `/api/comments/trash/${this.comment.id}/`,
+                type = 'post'
+
+            if (this.comment.trashed === 1) type = 'delete'
+
+            let data = {
+                type, uri
+            }
+
+            this.trashComment(data)
+                .then(() => {
+                    this.comment.trashed = !this.comment.trashed
+                })
         }
     }
 }

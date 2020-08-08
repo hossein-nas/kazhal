@@ -1,6 +1,7 @@
 .panel{
     padding: .5rem;
     user-select: none;
+    position: relative;
     .header{
         background-color: $rp-gray-1;
         border-radius: .355rem;

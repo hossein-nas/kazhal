@@ -3,7 +3,9 @@
         <div class="header">
             {{ title }}
         </div><!--  /.header -->
-        <div class="body">
+        <div class="body"
+             v-if="isLoading"
+        >
             <template v-if="hasContent">
                 <q-list>
                     <div  v-for="(item, index) in data"
@@ -56,10 +58,17 @@
                 هنوز داده‌ای ثبت نشده !
             </p>
         </div>
+
+        <q-inner-loading :showing="!isLoading">
+            <q-spinner size="2rem"
+                       color="blue"
+                       :thickness="3"/>
+        </q-inner-loading>
     </div><!--  /.panel -->
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 
 export default {
     name: 'LatestApproved',
@@ -75,8 +84,10 @@ export default {
     },
 
     computed: {
+        ...mapGetters('comment', ['isLoading']),
+
         hasContent () {
-            return this.value.length
+            return !!this.value.length
         },
 
         data () {

@@ -7,52 +7,7 @@
                           ref="form"
                           @input="changed">
 
-                        <div class="form-control">
-                            <div class="label">
-                                انتخاب فایل
-                            </div><!-- /.label -->
-                            <q-file outlined
-                                    v-model="file"
-                                    :rules="[fileRule]">
-                                <template v-slot:prepend>
-                                    <q-icon name="attach_file" />
-                                </template>
-                            </q-file>
-                        </div><!-- /.form-control file-picker -->
-
-                        <div class="form-control">
-                            <div class="label">
-                                عنوان عکس
-                            </div><!-- /.label -->
-                            <q-input v-model="thumbnail.title"
-                                     outlined
-                                     ref="title"
-                                     hint="یک عنوان برای عکس مورد نظر انتخاب کنید."/>
-
-                        </div><!-- /.form-control -->
-
-                        <div class="form-control">
-                            <div class="label">
-                                توضیح :
-                            </div><!-- /.label -->
-                            <q-input v-model="thumbnail.desc"
-                                     type="textarea"
-                                     :row="3"
-                                     outlined
-                                     ref="title"
-                                     hint="توضیح مختصری برای عکس بنویسید"/>
-
-                        </div><!-- /.form-control -->
-
-                        <div class="form-control  submit ">
-                            <q-btn  flat
-                                    style="color: #1c4440"
-                                    type="submit"
-                                    @click.prevent="submitFileUpload"
-                                    label="ثبت تغییرات"
-                                    :disable="!anyChange"
-                            />
-                        </div><!-- /.form-control .submit -->
+                        <progress-bar :value="100" />
 
                     </form>
                 </div><!-- /.form -->
@@ -63,10 +18,16 @@
 </template>
 
 <script>
+import ProgressBar from '@/components/Image/ProgressBar'
 import { mapGetters } from 'vuex'
 
 export default {
     name: 'changeThumbnail',
+
+    components: {
+        ProgressBar
+    },
+
     data () {
         return {
             file: null,

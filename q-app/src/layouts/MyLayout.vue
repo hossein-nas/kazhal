@@ -180,7 +180,7 @@ export default {
         updateUserinfo () {
             this.username = this.user.firstname + ' ' + this.user.lastname
             this.user_role = this.user.role.slug
-            this.photo = this.user.photo.specs[0].fullpath
+            this.photo = this.user.photo.specs[0].relativepath
         }
 
     },
