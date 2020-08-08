@@ -10,10 +10,19 @@ export async function fetchAllComments ({ commit, dispatch }) {
 }
 
 export async function approveComment ({ commit, dispatch }, payload) {
-    _axios[payload.type](payload.uri)
-        .then(({ data }) => {
-            dispatch('fetchAllComments')
-        })
+    console.log('inside approveComment')
+
+    let type = 'post'
+
+    if (payload.type) type = payload.type
+
+    let res = _axios({
+        method: type,
+        url: payload.uri,
+        data: {}
+    })
+
+    console.log(res)
 }
 
 export async function trashComment ({ commit, dispatch }, payload) {

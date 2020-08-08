@@ -246,7 +246,7 @@ export default {
 
         submitChange () {
             if (this.editing) {
-                let uri = `/api/comments/update/${this.comment.id}/`
+                let uri = `/api/comments/update/${this.comment.id}`
 
                 this.$axios.patch(uri, { body: this.body })
                     .then(() => {
@@ -269,7 +269,7 @@ export default {
         },
 
         verificationMethod () {
-            let uri = `/api/comments/approve/${this.comment.id}/`,
+            let uri = `/api/comments/approve/${this.comment.id}`,
                 message = '',
                 type = 'post'
 
@@ -291,7 +291,7 @@ export default {
         },
 
         trashMethod () {
-            let uri = `/api/comments/trash/${this.comment.id}/`,
+            let uri = `/api/comments/trash/${this.comment.id}`,
                 type = 'post'
 
             if (this.comment.trashed === 1) type = 'delete'
