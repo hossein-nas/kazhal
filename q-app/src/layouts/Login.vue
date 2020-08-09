@@ -70,31 +70,31 @@ export default {
             loading: false,
             rememberMe: false,
             username: 'hossein@example.com',
-            password: '123'
+            password: '123',
         }
     },
     directives: {
         autofocus: {
             inserted (el) {
                 el.focus()
-            }
-        }
+            },
+        },
     },
     created () {
     },
     methods: {
         ...mapActions({
-            initSignIn: 'auth/init'
+            initSignIn: 'auth/init',
         }),
         login () {
             this.loading = true
             this.initSignIn({
                 data: {
                     username: this.username,
-                    password: this.password
-                }
+                    password: this.password,
+                },
             }).then(res => {
-                this.$router.push({ path: '/dashboard' })
+                this.$router.push({ path: '/dashboard', })
                     .catch(() => {
                         this.loading = false
                     })
@@ -102,8 +102,8 @@ export default {
         },
         validateInputs () {
             //
-        }
-    }
+        },
+    },
 }
 </script>
 

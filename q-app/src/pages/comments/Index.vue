@@ -135,7 +135,7 @@ export default {
 
     components: {
         UserStats,
-        LatestApproved
+        LatestApproved,
     },
 
     data () {
@@ -147,9 +147,9 @@ export default {
                 rowsPerPage: 10,
                 page: 1,
                 sortBy: 'date',
-                descending: false
+                descending: false,
                 // rowsNumber: xx if getting data from a server
-            }
+            },
         }
     },
 
@@ -169,7 +169,7 @@ export default {
             let comment_id = this.selectedComments[0].id
             let uri = '/api/comments/approve/' + comment_id
             let data = {
-                uri
+                uri,
             }
 
             await this.approveComment(data)
@@ -193,7 +193,7 @@ export default {
             let comment_id = this.selectedComments[0].id
             let uri = '/api/comments/trash/' + comment_id
             let data = {
-                comment_id, uri
+                comment_id, uri,
             }
             this.trashComment(data)
                 .then(() => {
@@ -208,7 +208,7 @@ export default {
                 message: 'دیدگاه مورد نظر تأیید گردید.',
                 progress: true,
                 timeout: 2500,
-                type: 'positive'
+                type: 'positive',
             })
         },
 
@@ -217,9 +217,9 @@ export default {
                 message: 'دیدگاه مورد نظر با موفقیت حذف گردید.',
                 progress: true,
                 timeout: 2500,
-                type: 'danger'
+                type: 'danger',
             })
-        }
+        },
     },
 
     computed: {
@@ -237,9 +237,9 @@ export default {
         columns () {
             return [
                 // { name: 'id', required: true, label: '', align: 'right', sortable: true, field: 'id' },
-                { name: 'username', required: true, label: 'نام ارسال کننده', align: 'center', sortable: false, field: 'name' },
-                { name: 'content', required: true, label: 'متن دیدگاه', align: 'center', sortable: false, field: 'body', style: 'width: 50%' },
-                { name: 'date', required: true, label: 'تاریخ ارسال', align: 'center', sortable: true, field: 'local_time' }
+                { name: 'username', required: true, label: 'نام ارسال کننده', align: 'center', sortable: false, field: 'name', },
+                { name: 'content', required: true, label: 'متن دیدگاه', align: 'center', sortable: false, field: 'body', style: 'width: 50%', },
+                { name: 'date', required: true, label: 'تاریخ ارسال', align: 'center', sortable: true, field: 'local_time', }
             ]
         },
 
@@ -260,17 +260,17 @@ export default {
         },
 
         answerToLink () {
-            return { name: 'comment.answer', params: { commentId: this.selectedId } }
+            return { name: 'comment.answer', params: { commentId: this.selectedId, }, }
         },
 
         detailPageLink () {
-            return { name: 'comment.detail', params: { commentId: this.selectedId } }
+            return { name: 'comment.detail', params: { commentId: this.selectedId, }, }
         },
 
         editPageLink () {
-            return { name: 'comment.edit', params: { commentId: this.selectedId } }
-        }
-    }
+            return { name: 'comment.edit', params: { commentId: this.selectedId, }, }
+        },
+    },
 }
 </script>
 

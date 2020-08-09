@@ -101,7 +101,7 @@ export default {
             role: '',
             message: '',
             anyError: false,
-            anyChange: false
+            anyChange: false,
         }
     },
     methods: {
@@ -117,16 +117,18 @@ export default {
             if (this.anyErrors()) {
                 return false
             }
+
             this.$axios.post('api/user/update', {
                 firstname: this.firstname,
                 lastname: this.lastname,
-                bio: this.bio
+                bio: this.bio,
             })
                 .then(res => {
                     if (res.data.status === 'ok') {
                         this.message = res.data.text
                         setTimeout(() => { this.message = '' }, 3000)
                     }
+
                     if (res.data.status === 'error') {
                         this.anyError = true
                         this.error = res.data.text
@@ -145,33 +147,38 @@ export default {
             if (val === null || val.length === 0) {
                 return true
             }
+
             if (val.length < 10) {
                 return false || 'طول کاراکترهای بیوگرافی باید بیشتر از ۱۰ کاراکتر باشد.'
             }
         },
         anyErrors () {
             let errors = this.$refs
+
             for (let err in errors) {
                 if (!errors[err].validate()) {
                     this.anyError = true
+
                     return true
                 }
             }
+
             this.anyError = false
+
             return false
-        }
+        },
     },
     computed: {
-        ...mapGetters({ user: 'auth/getUserInfo' }),
+        ...mapGetters({ user: 'auth/getUserInfo', }),
         photoPath () {
             return window.baseURL + this.photo
-        }
+        },
     },
     mounted () {
         if (this.user) {
             this.setUser()
         }
-    }
+    },
 }
 </script>
 

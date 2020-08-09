@@ -41,14 +41,14 @@ export default {
     name: 'serviceColor',
     props: {
         value: {
-            required: true
-        }
+            required: true,
+        },
     },
     data () {
         return {
             activeColor: 1,
             colorsLoaded: false,
-            allColors: []
+            allColors: [],
         }
     },
     async mounted () {
@@ -66,8 +66,8 @@ export default {
         check (el) {
             this.activeColor = el
             this.$emit('input', this.activeColor)
-        }
-    }
+        },
+    },
 }
 </script>
 

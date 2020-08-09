@@ -62,16 +62,16 @@ export default {
     props: {
         value: {
             required: true,
-            type: Object
+            type: Object,
         },
         visible: Boolean,
-        cats: Array
+        cats: Array,
     },
     data () {
         return {
             isVisible: false,
             title: null,
-            parent: null
+            parent: null,
         }
     },
     mounted () {
@@ -81,6 +81,7 @@ export default {
         // this is for initial validating inputs
         if (this.$refs && this.isVisible) {
             let ref = this.$refs
+
             for (let p in ref) {
                 ref[p].validate()
             }
@@ -89,15 +90,16 @@ export default {
     watch: {
         visible (val) {
             this.isVisible = val
-        }
+        },
     },
     computed: {
         anyError () {
             if (this.title !== null) {
                 return true
             }
+
             return false
-        }
+        },
 
     },
     methods: {
@@ -105,6 +107,7 @@ export default {
             if (val === null || val === undefined) {
                 return false || 'عنوانی برای دسته انتخاب نکردید'
             }
+
             if (val && val.length < 3) {
                 return false || 'طول دسته بسیار کوتاه است.'
             }
@@ -121,7 +124,7 @@ export default {
         addedCat () {
             let data = {
                 title: this.title,
-                parent_id: this.parent ? this.parent.value : null
+                parent_id: this.parent ? this.parent.value : null,
             }
             this.$axios.post('/api/category/add-new', data)
                 .then(res => {
@@ -130,8 +133,8 @@ export default {
                     this.$emit('done', data)
                     this.isVisible = false
                 })
-        }
-    }
+        },
+    },
 }
 </script>
 

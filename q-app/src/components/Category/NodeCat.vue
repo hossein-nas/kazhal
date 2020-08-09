@@ -36,7 +36,7 @@ export default {
     ],
     data () {
         return {
-            selectedCategory: null
+            selectedCategory: null,
         }
     },
     computed: {
@@ -44,14 +44,16 @@ export default {
             if (this.node.children && this.node.children.length) {
                 return this.node.children
             }
+
             return null
-        }
+        },
     },
     mounted () {
         // this is for initial checking for initial check items
         if (this.init && this.init.length) {
             let nodeId = this.node.id
             let list = this.init
+
             if (list.includes(nodeId)) {
                 this.itemclicked()
             }
@@ -70,8 +72,8 @@ export default {
                 this.selectedCategory = 0
                 this.$root.$emit('category_deselected', this.node)
             }
-        }
-    }
+        },
+    },
 }
 </script>
 

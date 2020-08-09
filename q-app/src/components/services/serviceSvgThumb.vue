@@ -64,13 +64,13 @@ export default {
             uploadDone: false,
             uploadProgress: 0,
             uploadedFile: null,
-            filePreview: null
+            filePreview: null,
         }
     },
     computed: {
         fileIsValid () {
             return true
-        }
+        },
     },
     methods: {
         selectFile () {
@@ -80,16 +80,20 @@ export default {
             if (file && file.type !== 'image/svg+xml') {
                 alert('فایل انتخابی مورد قبول نیست')
                 this.file = null
+
                 return
             }
+
             this.fileSelected = true
             this.loadPreviewImage()
         },
         loadPreviewImage () {
             let fileReader = new FileReader()
+
             fileReader.onload = (theFile) => {
                 this.filePreview = theFile.target.result
             }
+
             fileReader.readAsDataURL(this.file)
         },
         uploadThumb () {
@@ -104,11 +108,11 @@ export default {
 
             this.$axios.post('/api/files/upload', $data, {
                 headers: {
-                    'Content-Type': 'multipart/form-data'
+                    'Content-Type': 'multipart/form-data',
                 },
                 onUploadProgress (progressEvent) {
                     console.log(progressEvent)
-                }
+                },
             })
                 .then((res) => {
                     this.uploadFinished(res.data)
@@ -122,8 +126,8 @@ export default {
         },
         changeThumb () {
 
-        }
-    }
+        },
+    },
 }
 </script>
 

@@ -42,21 +42,23 @@ export default {
     props: {
         value: {
             required: true,
-            type: Number
+            type: Number,
         },
+
         start: {
             type: Boolean,
-            default: false
+            default: false,
         },
+
         visibility: {
             type: Boolean,
-            default: true
-        }
+            default: true,
+        },
     },
 
     data () {
         return {
-            progress: this.value / 100
+            progress: this.value / 100,
         }
     },
 
@@ -71,8 +73,8 @@ export default {
 
         doneText () {
             return 'آپلود انجام شد.'
-        }
-    }
+        },
+    },
 }
 </script>
 

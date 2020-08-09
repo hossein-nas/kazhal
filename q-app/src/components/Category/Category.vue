@@ -60,12 +60,12 @@ export default {
     name: 'Category',
     components: {
         NodeCat,
-        newCat
+        newCat,
     },
     props: {
         value: {
-            type: Object
-        }
+            type: Object,
+        },
     },
     data () {
         return {
@@ -75,13 +75,13 @@ export default {
             addnewcat: false,
             newcat: {
 
-            }
+            },
         }
     },
     watch: {
         newcat () {
             this.initCats()
-        }
+        },
     },
     mounted () {
         this.$root.$on('category_selected', (value) => {
@@ -90,6 +90,7 @@ export default {
         this.$root.$on('category_deselected', (value) => {
             this.deselectCategory(value)
         })
+
         if (this.value) {
             // init selected key
             this.value.selected = []
@@ -112,17 +113,20 @@ export default {
             let options = []
             this.allcats().forEach((val, ind) => {
                 let prepend = ''
+
                 if (val.depth > 0) {
                     prepend = ' ' + '--'.repeat(val.depth) + ' '
                 }
+
                 let title = prepend + val.title
                 options.push({
                     label: title,
-                    value: val.id
+                    value: val.id,
                 })
             })
+
             return options
-        }
+        },
     },
     methods: {
         initCats () {
@@ -133,9 +137,11 @@ export default {
         },
         allcats (_parent = null) {
             let cats = []
+
             if (_parent === null) {
                 this.cats.forEach((val, ind) => {
                     cats.push(val)
+
                     if (val.children && val.children.length) {
                         cats = [...cats, ...this.allcats(val.children)]
                     }
@@ -143,12 +149,15 @@ export default {
             } else {
                 for (let i = 0; i < _parent.length; i++) {
                     cats.push(_parent[i])
+
                     if (_parent[i].children && _parent[i].children.length) {
                         cats.push(...this.allcats(_parent[i].children))
                     }
                 }
+
                 return cats
             }
+
             return cats
         },
         selectCategory (node) {
@@ -158,11 +167,13 @@ export default {
                     notSame = false
                 }
             })
+
             if (notSame) {
                 this.selected.push(node)
             }
+
             let value = {
-                selected: this.selected
+                selected: this.selected,
             }
             this.$emit('input', value)
         },
@@ -172,8 +183,8 @@ export default {
                     this.selected.splice(ind, 1)
                 }
             })
-        }
-    }
+        },
+    },
 }
 </script>
 

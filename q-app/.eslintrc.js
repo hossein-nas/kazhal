@@ -15,7 +15,7 @@ module.exports = {
         // consider switching to `plugin:vue/strongly-recommended` or `plugin:vue/recommended` for stricter rules.
         "plugin:vue/essential",
         "@vue/standard"
-    ],
+        ],
 
     // required to lint *.vue files
     plugins: ["vue"],
@@ -39,7 +39,20 @@ module.exports = {
         "no-unused-vars" : "off",
         "eqeqeq" : "off",
         "one-var": "off",
-
+        "comma-dangle": ["error", {
+            "arrays": "never",
+            "objects": "always",
+            "imports": "never",
+            "exports": "never",
+            "functions": "never"
+        }],
+        "newline-before-return" : "error",
+        "function-paren-newline": ["error", { "minItems": 4 }],
+        "padding-line-between-statements": [
+            "error",
+            { "blankLine": "always", "prev": "*", "next": "block-like"},
+            { "blankLine": "always", "prev": "block-like", "next": "*"},
+        ],
         "import/first": "off",
         "import/named": "error",
         "import/namespace": "error",
@@ -62,8 +75,8 @@ module.exports = {
             "multiline": {
               "max": 1,
               "allowFirstLine": true
-            }
-        }],
+          }
+      }],
 
         // allow debugger during development only
         "no-debugger": process.env.NODE_ENV === "production" ? "error" : "off"

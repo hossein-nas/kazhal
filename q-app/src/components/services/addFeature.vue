@@ -77,17 +77,17 @@ import addFeatureInput from '@/components/services/addFeatureInput'
 export default {
     name: 'addFeature',
     components: {
-        addFeatureInput
+        addFeatureInput,
     },
     props: {
         value: {
-            required: true
-        }
+            required: true,
+        },
     },
     watch: {
         features () {
             this.$emit('input', this.features)
-        }
+        },
     },
     mounted () {
         if (this.value && this.value.length) {
@@ -102,7 +102,7 @@ export default {
             newFeature: '',
             editFeature: false,
             editFeatureItem: null,
-            selectedItem: null
+            selectedItem: null,
         }
     },
     computed: {
@@ -110,6 +110,7 @@ export default {
             if (this.features && this.features.length === 0) {
                 return true
             }
+
             return false
         },
         newItemNumber () {
@@ -119,8 +120,9 @@ export default {
             if (this.selectedItem === null) {
                 return false
             }
+
             return true
-        }
+        },
     },
     methods: {
         checkItem (item) {
@@ -153,8 +155,8 @@ export default {
             this.newFeature = this.features[this.selectedItem]
             this.selectedItem = null
             this.editFeature = true
-        }
-    }
+        },
+    },
 }
 </script>
 

@@ -2,6 +2,6 @@ export default function () {
     return {
         comments: [],
         trashed: [],
-        loading: false
+        loading: false,
     }
 }

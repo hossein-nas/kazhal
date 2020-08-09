@@ -48,6 +48,7 @@ export default {
             if (typeof item.data === 'string' || typeof item.data === 'number') {
                 let str = `<span> ${item.data} </span>`
                 str += (item.suffix) ?? ''
+
                 return str
             }
 
@@ -58,7 +59,7 @@ export default {
                     return `<a href="${item.data.path}" target="_blank"> ${item.data.text} </a>`
                 }
             }
-        }
+        },
     },
 
     computed: {
@@ -76,34 +77,35 @@ export default {
             return [
                 {
                     label: 'اخرین پاسخ ارسالی',
-                    data: this.lastUserComment
+                    data: this.lastUserComment,
                 },
                 {
                     label: 'تعداد دیدگاه‌های شما',
                     data: this.userSentCommentsCount,
-                    suffix: 'پاسخ'
+                    suffix: 'پاسخ',
                 },
                 {
                     label: 'تعداد تأیید کرده‌ها',
                     data: this.approvedByUserCount,
-                    suffix: 'دیدگاه'
+                    suffix: 'دیدگاه',
                 },
                 {
                     label: 'آی پی آدرس شما',
-                    data: this.getUserInfo.ip
+                    data: this.getUserInfo.ip,
                 }
             ]
         },
         lastUserComment () {
             if (!this.userSentCommentsCount) return null
             let lastComment = this.userSentComments.slice(0)[0]
+
             return {
                 type: 'link',
                 path: lastComment.path,
-                text: lastComment.post.title
+                text: lastComment.post.title,
             }
-        }
-    }
+        },
+    },
 }
 </script>
 

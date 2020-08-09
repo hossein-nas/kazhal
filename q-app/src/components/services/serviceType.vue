@@ -22,12 +22,12 @@ export default {
     name: 'serviceType',
     props: {
         value: {
-            required: true
-        }
+            required: true,
+        },
     },
     data () {
         return {
-            type: null
+            type: null,
         }
     },
     mounted () {
@@ -37,22 +37,24 @@ export default {
         changeType (type) {
             this.type = type
             this.$emit('input', this.type)
-        }
+        },
     },
     computed: {
         mainActive () {
             if (this.type === 'main') {
                 return true
             }
+
             return false
         },
         categoryActive () {
             if (this.type === 'category') {
                 return true
             }
+
             return false
-        }
-    }
+        },
+    },
 }
 </script>
 

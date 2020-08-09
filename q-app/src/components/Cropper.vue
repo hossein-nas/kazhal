@@ -65,12 +65,12 @@ export default {
     name: 'croppervue',
     props: {
         value: {
-            required: true
+            required: true,
         },
         ratio: {
             type: Number,
-            required: true
-        }
+            required: true,
+        },
     },
     data () {
         return {
@@ -83,7 +83,7 @@ export default {
             cropper: {},
             cropperInit: false,
             previewImg: null,
-            imgSrc: ''
+            imgSrc: '',
         }
     },
     watch: {
@@ -99,7 +99,7 @@ export default {
             if (val) {
                 setTimeout(this.init_cropper(), 200)
             }
-        }
+        },
     },
     mounted () {
     },
@@ -107,16 +107,18 @@ export default {
         emitEvent (imageData) {
             let data = {
                 previewImage: imageData.data.specs[0].relativepath,
-                thumbnailId: imageData.data.id
+                thumbnailId: imageData.data.id,
             }
             this.$emit('input', data)
         },
         initImg () {
             let file_reader = new FileReader()
+
             file_reader.onload = (loadedFile) => {
                 let dataURL = loadedFile.target.result
                 this.imgSrc = dataURL
             }
+
             file_reader.readAsDataURL(this.selectedFile)
         },
         init_cropper () {
@@ -134,7 +136,7 @@ export default {
                 ready () {
                 },
                 crop (event) {
-                }
+                },
             })
             this.cropper.replace(this.imgSrc)
         },
@@ -144,7 +146,7 @@ export default {
                 maxWidth: 1080,
                 minWidth: 1080,
                 imageSmoothingEnabled: false,
-                imageSmoothingQuality: 1
+                imageSmoothingQuality: 1,
             })
             canvas.toBlob((blob) => {
                 this.cropper.destroy()
@@ -161,14 +163,15 @@ export default {
             data.append('keywords', [])
             this.uploading = true
             this.$axios.post('/api/files/upload', data, {
-                headers: { 'Content-Type': 'multipart/form-data' },
+                headers: { 'Content-Type': 'multipart/form-data', },
                 onUploadProgress: (progressEvent) => {
                     const totalLength = progressEvent.lengthComputable ? progressEvent.total : progressEvent.target.getResponseHeader('content-length') || progressEvent.target.getResponseHeader('x-decompressed-content-length')
+
                     if (totalLength !== null) {
                         let progress = Math.ceil((progressEvent.loaded * 100) / totalLength)
                         this.uploadingValue = (progress / 100.0)
                     }
-                }
+                },
             })
                 .then((res) => {
                     if (res.data.status === 'success') {
@@ -186,20 +189,23 @@ export default {
             if (!val) {
                 return
             }
+
             if (val.type && val.type.length) {
                 let type = val.type
                 let permitedTypes = ['image/png', 'image/jpeg', 'image/svg+xml']
+
                 if (!permitedTypes.includes(type)) {
                     return false || 'فایل انتخابی پسوند قابل قبولی ندارد'
                 }
             }
+
             if (val.size && val.size > 2500000) {
                 return false || 'حجم فایل انتخابی بیش از حد مجاز است.'
             }
-        }
+        },
     },
     computed: {
-    }
+    },
 }
 </script>
 

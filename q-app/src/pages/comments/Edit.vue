@@ -179,7 +179,7 @@ export default {
             loaded: false,
             comment: [],
             editing: false,
-            body: ''
+            body: '',
         }
     },
 
@@ -194,7 +194,7 @@ export default {
             } else {
                 this.revertEditing()
             }
-        }
+        },
 
     },
 
@@ -221,7 +221,7 @@ export default {
 
         isVerified () {
             return !!this.comment.verified
-        }
+        },
     },
 
     methods: {
@@ -236,7 +236,7 @@ export default {
             let comment_id = this.$route.params.commentId
             let uri = `/api/comments/${comment_id}/show`
             this.$axios.get(uri)
-                .then(({ data }) => {
+                .then(({ data, }) => {
                     this.comment = data
 
                     this.$nextTick(() => { this.loaded = true })
@@ -257,12 +257,12 @@ export default {
             if (this.editing) {
                 let uri = `/api/comments/update/${this.comment.id}`
 
-                this.$axios.patch(uri, { body: this.body })
+                this.$axios.patch(uri, { body: this.body, })
                     .then(() => {
                         this.notify()
 
                         setTimeout(() => {
-                            this.$router.push({ name: 'comment.detail', params: { commentId: this.comment.id } })
+                            this.$router.push({ name: 'comment.detail', params: { commentId: this.comment.id, }, })
                         }, 1000)
                     })
             }
@@ -273,7 +273,7 @@ export default {
                 type: 'positive',
                 color: 'secondary',
                 message: 'دیدگاه با موفقیت ویرایش شد',
-                timeout: 950
+                timeout: 950,
             })
         },
 
@@ -290,7 +290,7 @@ export default {
             }
 
             let data = {
-                uri, type
+                uri, type,
             }
 
             this.approveComment(data)
@@ -306,15 +306,15 @@ export default {
             if (this.comment.trashed === 1) type = 'delete'
 
             let data = {
-                type, uri
+                type, uri,
             }
 
             this.trashComment(data)
                 .then(() => {
                     this.comment.trashed = !this.comment.trashed
                 })
-        }
-    }
+        },
+    },
 }
 </script>
 

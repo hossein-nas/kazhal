@@ -79,7 +79,7 @@ export default {
         return {
             defaultReplier: 'شما',
             currentPage: 1,
-            totalPages: 4
+            totalPages: 4,
         }
     },
 
@@ -93,6 +93,7 @@ export default {
         data () {
             let startingPoint = (this.currentPage - 1) * (this.totalPages)
             let endingPoint = startingPoint + this.totalPages
+
             return this.value.slice(startingPoint, endingPoint)
         },
 
@@ -101,7 +102,7 @@ export default {
             let allPages = parseInt((allCount / this.totalPages), 10) + (allCount % this.totalPages ? 1 : 0)
 
             return allPages
-        }
+        },
     },
 
     methods: {
@@ -110,9 +111,10 @@ export default {
             if (this.owns === false && item.verified) {
                 return [item.verifier.firstname, item.verifier.lastname].join(' ')
             }
+
             return this.defaultReplier
-        }
-    }
+        },
+    },
 }
 </script>
 

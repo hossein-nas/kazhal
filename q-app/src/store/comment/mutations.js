@@ -14,6 +14,7 @@ export function SET_TRASHED (state, data) {
 export function SET_COMMENT_LOADING_DONE (state) {
     state.loading = true
 }
+
 export function SET_COMMENT_LOADING (state) {
     state.loading = false
 }

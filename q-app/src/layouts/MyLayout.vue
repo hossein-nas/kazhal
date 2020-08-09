@@ -164,30 +164,30 @@ export default {
             leftDrawerOpen: true,
             username: '',
             user_role: '',
-            photo: ''
+            photo: '',
         }
     },
     computed: {
-        ...mapGetters({ user: 'auth/getUserInfo' }),
+        ...mapGetters({ user: 'auth/getUserInfo', }),
         photoPath () {
             return window.baseURL + this.photo
         },
         logoPath () {
             return window.baseURL + 'img/svg/Logo.svg'
-        }
+        },
     },
     methods: {
         updateUserinfo () {
             this.username = this.user.firstname + ' ' + this.user.lastname
             this.user_role = this.user.role.slug
             this.photo = this.user.photo.specs[0].relativepath
-        }
+        },
 
     },
     watch: {
         user () {
             this.updateUserinfo()
-        }
+        },
 
     },
     mounted () {
@@ -196,7 +196,7 @@ export default {
     beforeRouteUpdate (to, from, next) {
         this.updateUserinfo()
         next()
-    }
+    },
 }
 </script>
 

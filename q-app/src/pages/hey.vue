@@ -14,9 +14,9 @@ export default {
 
     data () {
         return {
-            bar: null
+            bar: null,
         }
-    }
+    },
 }
 </script>
 

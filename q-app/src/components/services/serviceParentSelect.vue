@@ -36,15 +36,15 @@ export default {
     name: 'serviceParentSelect',
     props: {
         value: {
-            required: true
-        }
+            required: true,
+        },
     },
     data () {
         return {
             init: false,
             selectedItem: null,
             loadingDone: false,
-            categoryServicesList: []
+            categoryServicesList: [],
         }
     },
     mounted () {
@@ -56,7 +56,7 @@ export default {
             if (val !== undefined) {
                 this.$emit('input', this.categoryServicesList[val].id)
             }
-        }
+        },
     },
     methods: {
         initServices () {
@@ -66,6 +66,7 @@ export default {
                         let service = res.data[ind]
                         this.categoryServicesList.push(service)
                     }
+
                     this.loadingDone = true
                 })
         },
@@ -74,14 +75,14 @@ export default {
                 id: null,
                 title: 'بدون سرویس والد',
                 parent_id: null,
-                default: true
+                default: true,
             })
             this.selectedItem = 0
         },
         checkItem (id) {
             this.selectedItem = id
-        }
-    }
+        },
+    },
 }
 </script>
 

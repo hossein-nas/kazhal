@@ -10,7 +10,7 @@ export default {
     name: 'Logout',
     data () {
         return {
-            show: false
+            show: false,
         }
     },
     created () {
@@ -21,6 +21,6 @@ export default {
             })
             .catch(() => {
             })
-    }
+    },
 }
 </script>

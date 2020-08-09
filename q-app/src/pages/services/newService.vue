@@ -150,7 +150,7 @@ import ServiceParentSelect from '@/components/services/serviceParentSelect'
 export default {
     name: 'newService',
     components: {
-        ServiceType, ServiceColor, Thumbnail, ServiceAddFeature, ServiceParentSelect
+        ServiceType, ServiceColor, Thumbnail, ServiceAddFeature, ServiceParentSelect,
     },
     data () {
         return {
@@ -165,7 +165,7 @@ export default {
                 featured: false,
                 type: 'main',
                 features: [],
-                hardware: []
+                hardware: [],
             },
             color: null,
             thumbnail: null,
@@ -173,7 +173,7 @@ export default {
             editing: false,
             submitSuccess: false,
             errors: [],
-            extras: []
+            extras: [],
         }
     },
     beforeMount () {
@@ -204,7 +204,7 @@ export default {
                     hardware: this.serviceModel.hardware,
                     extra: this.extras,
                     thumbnail_id: this.thumbnail,
-                    color_id: this.color
+                    color_id: this.color,
                 }
                 this.$axios.post('/api/services/add-new/service', data)
                     .then((res) => {
@@ -217,30 +217,37 @@ export default {
         validateInputs () {
             this.anyError = false
             this.errors = []
+
             if (this.serviceModel.title.length < 10) {
                 this.anyError = true
                 this.errors.push('تعداد کاراکترها برای عنوان سرویس ناکافی است.')
             }
+
             if (this.serviceModel.slug.length < 10) {
                 this.anyError = true
                 this.errors.push('تعداد کاراکرها برای عنوان انگلیسی سرویس ناکافی است.')
             }
+
             if (this.serviceModel.excerpt.length < 25) {
                 this.anyError = true
                 this.errors.push('برای فیلد توضیح مختصر حداقل باید ۲۵ کاراکتر وارد کنید.')
             }
+
             if (this.serviceModel.content.length < 50) {
                 this.anyError = true
                 this.errors.push('برای فیلد توضسح جامع حداقل باید ۵۰ کاراکتر وارد کنید.')
             }
+
             if (this.thumbnail === null) {
                 this.anyError = true
                 this.errors.push('تصویر شاخص انتخاب نشده است.')
             }
+
             if (this.serviceModel.type === 'main' && this.serviceModel.features.length < 3) {
                 this.anyError = true
                 this.errors.push('حداقل سه مورد ویژگی باید وارد کنید.')
             }
+
             return !this.anyError
         },
         SubmitSuccess (response) {
@@ -271,13 +278,13 @@ export default {
                 id: data.id,
                 parent_id: data.parent_id,
                 features: data.features,
-                hardware: data.hardware
+                hardware: data.hardware,
             }
 
             this.color = data.color_id
             this.thumbnail = {
                 thumbnailId: data.thumbnail.id,
-                previewImage: data.thumbnail.specs[0].relativepath
+                previewImage: data.thumbnail.specs[0].relativepath,
             }
             this.extras = data.extra
         },
@@ -286,10 +293,10 @@ export default {
             value = value.trim()
             value = value.replace(/\s/gi, '-')
             this.serviceModel.slug = value
-        }
+        },
     },
     computed: {
-    }
+    },
 }
 </script>
 

@@ -142,7 +142,7 @@ export default {
             form: {
                 body: '',
                 parent_id: null,
-                post_id: null
+                post_id: null,
             },
             submiting: false,
             posts: [],
@@ -151,7 +151,7 @@ export default {
             comment: [],
             loaded: false,
             reply_to: false,
-            new_reply: true
+            new_reply: true,
         }
     },
 
@@ -171,7 +171,7 @@ export default {
             if (val) {
                 this.form.post_id = val.value
             }
-        }
+        },
     },
 
     computed: {
@@ -186,7 +186,7 @@ export default {
         },
 
         postsToSelect () {
-            return this.filteredPosts.map((post) => { return { label: post.title, value: post.id } })
+            return this.filteredPosts.map((post) => { return { label: post.title, value: post.id, } })
         },
 
         postId () {
@@ -195,7 +195,7 @@ export default {
             }
 
             return this.selectedPost.value
-        }
+        },
 
     },
 
@@ -204,7 +204,7 @@ export default {
             let comment_id = this.$route.params.commentId
             let uri = `/api/comments/${comment_id}/show`
             this.$axios.get(uri)
-                .then(({ data }) => {
+                .then(({ data, }) => {
                     this.loaded = true
                     this.comment = data
                     this.form.parent_id = data.id
@@ -228,7 +228,7 @@ export default {
 
             let uri = `/posts/index`
             this.$axios.get(uri)
-                .then(({ data }) => {
+                .then(({ data, }) => {
                     this.posts = data
                     this.filteredPosts = data
                 })
@@ -247,27 +247,27 @@ export default {
             let data = {
                 ...this.form,
                 name: this.username,
-                email: this.email
+                email: this.email,
             }
             let uri = '/api/comments/create'
 
             this.$axios.post(uri, data)
-                .then(({ data }) => {
+                .then(({ data, }) => {
                     this.submiting = false
 
                     let dismiss = this.$q.notify({
                         type: 'positive',
                         message: 'دیدگاه با موفقیت ثبت شد',
-                        timeout: 0
+                        timeout: 0,
                     })
 
                     setTimeout(() => {
                         dismiss()
-                        this.$router.push({ path: '/comments/index' })
+                        this.$router.push({ path: '/comments/index', })
                     }, 1500)
                 })
-        }
-    }
+        },
+    },
 
 }
 </script>

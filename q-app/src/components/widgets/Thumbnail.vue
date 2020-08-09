@@ -68,15 +68,15 @@ import Cropper from '@/components/Cropper'
 export default {
     name: 'Thumbnail',
     components: {
-        Cropper
+        Cropper,
     },
     props: {
         value: {
-            required: true
+            required: true,
         },
         square: {
-            type: Boolean
-        }
+            type: Boolean,
+        },
     },
     watch: {
         thumbnail (val) {
@@ -87,7 +87,7 @@ export default {
             if (val) {
                 this.initDefaultImage()
             }
-        }
+        },
     },
     data () {
         return {
@@ -96,13 +96,14 @@ export default {
             ThumbnailDialog: false,
             hasThumb: false,
             aspectRatio: 1.6,
-            thumbImg: null
+            thumbImg: null,
         }
     },
     mounted () {
         if (this.square) {
             this.aspectRatio = 1
         }
+
         if (this.value) {
             this.initDefaultImage()
         }
@@ -129,13 +130,13 @@ export default {
             this.hasThumb = false
             this.thumbImg = null
             this.openDialog()
-        }
+        },
     },
     computed: {
         thumbImgSrc () {
             return 'http://kazhal.test' + this.thumbImg
-        }
-    }
+        },
+    },
 }
 </script>
 

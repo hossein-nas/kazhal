@@ -154,9 +154,9 @@ export default {
                 loading: false,
                 done: false,
                 success: false,
-                message: ''
+                message: '',
             },
-            allServices: []
+            allServices: [],
         }
     },
     beforeCreate () {
@@ -171,6 +171,7 @@ export default {
             if (enName === 'main') {
                 return 'اصلی'
             }
+
             if (enName === 'category') {
                 return 'دسته'
             }
@@ -181,7 +182,7 @@ export default {
         editItem () {
             let index = this.selectedService
             let id = this.allServices[index].id
-            this.$router.push({ path: `/services/edit/${id}/` })
+            this.$router.push({ path: `/services/edit/${id}/`, })
         },
         deleteItem () {
             this.deleteServiceDialog = true
@@ -199,12 +200,13 @@ export default {
 
             // making requets to service in order to delete service
             let data = {
-                service_id: service.id
+                service_id: service.id,
             }
             this.$axios.post('/api/services/delete/service', data)
                 .then(res => {
                     this.deleting.done = true
                     this.deleting.loading = false
+
                     if (res.data.status == 'ok') {
                         this.deleting.success = true
                         this.deleting.message = 'سرویس با موفقیت حذف گردید'
@@ -224,21 +226,23 @@ export default {
             this.deleting = {
                 done: false,
                 success: false,
-                message: ''
+                message: '',
             }
-        }
+        },
 
     },
     computed: {
         selectedServiceInfo () {
             if (this.selectedService === null) { return {} }
+
             let index = this.selectedService
+
             return this.allServices[index]
         },
         noService () {
             return !this.allServices.length
-        }
-    }
+        },
+    },
 
 }
 </script>

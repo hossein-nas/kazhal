@@ -127,12 +127,12 @@ import Category from '@/components/Category/Category'
 export default {
     name: 'Posts',
     components: {
-        Category
+        Category,
     },
     data () {
         return {
             posts: [],
-            categories: {}
+            categories: {},
         }
     },
     beforeMount () {
@@ -153,8 +153,8 @@ export default {
         },
         getTime (_date) {
             return new PersianDate().unix(_date).format('H:mm')
-        }
-    }
+        },
+    },
 }
 </script>
 

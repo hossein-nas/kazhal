@@ -36,24 +36,24 @@ export default {
     name: 'addFeatureInput',
     props: {
         showing: {
-            type: Boolean
+            type: Boolean,
         },
         value: {
-            required: true
+            required: true,
         },
         editing: {
-            type: Boolean
+            type: Boolean,
         },
         index: {
-            required: true
-        }
+            required: true,
+        },
     },
     mounted () {
     },
     data () {
         return {
             newFeature: '',
-            visiblity: false
+            visiblity: false,
         }
     },
     updated () {
@@ -61,6 +61,7 @@ export default {
     watch: {
         showing (val) {
             this.visiblity = val
+
             if (this.editing == true) {
                 this.newFeature = this.value
             }
@@ -68,13 +69,14 @@ export default {
         editing (val) {
         },
         newFeature () {
-        }
+        },
     },
     methods: {
         newFeatureRule (val) {
             if (!val && val.length === 0) {
                 return false || 'فیلد نباید خالی باشد.'
             }
+
             if (val && val.length < 5) {
                 return false || 'حداثل ۵ کاراکتر وارد کنید.'
             }
@@ -88,14 +90,15 @@ export default {
             if (this.editing) {
                 let data = {
                     index: this.index,
-                    data: this.newFeature
+                    data: this.newFeature,
                 }
                 this.$emit('update', data)
             } else {
                 this.$emit('add', this.newFeature)
             }
+
             this.cancelAddNewFeatureProc()
-        }
+        },
 
     },
     computed: {
@@ -104,18 +107,21 @@ export default {
         },
         enableSumbit () {
             let f = this.newFeature
+
             if (!this.$refs.newFeatureInput) {
                 return false
             }
+
             if ((this.$refs && this.$refs.newFeatureInput) || this.newFeature) {
                 return !this.$refs.newFeatureInput.hasError
             }
+
             return false
         },
         Index () {
             return '#' + (this.index + 1)
-        }
-    }
+        },
+    },
 }
 </script>
 

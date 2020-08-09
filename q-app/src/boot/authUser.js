@@ -6,6 +6,7 @@ export default function (store) {
             var token = localStorage.getItem('token')
             _axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
         }
+
         _axios.get('api/user')
             .then((res) => {
                 store.dispatch('auth/setToken', token)

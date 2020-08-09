@@ -12,8 +12,8 @@ class InitialUserSeeder extends Seeder
     public function run()
     {
         factory('App\User')
-        ->create(['username' => 'hossein.nas', 'email'=> 'hossein@example.com', 'password' => bcrypt('123') ]);
+            ->create(['username' => 'hossein.nas', 'email' => 'hossein@example.com', 'password' => bcrypt('123'), 'thumbnail_id' => 3]);
         factory('App\User')
-        ->create(['username' => 'admin', 'email'=> 'admin@example.com', 'password' => bcrypt('admin') ]);
+            ->create(['username' => 'admin', 'email' => 'admin@example.com', 'password' => bcrypt('admin'), 'thumbnail_id' => 3]);
     }
 }

@@ -4,7 +4,7 @@ export function someAction (context) {
 }
 */
 
-export async function init ({ commit, dispatch }, payload) {
+export async function init ({ commit, dispatch, }, payload) {
     let credentials = payload.data
     let data = null
     await _axios.post('/api/login', credentials).then(response => {
@@ -17,23 +17,25 @@ export async function init ({ commit, dispatch }, payload) {
     dispatch('setTokenLocalStorage', data.access_token)
 }
 
-export function setToken ({ commit }, token) {
+export function setToken ({ commit, }, token) {
     commit('SET_TOKEN', token)
 }
 
-export function setUserInfo ({ commit }, user) {
+export function setUserInfo ({ commit, }, user) {
     commit('SET_USER', user)
 }
 
-export function setAxiosHeader ({ commit }, payload) {
+export function setAxiosHeader ({ commit, }, payload) {
     if (payload !== null) {
         _axios.defaults.headers.common['Authorization'] = ` Bearer ${payload}`
+
         return
     }
+
     _axios.defaults.headers.common['Authorization'] = null
 }
 
-export function setTokenLocalStorage ({ commit }, payload) {
+export function setTokenLocalStorage ({ commit, }, payload) {
     if (payload !== null) {
         localStorage.setItem('token', payload)
     } else {

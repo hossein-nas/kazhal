@@ -108,7 +108,7 @@ export default {
     components: {
         ckeditor: CKEditor.component,
         category: Category,
-        thumbnail: Thumbnail
+        thumbnail: Thumbnail,
     },
     mounted () {
         this.$emit('newPostMounted')
@@ -118,11 +118,11 @@ export default {
             loaded: false,
             ckData: '',
             ckConfig: {
-                language: 'fa'
+                language: 'fa',
             },
             thumbnail: null,
             categories: {
-                init: [1]
+                init: [1],
             },
             newPost: true,
             errors: [],
@@ -131,26 +131,28 @@ export default {
                 post_type: 1,
                 title: '',
                 slug: '',
-                published: true
-            }
+                published: true,
+            },
         }
     },
     async beforeMount () {
         if (Object.keys(this.$route.params).length) {
             this.newPost = false
             let slug = this.$route.params.slug
+
             try {
-                let { data } = await this.$axios.get(`/posts/${slug}/show`)
+                let { data, } = await this.$axios.get(`/posts/${slug}/show`)
                 this.postModel = data
                 this.postModel.published = !!this.postModel.published
                 this.ckData = this.postModel.content
                 this.categories.init = this.pluckIds(this.postModel.categories)
                 this.thumbnail = {
                     thumbnailId: this.postModel.thumb.id,
-                    previewImage: this.postModel.thumb.specs[0].relativepath
+                    previewImage: this.postModel.thumb.specs[0].relativepath,
                 }
             } catch (e) {}
         }
+
         this.loaded = true
     },
     methods: {
@@ -158,26 +160,32 @@ export default {
             if (!val) {
                 return false || 'این فیلد باید پرشود.'
             }
+
             if (val.length < 10) {
                 return false || 'تعداد کاراکتر حداقل باید ۱۰ تا باشد.'
             }
+
             return true
         },
         validateAllInputs () {
             this.errors = []
             this.anyError = false
+
             if (this.postModel.title !== undefined && this.postModel.title.length < 10) {
                 this.anyError = true
                 this.errors.push('تعداد کاراکتر های عنوان پست ناکافی است.')
             }
+
             if (this.ckData !== undefined && this.ckData.length < 15) {
                 this.anyError = true
                 this.errors.push('متن پست حداقل باید ۱۵ کاراکتر باشد.')
             }
+
             if (this.categories && this.categories.selected.length == 0) {
                 this.anyError = true
                 this.errors.push('دسته‌ای برای پست انتخاب نشده است')
             }
+
             if (this.thumbnail === null) {
                 this.anyError = true
                 this.errors.push('تصویر شاخص انتخاب نشده است')
@@ -191,11 +199,13 @@ export default {
                 slug: this.postModel.slug,
                 post_type: this.postModel.post_type,
                 categories: this.allCategories,
-                thumbnail_id: this.thumbnail
+                thumbnail_id: this.thumbnail,
             }
             this.validateAllInputs()
+
             if (this.anyError) {
                 alert('در داده‌های ورودی خطایی مشاهده می‌شود.')
+
                 return
             }
 
@@ -230,29 +240,33 @@ export default {
 
         pluckIds (obj) {
             return Object.keys(obj).map(f => obj[f].id)
-        }
+        },
 
     },
     computed: {
         slugURL () {
             let slug = this.postModel.slug
+
             return `http://rp-kazhal.ir/posts/${slug}/show`
         },
         titleEntered () {
             if (this.postModel.title && this.postModel.title.length) {
                 return true
             }
+
             return false
         },
         allCategories () {
             let result = []
+
             for (let cat in this.categories.selected) {
                 let c = this.categories.selected[cat]
                 result.push(c.id)
             }
+
             return result
-        }
-    }
+        },
+    },
 }
 </script>
 

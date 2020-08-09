@@ -9,6 +9,6 @@
 export default {
     name: 'PageIndex',
     created () {
-    }
+    },
 }
 </script>
