@@ -36,6 +36,7 @@
         "persian-date": "^1.1.0",
         "persianjs": "^0.4.0",
         "tippy.js": "^6.2.0",
-        "validate.js": "^0.13.1"
+        "validate.js": "^0.13.1",
+        "vue-advanced-cropper": "^0.16.10"
     }
 }

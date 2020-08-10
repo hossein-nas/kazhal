@@ -25,6 +25,8 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('/logout', 'Auth\LoginController@logout');
 
     Route::post('/user/update', 'User\UsersController@update');
+
+    Route::post('/user/change-thumbnail/{user}', 'User\UserThumbnailController@update')->name('change-thumbnail');
 });
 
 // Categories specific routes

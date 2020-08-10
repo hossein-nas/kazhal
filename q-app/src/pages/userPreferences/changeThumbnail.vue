@@ -21,7 +21,11 @@
                             </div>
                         </div>
 
-                        <image-uploader :show="uploaderShowing"></image-uploader>
+                        <div class="success-message text-center q-my-md non-selectable"
+                             v-show="fileChanged">
+                            <p class="text-body1 text-green-7 q-ma-none q-mb-sm">فایل با موفقیت انتخاب شد</p>
+                            <p class="text-caption text-grey-7">برای تکمیل <strong>فرآیند تغییر تصویر شاخص</strong> دکمه <strong>ثبت تصویر شاخص</strong> را بزنید</p>
+                        </div>
 
                         <q-separator spaced="xl" ></q-separator>
 
@@ -30,6 +34,8 @@
                                    class=""
                                    label="ثبت تصویر شاخص"
                                    size=".75rem"
+                                   :disabled="!fileChanged"
+                                   @click.prevent="submitThumb"
                                    color="teal-4"
                                    padding="sm md"
                             />
@@ -44,20 +50,20 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import ImageUploader from '@/components/Image/ImageUploader'
+import CropperDialog from '@/components/widgets/CropperDialog'
 
 export default {
     name: 'changeThumbnail',
 
     components: {
-        ImageUploader,
     },
 
     data () {
         return {
             file: null,
             userThumb: {},
-            uploaderShowing: false,
+            fileChanged: false,
+            newThumb: null,
         }
     },
 
@@ -65,6 +71,8 @@ export default {
         ...mapGetters({ user: 'auth/getUserInfo', }),
 
         userThumbSrc () {
+            if (this.fileChanged) return this.newThumb.dataURL
+
             return window.baseURL + this.user.photo.specs[0].relativepath
         },
     },
@@ -86,7 +94,25 @@ export default {
         },
 
         changeThumbnail () {
+            this.$q.dialog({
+                component: CropperDialog,
+                parent: this,
+                url: '/api/files/upload',
+            }).onOk((payload) => {
+                this.fileChanged = true
+                this.newThumb = { id: payload.data.data.id, dataURL: payload.dataURL, }
+            })
+        },
 
+        submitThumb () {
+            let uri = `/api/user/change-thumbnail/${this.user.id}`
+            let data = {
+                thumbnail_id: this.newThumb.id,
+            }
+
+            this.$axios.post(uri, data)
+                .then((data) => {
+                })
         },
     },
 }

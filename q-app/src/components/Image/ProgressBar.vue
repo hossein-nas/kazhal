@@ -37,7 +37,7 @@
 <script>
 
 export default {
-    name: 'ProgreeBar',
+    name: 'ProgressBar',
 
     props: {
         value: {
@@ -58,7 +58,6 @@ export default {
 
     data () {
         return {
-            progress: this.value / 100,
         }
     },
 
@@ -74,6 +73,10 @@ export default {
         doneText () {
             return 'آپلود انجام شد.'
         },
+
+        progress () {
+            return parseFloat(this.value) / 100
+        },
     },
 }
 </script>
@@ -85,6 +88,8 @@ export default {
     justify-content: center;
     min-height: 3rem;
     margin-bottom: .25rem;
+    min-width: 500px;
+    max-width: 60%;
 
     span.text{
         font-size: .95rem;
