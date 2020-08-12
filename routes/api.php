@@ -26,7 +26,7 @@ Route::group(['middleware' => 'auth:api'], function () {
 
     Route::post('/user/update', 'User\UsersController@update');
 
-    Route::post('/user/change-thumbnail/{user}', 'User\UserThumbnailController@update')->name('change-thumbnail');
+    Route::patch('/user/change-thumbnail/{user}', 'User\UserThumbnailController@update')->name('change-thumbnail');
 });
 
 // Categories specific routes

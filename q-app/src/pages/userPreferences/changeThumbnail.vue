@@ -21,12 +21,12 @@
                             </div>
                         </div>
 
-                        <div class="success-message text-center q-my-md non-selectable"
+                        <!--                         <div class="success-message text-center q-my-md non-selectable"
                              v-show="fileChanged">
                             <p class="text-body1 text-green-7 q-ma-none q-mb-sm">فایل با موفقیت انتخاب شد</p>
                             <p class="text-caption text-grey-7">برای تکمیل <strong>فرآیند تغییر تصویر شاخص</strong> دکمه <strong>ثبت تصویر شاخص</strong> را بزنید</p>
                         </div>
-
+ -->
                         <q-separator spaced="xl" ></q-separator>
 
                         <div class="submit flex justify-end q-mt-md">
@@ -65,6 +65,18 @@ export default {
             fileChanged: false,
             newThumb: null,
         }
+    },
+
+    watch: {
+        fileChanged (val) {
+            if (val) {
+                this.$q.notify({
+                    type: 'info',
+                    message: 'فایل با موفقیت انتخاب شد.',
+                    caption: 'برای ثبت نهایی روی دکمه «ثبت تصویر شاخص» کلیک کنید.',
+                })
+            }
+        },
     },
 
     computed: {
@@ -110,8 +122,12 @@ export default {
                 thumbnail_id: this.newThumb.id,
             }
 
-            this.$axios.post(uri, data)
+            this.$axios.patch(uri, data)
                 .then((data) => {
+                    this.$q.notify({
+                        type: 'positive',
+                        message: 'تصویر شاخص با موفقیت تغییر کرد.',
+                    })
                 })
         },
     },

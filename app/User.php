@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'firstname', 'lastname', 'email', 'gender', 'username', 'activated', 'bio',
+        'firstname', 'lastname', 'email', 'gender', 'username', 'activated', 'bio', 'thumbnail_id', 'role_id',
     ];
 
     /**
@@ -59,4 +59,10 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Comment')->withoutGlobalScopes();
     }
+
+    public function updateThumbnail($thumbnailId)
+    {
+        $this->update(['thumbnail_id' => $thumbnailId]);
+    }
+
 }
